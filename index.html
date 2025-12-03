@@ -4,37 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="JSK Buildwell - Redefining luxury living with premium residential and commercial properties. Experience exceptional craftsmanship and timeless design.">
-    <meta name="keywords"
-        content="JSW Buildwell, luxury homes, premium properties, real estate, residential projects, commercial properties, luxury living">
-    <meta name="author" content="JSK Buildwell">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="JSK Buildwell - Redefining Luxury Living">
-    <meta property="og:description"
-        content="Experience exceptional craftsmanship and timeless design with JSK Buildwell's premium properties.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://jswbuildwell.com">
-    <meta property="og:image" content="https://jswbuildwell.com/images/og-image.jpg">
-    <meta property="og:site_name" content="JSK Buildwell">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="JSK Buildwell - Redefining Luxury Living">
-    <meta name="twitter:description"
-        content="Experience exceptional craftsmanship and timeless design with JSK Buildwell's premium properties.">
-    <meta name="twitter:image" content="https://jswbuildwell.com/images/twitter-card.jpg">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
     <title>JSK Buildwell - Redefining Luxury Living</title>
-
+    <title></title>
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -749,6 +720,99 @@
             transform: translateY(-2px);
         }
 
+        /* --- CTA Banner --- */
+        .cta-section {
+            padding: 4rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cta-banner {
+            position: relative;
+            width: min(1200px, 92vw);
+            min-height: 320px;
+            border-radius: 28px;
+            overflow: hidden;
+            background: linear-gradient(115deg, rgba(12, 19, 35, 0.9), rgba(12, 19, 35, 0.75)), url('https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.16);
+            display: flex;
+            align-items: center;
+        }
+
+        .cta-banner::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.08), transparent 45%);
+            pointer-events: none;
+        }
+
+        .cta-body {
+            position: relative;
+            z-index: 1;
+            padding: clamp(2rem, 4vw, 3.5rem);
+            color: #f8fafc;
+            display: grid;
+            gap: 1rem;
+            max-width: 600px;
+        }
+
+        .cta-body .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: #fbbf24;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-weight: 800;
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 2.6rem);
+            line-height: 1.15;
+            color: #f8fafc;
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        .cta-text {
+            color: #e5e7eb;
+            font-weight: 500;
+            max-width: 520px;
+        }
+
+        .cta-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.85rem 1.3rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #f8fafc;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            background: rgba(255, 255, 255, 0.08);
+            transition: all 0.25s ease;
+        }
+
+        .cta-link:hover {
+            background: rgba(255, 255, 255, 0.14);
+            transform: translateY(-1px);
+        }
+
+        .cta-link i {
+            color: #f8fafc;
+        }
+
         /* --- SECTION 3: BENTO GRID --- */
         .bento-section {
             padding: 4rem 3rem 3rem 3rem;
@@ -1241,6 +1305,20 @@
                 padding: 0 1.5rem;
             }
 
+            .cta-section {
+                padding: 3rem 0;
+            }
+
+            .cta-banner {
+                width: 94%;
+                min-height: 280px;
+                border-radius: 22px;
+            }
+
+            .cta-body {
+                padding: 1.75rem;
+            }
+
             .nav-links,
             .header-actions .user-icon,
             .header-actions .lang-switch {
@@ -1430,16 +1508,13 @@
                 <div class="hero-text-content">
                     <h2 class="fade-in-up delay-1">
                         <span class="accent-text serif-text">Redefining</span>
-                        Urban Living<br>
+                        Villa Living<br>
                         with Superior<br>
                         Elegance.
-
-
                     </h2>
 
                     <p class="subtext fade-in-up delay-2">
-                        From humble beginnings in 2005, JSK Buildwell crafts estates you'll cherish. We combine timeless
-                        elegance and exceptional craftsmanship to redefine luxury living.
+                        From humble beginnings to elite creators. We craft estates you'll cherish.
                     </p>
 
                     <div class="cta-wrapper fade-in-up delay-3">
@@ -1646,6 +1721,20 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section reveal-up">
+            <div class="cta-banner">
+                <div class="cta-body">
+                    <div class="eyebrow">Private Showings</div>
+                    <h2 class="dm-san cta-title">Walk a finished villa before you decide.</h2>
+                    <p class="cta-text">Schedule a hosted walkthrough across Mumbai, Pune, or Alibaug and see our build quality up close.</p>
+                    <div class="cta-actions">
+                        <a class="btn-pill" href="contact.html">Book a site visit</a>
+                        <a class="cta-link" href="projects.html">View current projects <i data-lucide="arrow-right" width="16" height="16"></i></a>
                     </div>
                 </div>
             </div>

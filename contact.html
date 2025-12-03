@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSK Buildwell | Contact</title>
+    <meta name="description"
+        content="Reach JSK Buildwell for project consultations, site visits, and partnership opportunities.">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/pages.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <button id="menu-btn" class="mobile-toggle">
+            <i data-lucide="menu" width="24" height="24"></i>
+        </button>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link"><span>Home</span><span>Home</span></a>
+            <a href="projects.html" class="nav-link"><span>Projects</span><span>Projects</span></a>
+            <a href="services.html" class="nav-link"><span>Services</span><span>Services</span></a>
+            <a href="about.html" class="nav-link"><span>About</span><span>About</span></a>
+            <a href="news.html" class="nav-link"><span>News</span><span>News</span></a>
+            <a href="careers.html" class="nav-link"><span>Careers</span><span>Careers</span></a>
+            <a href="contact.html" class="nav-link"><span>Contact</span><span>Contact</span></a>
+        </nav>
+        <a href="index.html" class="logo-link">
+            <img src="./assets/images/logo.png" alt="JSK Buildwell Logo">
+        </a>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu-overlay">
+        <a href="index.html" class="mobile-link">Home</a>
+        <a href="projects.html" class="mobile-link">Projects</a>
+        <a href="services.html" class="mobile-link">Services</a>
+        <a href="about.html" class="mobile-link">About</a>
+        <a href="news.html" class="mobile-link">News</a>
+        <a href="careers.html" class="mobile-link">Careers</a>
+        <a href="contact.html" class="mobile-link">Contact</a>
+    </div>
+
+    <main class="page-wrapper">
+        <section class="container page-hero reveal-up">
+            <div class="hero-content">
+                <div class="eyebrow">Connect</div>
+                <h1 class="dm-san">Let's plan your next residence.</h1>
+                <p class="hero-copy">Share your vision and we will set up a tailored consultation, on site or virtually.
+                </p>
+                <div class="hero-meta">
+                    <!-- <span class="pill"><i data-lucide="clock" width="16" height="16"></i> Response within 24 hrs</span> -->
+                    <span class="pill"><i data-lucide="map-pin" width="16" height="16"></i> Mumbai | Pune |
+                        Alibaug</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="./assets/images/large-house-with-pool-large-lawn.jpg" alt="Contact JSK Buildwell">
+            </div>
+        </section>
+
+        <section class="section-shell">
+            <div class="container contact-grid">
+                <div class="info-card reveal-up">
+                    <!-- <div class="label">Studios & Sites</div> -->
+                    <h3>Visit us</h3>
+                    <div class="list-grid">
+                        <div class="list-item"><i data-lucide="map-pin" width="18" height="18"></i> Mumbai Studio -
+                            Worli Sea Face</div>
+                        <div class="list-item"><i data-lucide="map-pin" width="18" height="18"></i> Pune Studio -
+                            Kalyani Nagar</div>
+                        <div class="list-item"><i data-lucide="anchor" width="18" height="18"></i> Alibaug Waterfront -
+                            Private Jetty</div>
+                    </div>
+                    <div class="hero-meta" style="margin-top: 1rem;">
+                        <span class="pill"><i data-lucide="phone" width="16" height="16"></i> +91 98765 43210</span>
+                        <span class="pill"><i data-lucide="mail" width="16" height="16"></i>
+                            concierge@jskbuildwell.com</span>
+                    </div>
+                </div>
+
+                <div class="info-card reveal-up">
+                    <!-- <div class="label">Message Us</div> -->
+                    <!-- <h3>Tell us about your project</h3> -->
+                    <form class="list-grid"
+                        onsubmit="event.preventDefault(); alert('Thanks, we will be in touch soon.')">
+                        <div class="form-grid">
+                            <input class="form-input" type="text" name="name" placeholder="Your Name" required>
+                            <input class="form-input" type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-grid">
+                            <input class="form-input" type="text" name="phone" placeholder="Phone" required>
+                            <input class="form-input" type="text" name="city" placeholder="City" required>
+                        </div>
+                        <div class="form-grid full">
+                            <textarea class="form-input" rows="4" name="message"
+                                placeholder="Project vision, site location, timeline"></textarea>
+                        </div>
+                        <button type="submit" class="btn-pill">
+                            Send Message
+                            <i data-lucide="arrow-right" width="16" height="16"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    
+        <section class="cta-section reveal-up">
+            <div class="cta-banner">
+                <div class="cta-body">
+                    <div class="eyebrow">Private Showings</div>
+                    <h2 class="dm-san cta-title">Walk a finished villa before you decide.</h2>
+                    <p class="cta-text">Schedule a hosted walkthrough across Mumbai, Pune, or Alibaug and see our build quality up close.</p>
+                    <div class="cta-actions">
+                        <a class="btn-pill" href="contact.html">Book a site visit</a>
+                        <a class="cta-link" href="projects.html">View current projects <i data-lucide="arrow-right" width="16" height="16"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="simple-footer">
+        <div class="container footer-content">
+            <div class="footer-links">
+                <a href="contact.html">Contact</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+            </div>
+            <div class="serif-text" style="font-size: 1.1rem; font-weight: 600;">JSK BUILDWELL</div>
+            <div style="font-weight: 600;">© 2025 JSK Buildwell</div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        window.addEventListener('load', () => document.body.classList.add('loaded'));
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            mobileMenu.classList.toggle('open', isMenuOpen);
+            menuBtn.innerHTML = isMenuOpen
+                ? '<i data-lucide="x" width="24" height="24"></i>'
+                : '<i data-lucide="menu" width="24" height="24"></i>';
+            lucide.createIcons();
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                isMenuOpen = false;
+                menuBtn.innerHTML = '<i data-lucide="menu" width="24" height="24"></i>';
+                lucide.createIcons();
+            });
+        });
+
+        function setupScrollReveal() {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+        }
+        setupScrollReveal();
+    </script>
+</body>
+
+</html>
