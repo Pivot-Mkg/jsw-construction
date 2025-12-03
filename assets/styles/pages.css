@@ -218,7 +218,7 @@ footer .logo-link {
   max-width: 1400px;
   min-height: 80vh;
   margin: 1.5rem auto 3rem;
-  padding: clamp(2.5rem, 4vw, 4rem);
+  padding: clamp(2.5rem, 4vw, 4rem) !important;
   border-radius: 32px;
   overflow: hidden;
   isolation: isolate;
@@ -1205,12 +1205,12 @@ textarea.form-input {
   font-size: clamp(2.6rem, 4vw, 3rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
-  color: #131626;
+  color: var(--text-heading);
 }
 
 .hero-sub {
   font-size: 1.1rem;
-  color: #3c3f4c;
+  color: var(--text-main);
   max-width: 620px;
   font-weight: 600;
 }
@@ -1286,10 +1286,27 @@ textarea.form-input {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(12, 19, 35, 0.08);
+  background: var(--accent-gold) !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  z-index: 3;
+  /* prepare for smooth diagonal movement on hover */
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 0.25s;
+  transform: translate(0, 0);
+}
+
+/* Move the arrow smoothly diagonally to the top-right when the card is hovered */
+.gallery-card:hover .card-arrow {
+  transform: translate(8px, -8px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.card-arrow svg {
+  stroke: #fff;
+  font-size: 14px;
+  /* fill: #fff; */
+  font-weight: 700;
 }
 
 .card-illustra {
@@ -1320,7 +1337,7 @@ textarea.form-input {
   right: 0;
   bottom: 0;
   padding: 1rem;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.65) 100%);
+  /* background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0.65) 100%); */
   color: #f8fafc;
 }
 
@@ -1331,8 +1348,8 @@ textarea.form-input {
 }
 
 .card-body p {
-  color: #e5e7eb;
-  font-weight: 600;
+  color: var(--text-muted);
+  /* font-weight: 600; */
 }
 
 .card-blue {
@@ -1609,7 +1626,7 @@ textarea.form-input {
   .page-hero {
     width: 94%;
     min-height: 70vh;
-    padding: 2.25rem;
+    padding: 2.25rem !important;
     margin: 1rem auto 2.5rem;
     align-items: flex-end;
   }
@@ -1676,7 +1693,7 @@ textarea.form-input {
   }
 
   .page-hero {
-    padding: 1.75rem;
+    padding: 1.75rem !important;
     min-height: 65vh;
     border-radius: 24px;
   }
@@ -2216,5 +2233,118 @@ textarea.form-input {
 
   .gallery-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+
+/* Projects Page Section Spacing */
+.gallery-page section.container {
+  padding: 2rem 0;
+}
+
+.gallery-page section.container:first-of-type {
+  padding-top: 2rem;
+}
+
+.section-heading.flat {
+  margin: 0 0 2.5rem;
+}
+
+.gallery-grid {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .gallery-page section.container {
+    padding: 3rem 0;
+  }
+}
+
+
+/* Navigation Dropdown Styles */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+  color: var(--accent-gold);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 0.75rem 0;
+  min-width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  margin-top: 0.5rem;
+}
+
+.nav-item:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  color: var(--text-main);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(193, 157, 96, 0.1);
+  color: var(--accent-gold);
+  padding-left: 1.75rem;
+}
+
+.nav-link.cta-nav {
+  background: var(--accent-gold);
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.nav-link.cta-nav:hover {
+  background: #a3824a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(193, 157, 96, 0.3);
+}
+
+@media (max-width: 1024px) {
+  .nav-links {
+    display: none;
   }
 }
