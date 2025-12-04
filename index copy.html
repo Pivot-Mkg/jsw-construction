@@ -240,88 +240,6 @@
             transform: translateY(0);
         }
 
-        /* Dropdown Menu Styles */
-        .nav-dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .nav-dropdown-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #333;
-            transition: color 0.3s ease;
-        }
-
-        .nav-dropdown-toggle:hover {
-            color: var(--accent-gold);
-        }
-
-        .nav-dropdown-content {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            min-width: 220px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-8px);
-            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-            padding: 0.75rem 0;
-            margin-top: 0.5rem;
-            z-index: 1000;
-        }
-
-        .nav-dropdown:hover .nav-dropdown-content {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .nav-dropdown-content a {
-            display: block;
-            padding: 0.65rem 1.25rem;
-            color: var(--text-main);
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .nav-dropdown-content a:hover {
-            background-color: #f9f7f1;
-            color: var(--accent-gold);
-            padding-left: 1.5rem;
-        }
-
-        .nav-cta {
-            display: inline-block;
-            padding: 0.7rem 1.5rem;
-            background-color: var(--accent-gold);
-            color: white;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: all 0.3s ease;
-            margin-left: 1rem;
-        }
-
-        .nav-cta:hover {
-            background-color: #a3824a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(193, 157, 96, 0.3);
-        }
-
         .header-actions {
             display: flex;
             align-items: center;
@@ -371,17 +289,15 @@
             align-items: center;
             justify-content: center;
             gap: 2rem;
-            transform: translateY(-6%);
-            opacity: 0;
-            pointer-events: none;
-            transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease;
-            will-change: transform, opacity;
+            transform: translateY(-100%);
+            visibility: hidden;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.5s;
         }
 
         .mobile-menu-overlay.open {
             transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
+            visibility: visible;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
         }
 
         .mobile-link {
@@ -394,81 +310,6 @@
 
         .mobile-link:hover {
             color: var(--accent-gold);
-        }
-
-        /* Mobile dropdown styles inside the mobile menu overlay */
-        .mobile-dropdown {
-            width: 100%;
-            display: block;
-            text-align: center;
-        }
-
-        .mobile-dropdown summary {
-            list-style: none;
-            -webkit-user-select: none;
-            user-select: none;
-            cursor: pointer;
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            color: var(--text-heading);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-        }
-
-        .mobile-dropdown summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .mobile-sublink {
-            display: block;
-            font-size: 1.1rem;
-            color: var(--text-main);
-            padding: 0.5rem 1.5rem;
-            text-decoration: none;
-        }
-
-        .mobile-sublink:hover {
-            color: var(--accent-gold);
-            padding-left: 1.75rem;
-        }
-
-        .mobile-cta {
-            display: inline-block;
-            padding: 0.85rem 1.75rem;
-            background: var(--accent-gold);
-            color: white;
-            border-radius: 999px;
-            font-weight: 800;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            margin-top: 1rem;
-        }
-
-        /* Animate sublinks and chevron rotation for details groups */
-        .mobile-dropdown summary i {
-            display: inline-block;
-            transition: transform 260ms ease;
-            transform-origin: center;
-        }
-
-        details[open]>summary i {
-            transform: rotate(180deg);
-        }
-
-        .mobile-sublink {
-            opacity: 0;
-            transform: translateY(-8px);
-            transition: opacity 260ms ease, transform 260ms ease;
-        }
-
-        details[open] .mobile-sublink {
-            opacity: 1;
-            transform: translateY(0);
-            transition-delay: 40ms;
         }
 
         /* --- Logo Styling --- */
@@ -1622,44 +1463,10 @@
         </button>
 
         <nav class="nav-links">
-            <a href="index.html" class="nav-link"><span>Home</span><span>Home</span></a>
-
-            <div class="nav-dropdown">
-                <div class="nav-dropdown-toggle">
-                    <span>Projects</span>
-                    <i data-lucide="chevron-down" width="14" height="14"></i>
-                </div>
-                <div class="nav-dropdown-content">
-                    <a href="projects.html#residential-townships">Residential Townships</a>
-                    <a href="projects.html#villas-row-housing">Villas & Row Housing</a>
-                    <a href="projects.html#commercial-mixed-use">Commercial & Mixed-Use</a>
-                    <a href="projects.html#redevelopment-projects">Redevelopment Projects</a>
-                </div>
-            </div>
-
-            <div class="nav-dropdown">
-                <div class="nav-dropdown-toggle">
-                    <span>Services</span>
-                    <i data-lucide="chevron-down" width="14" height="14"></i>
-                </div>
-                <div class="nav-dropdown-content">
-                    <a href="services.html#redevelopment">Redevelopment</a>
-                </div>
-            </div>
-
-            <div class="nav-dropdown">
-                <div class="nav-dropdown-toggle">
-                    <span>About Us</span>
-                    <i data-lucide="chevron-down" width="14" height="14"></i>
-                </div>
-                <div class="nav-dropdown-content">
-                    <a href="about.html#company-profile">Company Profile</a>
-                    <a href="about.html#leadership-team">Leadership Team</a>
-                    <a href="about.html#vision-mission">Vision & Mission</a>
-                </div>
-            </div>
-
-            <a href="contact.html" class="nav-cta">Get a Quote</a>
+            <a href="#" class="nav-link"><span>Projects</span><span>Projects</span></a>
+            <a href="#" class="nav-link"><span>Legacy</span><span>Legacy</span></a>
+            <a href="#" class="nav-link"><span>Testimonials</span><span>Testimonials</span></a>
+            <a href="#" class="nav-link"><span>Contact</span><span>Contact</span></a>
         </nav>
 
         <a href="#" class="logo-link">
@@ -1682,29 +1489,10 @@
     </header>
 
     <div id="mobile-menu" class="mobile-menu-overlay">
-        <a href="index.html" class="mobile-link">Home</a>
-
-        <details class="mobile-dropdown">
-            <summary class="mobile-link">Projects <i data-lucide="chevron-down" width="16" height="16"></i></summary>
-            <a class="mobile-sublink" href="projects.html#residential-townships">Residential Townships</a>
-            <a class="mobile-sublink" href="projects.html#villas-row-housing">Villas & Row Housing</a>
-            <a class="mobile-sublink" href="projects.html#commercial-mixed-use">Commercial & Mixed-Use</a>
-            <a class="mobile-sublink" href="projects.html#redevelopment-projects">Redevelopment Projects</a>
-        </details>
-
-        <details class="mobile-dropdown">
-            <summary class="mobile-link">Services <i data-lucide="chevron-down" width="16" height="16"></i></summary>
-            <a class="mobile-sublink" href="services.html#redevelopment">Redevelopment</a>
-        </details>
-
-        <details class="mobile-dropdown">
-            <summary class="mobile-link">About Us <i data-lucide="chevron-down" width="16" height="16"></i></summary>
-            <a class="mobile-sublink" href="about.html#company-profile">Company Profile</a>
-            <a class="mobile-sublink" href="about.html#leadership-team">Leadership Team</a>
-            <a class="mobile-sublink" href="about.html#vision-mission">Vision & Mission</a>
-        </details>
-
-        <a href="contact.html" class="mobile-cta">Get a Quote</a>
+        <a href="#" class="mobile-link">Projects</a>
+        <a href="#" class="mobile-link">Legacy</a>
+        <a href="#" class="mobile-link">Testimonials</a>
+        <a href="#" class="mobile-link">Contact</a>
     </div>
 
     <div class="page-wrapper">
@@ -2111,20 +1899,6 @@
                 mobileMenu.classList.remove('open');
                 menuBtn.innerHTML = '<i data-lucide="menu" width="24" height="24"></i>';
             }
-            lucide.createIcons();
-        });
-
-        // Close mobile menu when clicking a mobile link or sublink
-        mobileMenu.addEventListener('click', (e) => {
-            const target = e.target.closest('a, summary');
-            if (!target) return;
-
-            // If it's a top-level summary (details toggle), let it toggle; otherwise close menu
-            if (target.tagName.toLowerCase() === 'summary') return;
-
-            mobileMenu.classList.remove('open');
-            isMenuOpen = false;
-            menuBtn.innerHTML = '<i data-lucide="menu" width="24" height="24"></i>';
             lucide.createIcons();
         });
 

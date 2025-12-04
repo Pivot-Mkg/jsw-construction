@@ -89,6 +89,7 @@ p {
 .nav-links {
   display: flex;
   gap: 2rem;
+  align-items: center;
 }
 
 .nav-link {
@@ -121,6 +122,61 @@ p {
 
 .nav-link:hover span:last-child {
   transform: translateY(0);
+}
+
+/* Dropdown nav (desktop) */
+.nav-item {
+  position: relative;
+}
+
+.nav-item .dropdown-toggle {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-item .dropdown-menu {
+  position: absolute;
+  top: calc(var(--header-height) + 6px);
+  left: 0;
+  min-width: 220px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+  padding: 0.5rem 0;
+  display: none;
+  z-index: 120;
+}
+
+.nav-item .dropdown-item {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: var(--text-main);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.nav-item .dropdown-item:hover {
+  background: rgba(193, 157, 96, 0.06);
+  color: var(--accent-dark);
+}
+
+/* Show on hover for desktop */
+@media (hover: hover) and (min-width: 769px) {
+  .nav-item:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+/* On small screens dropdowns are hidden and mobile menu provides links */
+@media (max-width: 768px) {
+  .nav-item .dropdown-menu {
+    display: none !important;
+  }
 }
 
 .mobile-toggle {
