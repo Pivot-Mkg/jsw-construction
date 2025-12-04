@@ -6,148 +6,219 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSK Buildwell | Services</title>
     <meta name="description"
-        content="Discover JSK Buildwell's end-to-end services from architecture to construction management and hospitality-grade operations.">
+        content="Specialized redevelopment services transforming aging buildings into vibrant modern spaces.">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Lenis smooth scroll (loaded before navigation module) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@latest/dist/lenis.min.js"></script>
+    <script src="./assets/js/navigation.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap"
         rel="stylesheet">
+    <!-- Lenis smooth scroll (loaded before navigation module) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@latest/dist/lenis.min.js"></script>
+
     <link rel="stylesheet" href="assets/styles/pages.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
 </head>
 
 <body>
+    <!-- Header -->
     <header class="main-header">
         <button id="menu-btn" class="mobile-toggle">
             <i data-lucide="menu" width="24" height="24"></i>
         </button>
+
         <nav class="nav-links">
             <a href="index.html" class="nav-link"><span>Home</span><span>Home</span></a>
-            <a href="projects.html" class="nav-link"><span>Projects</span><span>Projects</span></a>
-            <a href="services.html" class="nav-link"><span>Services</span><span>Services</span></a>
-            <a href="about.html" class="nav-link"><span>About</span><span>About</span></a>
-            <a href="news.html" class="nav-link"><span>News</span><span>News</span></a>
-            <a href="careers.html" class="nav-link"><span>Careers</span><span>Careers</span></a>
-            <a href="contact.html" class="nav-link"><span>Contact</span><span>Contact</span></a>
+
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>Projects</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
+                </div>
+                <div class="nav-dropdown-content">
+                    <a href="projects.html#residential-townships">Residential Townships</a>
+                    <a href="projects.html#villas-row-housing">Villas & Row Housing</a>
+                    <a href="projects.html#commercial-mixed-use">Commercial & Mixed-Use</a>
+                    <a href="projects.html#redevelopment-projects">Redevelopment Projects</a>
+                </div>
+            </div>
+
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>Services</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
+                </div>
+                <div class="nav-dropdown-content">
+                    <a href="services.html#redevelopment">Redevelopment</a>
+                </div>
+            </div>
+
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>About Us</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
+                </div>
+                <div class="nav-dropdown-content">
+                    <a href="about.html#company-profile">Company Profile</a>
+                    <a href="about.html#leadership-team">Leadership Team</a>
+                    <a href="about.html#vision-mission">Vision & Mission</a>
+                </div>
+            </div>
+
+            <a href="contact.html" class="nav-cta">Get a Quote</a>
         </nav>
-        <a href="index.html" class="logo-link">
-            <img src="./assets/images/logo.png" alt="JSK Buildwell Logo">
+
+        <a href="#" class="logo-link">
+            <!-- style="font-size: 1.5rem; font-weight: 500; position: absolute; left: 50%; transform: translateX(-50%);"> -->
+            <!-- JSK Buildwell -->
+            <img src="./assets/images/logo.png" alt="" srcset="">
         </a>
+        <!-- <div class="header-actions">
+                <i data-lucide="user" class="user-icon" width="20" height="20" style="cursor: pointer;"></i>
+                <i data-lucide="search" width="20" height="20" style="cursor: pointer;"></i>
+                <div class="lang-switch">
+                    <span>ENG</span>
+                    <i data-lucide="globe" width="16" height="16"></i>
+                </div>
+                <div class="cart-icon" style="cursor: pointer;">
+                    <i data-lucide="shopping-bag" width="20" height="20"></i>
+                    <div class="cart-dot"></div>
+                </div>
+            </div> -->
     </header>
 
     <div id="mobile-menu" class="mobile-menu-overlay">
         <a href="index.html" class="mobile-link">Home</a>
-        <a href="projects.html" class="mobile-link">Projects</a>
-        <a href="services.html" class="mobile-link">Services</a>
-        <a href="about.html" class="mobile-link">About</a>
-        <a href="news.html" class="mobile-link">News</a>
-        <a href="careers.html" class="mobile-link">Careers</a>
-        <a href="contact.html" class="mobile-link">Contact</a>
+
+        <details class="mobile-dropdown">
+            <summary class="mobile-link">Projects <i data-lucide="chevron-down" width="16" height="16"></i></summary>
+            <a class="mobile-sublink" href="projects.html#residential-townships">Residential Townships</a>
+            <a class="mobile-sublink" href="projects.html#villas-row-housing">Villas & Row Housing</a>
+            <a class="mobile-sublink" href="projects.html#commercial-mixed-use">Commercial & Mixed-Use</a>
+            <a class="mobile-sublink" href="projects.html#redevelopment-projects">Redevelopment Projects</a>
+        </details>
+
+        <details class="mobile-dropdown">
+            <summary class="mobile-link">Services <i data-lucide="chevron-down" width="16" height="16"></i></summary>
+            <a class="mobile-sublink" href="services.html#redevelopment">Redevelopment</a>
+        </details>
+
+        <details class="mobile-dropdown">
+            <summary class="mobile-link">About Us <i data-lucide="chevron-down" width="16" height="16"></i></summary>
+            <a class="mobile-sublink" href="about.html#company-profile">Company Profile</a>
+            <a class="mobile-sublink" href="about.html#leadership-team">Leadership Team</a>
+            <a class="mobile-sublink" href="about.html#vision-mission">Vision & Mission</a>
+        </details>
+        <a href="contact.html" class="mobile-cta">Get a Quote</a>
     </div>
 
     <main class="page-wrapper">
         <section class="container page-hero reveal-up">
             <div class="hero-content">
-                <div class="eyebrow">What We Deliver</div>
-                <h1 class="serif-text">Full-stack build services designed for discerning patrons.</h1>
-                <p class="hero-copy">End-to-end build and operations with tight control and hospitality polish.</p>
+                <h1 class="dm-san">Breathing New Life into Legacy Structures</h1>
+                <p class="hero-copy">We specialize in the transformative redevelopment of aging buildings, revitalizing
+                    not just structures, but entire communities.</p>
                 <div class="hero-meta">
-                    <span class="pill"><i data-lucide="ruler" width="16" height="16"></i> Architecture &
-                        Masterplanning</span>
-                    <span class="pill"><i data-lucide="factory" width="16" height="16"></i> EPC & Project
-                        Controls</span>
+                    <span class="pill"><i data-lucide="building-2" width="16" height="16"></i> Redevelopment
+                        Specialists</span>
+                    <span class="pill"><i data-lucide="shield-check" width="16" height="16"></i> Safety &
+                        Sustainability</span>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1400"
-                    alt="Design and build services">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=1600"
+                    alt="Redevelopment Services">
             </div>
         </section>
 
         <section class="section-shell">
             <div class="container">
-                <div class="section-heading">
-                    <h2 class="section-title">Core Services</h2>
-                    <p class="section-description">Teams keep continuity from first sketch to handover.</p>
-                </div>
-                <div class="card-grid">
-                    <div class="info-card reveal-up">
-                        <div class="label">Architecture & Masterplanning</div>
-                        <h3>Site-specific visions</h3>
-                        <p>Concept to GFC with sun studies, wind mapping, and landscape overlays that protect views.</p>
-                        <div class="stat-line"><i data-lucide="map" width="16" height="16"></i> 80+ acres masterplanned
-                        </div>
+                <div
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem;">
+                    <div data-aos="fade-right">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=800"
+                            alt="Redevelopment" style="width: 100%; border-radius: 8px;">
                     </div>
-                    <div class="info-card reveal-up">
-                        <div class="label">EPC & Construction</div>
-                        <h3>Precision delivery</h3>
-                        <p>Structure labs, MEP audits, and weekly digital twins to keep detailing aligned.</p>
-                        <div class="stat-line"><i data-lucide="hard-hat" width="16" height="16"></i> Zero deviation QC
-                            gates</div>
-                    </div>
-                    <div class="info-card reveal-up">
-                        <div class="label">Interiors & FF&E</div>
-                        <h3>Tactile environments</h3>
-                        <p>Custom joinery, global sourcing, and staging curated art for final handovers.</p>
-                        <div class="stat-line"><i data-lucide="feather" width="16" height="16"></i> Atelier-grade
-                            finishes</div>
-                    </div>
-                    <div class="info-card reveal-up">
-                        <div class="label">Operations</div>
-                        <h3>Hospitality-grade care</h3>
-                        <p>Club management, housekeeping, and resident services that keep properties pristine.</p>
-                        <div class="stat-line"><i data-lucide="sparkles" width="16" height="16"></i> White-glove upkeep
-                        </div>
+                    <div data-aos="fade-left">
+                        <h3 class="dm-san" style="margin-bottom: 1rem; font-size: 1.8rem;">Our Approach</h3>
+                        <p class="font_8 wixui-rich-text__text">Through our expertise, we create spaces that blend the
+                            charm of the past with the comforts and conveniences of the present. We&#39;re dedicated to
+                            enhancing the quality of life for residents, fostering a sense of belonging, and adding
+                            lasting value to properties.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="section-shell" style="background: rgba(255,255,255,0.7);">
-            <div class="container stacked">
-                <div class="info-card reveal-up">
-                    <div class="label">Methodology</div>
-                    <h3>Four deliberate moves.</h3>
-                    <div class="list-grid">
-                        <div class="list-item"><i data-lucide="compass" width="18" height="18"></i> Discovery charrettes
-                            with founders.</div>
-                        <div class="list-item"><i data-lucide="grid" width="18" height="18"></i> Digital twins and mock
-                            rooms to test flow.</div>
-                        <div class="list-item"><i data-lucide="shield-check" width="18" height="18"></i> Safety-first
-                            logistics with weekly audits.</div>
-                        <div class="list-item"><i data-lucide="infinity" width="18" height="18"></i> Post-handover care
-                            with predictive maintenance.</div>
-                    </div>
-                </div>
-                <div class="media-block reveal-up">
-                    <img src="https://images.unsplash.com/photo-1503389152951-9f343605f61e?auto=format&fit=crop&q=80&w=1400"
-                        alt="Project methodology">
-                </div>
-            </div>
-        </section>
-
-        <section class="section-shell">
-            <div class="container">
-                <div class="section-heading">
-                    <h2 class="section-title">Specialized Studios</h2>
-                    <p class="section-description">Dedicated practice leads bring niche expertise to complex briefs.</p>
-                </div>
-                <div class="card-grid">
-                    <div class="info-card reveal-up">
-                        <div class="label">Sustainability Lab</div>
-                        <h3>Climate-positive moves</h3>
-                        <p>Greywater loops, native planting, cooling courts, and carbon tracking built in.</p>
-                    </div>
-                    <div class="info-card reveal-up">
-                        <div class="label">Tech & Security</div>
-                        <h3>Quiet, invisible systems</h3>
-                        <p>Distributed audio, secure access, and privacy-first surveillance with concierge dashboards.
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                    <div data-aos="fade-right">
+                        <h3 class="dm-san" style="margin-bottom: 1rem; font-size: 1.8rem;">Our Commitment</h3>
+                        <p class="font_8 wixui-rich-text__text">
+                            <i data-lucide="sparkles" width="24" height="24"></i><b>Modernization:</b> We carefully
+                            integrate
+                            contemporary
+                            amenities and features, ensuring that residents enjoy the latest conveniences while
+                            preserving the building&#39;s unique character.<br class="wixui-rich-text__text">
+                            Safety &amp;
+                            <br><br>
+                            <i data-lucide="shield-check" width="24" height="24"></i><b>Sustainability:</b> We adhere to
+                            the most stringent construction and safety
+                            standards, incorporating sustainable practices to minimize environmental impact.<br
+                                class="wixui-rich-text__text">
+                            <br>
+                            <i data-lucide="users" width="24" height="24"></i><b>Community Building:</b> We create
+                            spaces that foster connection and interaction, encouraging a
+                            thriving community within the building and its surroundings.<br
+                                class="wixui-rich-text__text">
+                            Our commitment to excellence and innovation sets us apart. We&#39;re passionate about
+                            breathing new life into legacy structures, transforming them into vibrant, modern spaces
+                            that meet the needs of today&#39;s residents.
                         </p>
+
+                        <p class="font_8 wixui-rich-text__text"><span class="wixGuard wixui-rich-text__text"></span></p>
                     </div>
-                    <div class="info-card reveal-up">
-                        <div class="label">Hospitality</div>
-                        <h3>Moments with intention</h3>
-                        <p>Signature fragrance, lighting moods, and F&B rituals tailored to each guest touchpoint.</p>
+                    <div data-aos="fade-left">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800"
+                            alt="Modern Building" style="width: 100%; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-shell" id="redevelopment">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="section-title dm-san">Our Expertise</h2>
+                    <p class="section-description">
+                        Comprehensive redevelopment services that transform aging structures
+                        into modern living spaces.
+                    </p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card reveal-up">
+                        <div class="feature-icon">
+                            <i data-lucide="sparkles" width="24" height="24"></i>
+                        </div>
+                        <h4>Modernization</h4>
+                        <p>We carefully integrate contemporary amenities and features, ensuring that residents enjoy the
+                            latest conveniences while preserving the building's unique character.</p>
+                    </div>
+                    <div class="feature-card reveal-up delay-100">
+                        <div class="feature-icon">
+                            <i data-lucide="shield-check" width="24" height="24"></i>
+                        </div>
+                        <h4>Safety & Sustainability</h4>
+                        <p>We adhere to the most stringent construction and safety standards, incorporating sustainable
+                            practices to minimize environmental impact.</p>
+                    </div>
+                    <div class="feature-card reveal-up delay-200">
+                        <div class="feature-icon">
+                            <i data-lucide="users" width="24" height="24"></i>
+                        </div>
+                        <h4>Community Building</h4>
+                        <p>We create spaces that foster connection and interaction, encouraging a thriving community
+                            within the building and its surroundings.</p>
                     </div>
                 </div>
             </div>
@@ -175,7 +246,7 @@
             <div class="footer-wrapper">
                 <div class="footer-top">
                     <div class="footer-brand">
-                        <h3 class="brand-name logo-link"><img src="./assets/images/logo.png" alt="" srcset=""></h3>
+                        <h3 class="brand-name logo-link"><img src="./assets/images/logo.png" alt="JSK Buildwell"></h3>
                         <p class="brand-tagline">Crafting calm, timeless residences.</p>
                     </div>
                     <div class="footer-nav">
@@ -207,9 +278,30 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         lucide.createIcons();
         window.addEventListener('load', () => document.body.classList.add('loaded'));
+
+        // Initialize Lenis smooth scrolling
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smooth: true
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
 
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -246,6 +338,7 @@
         }
         setupScrollReveal();
     </script>
+    <script src="./assets/js/navigation.js"></script>
 </body>
 
 </html>

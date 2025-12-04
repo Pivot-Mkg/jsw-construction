@@ -9,6 +9,12 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Lenis smooth scroll (loaded before navigation module) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@latest/dist/lenis.min.js"></script>
+
+    <!-- Navigation Module -->
+    <script src="./assets/js/navigation.js"></script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -206,6 +212,7 @@
         .nav-links {
             display: flex;
             gap: 2.5rem;
+            align-items: center;
         }
 
         .nav-link {
@@ -267,9 +274,9 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background: white;
+            background: #f0efe9;
             border: 1px solid #e5e7eb;
-            border-radius: 8px;
+            border-radius: 6px;
             min-width: 220px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             opacity: 0;
@@ -449,9 +456,17 @@
         }
 
         /* Animate sublinks and chevron rotation for details groups */
+        .mobile-dropdown details {
+            transition: all 320ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .mobile-dropdown summary {
+            transition: all 260ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
         .mobile-dropdown summary i {
             display: inline-block;
-            transition: transform 260ms ease;
+            transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
             transform-origin: center;
         }
 
@@ -461,14 +476,26 @@
 
         .mobile-sublink {
             opacity: 0;
-            transform: translateY(-8px);
-            transition: opacity 260ms ease, transform 260ms ease;
+            transform: translateY(-10px);
+            transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1),
+                transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         details[open] .mobile-sublink {
             opacity: 1;
             transform: translateY(0);
-            transition-delay: 40ms;
+        }
+
+        details[open] .mobile-sublink:nth-child(2) {
+            transition-delay: 60ms;
+        }
+
+        details[open] .mobile-sublink:nth-child(3) {
+            transition-delay: 120ms;
+        }
+
+        details[open] .mobile-sublink:nth-child(4) {
+            transition-delay: 180ms;
         }
 
         /* --- Logo Styling --- */
@@ -1945,7 +1972,7 @@
                     <p class="cta-text">Schedule a hosted walkthrough across Mumbai, Pune, or Alibaug and see our build
                         quality up close.</p>
                     <div class="cta-actions">
-                        <a class="btn-pill" href="contact.html">Book a site visit</a>
+                        <!-- <a class="btn-pill" href="contact.html">Book a site visit</a> -->
                         <a class="cta-link" href="projects.html">View current projects <i data-lucide="arrow-right"
                                 width="16" height="16"></i></a>
                     </div>
@@ -2101,32 +2128,7 @@
             }, 300); // Reduced wait time to match new CSS transition (was 500)
         }
 
-        // --- MENU LOGIC ---
-        menuBtn.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.classList.add('open');
-                menuBtn.innerHTML = '<i data-lucide="x" width="24" height="24"></i>';
-            } else {
-                mobileMenu.classList.remove('open');
-                menuBtn.innerHTML = '<i data-lucide="menu" width="24" height="24"></i>';
-            }
-            lucide.createIcons();
-        });
-
-        // Close mobile menu when clicking a mobile link or sublink
-        mobileMenu.addEventListener('click', (e) => {
-            const target = e.target.closest('a, summary');
-            if (!target) return;
-
-            // If it's a top-level summary (details toggle), let it toggle; otherwise close menu
-            if (target.tagName.toLowerCase() === 'summary') return;
-
-            mobileMenu.classList.remove('open');
-            isMenuOpen = false;
-            menuBtn.innerHTML = '<i data-lucide="menu" width="24" height="24"></i>';
-            lucide.createIcons();
-        });
+        // --- MENU LOGIC (moved to assets/js/navigation.js) ---
 
         if (scrollInd) {
             scrollInd.addEventListener('click', () => {

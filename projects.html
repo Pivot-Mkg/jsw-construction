@@ -10,11 +10,15 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Lenis smooth scroll (loaded before navigation module) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@latest/dist/lenis.min.js"></script>
+    <script src="./assets/js/navigation.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="assets/styles/pages.css">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
         /* Gallery card: full-width image with gradient overlay for text visibility */
         .gallery-card {
@@ -26,7 +30,7 @@
         .gallery-card .card-illustra {
             position: relative;
             width: 100%;
-            height: 240px;
+            height: 400px;
             /* adjust height as needed */
             overflow: hidden;
             display: block;
@@ -70,64 +74,103 @@
         /* Smaller devices: reduce image height */
         @media (max-width: 768px) {
             .gallery-card .card-illustra {
-                height: 180px;
+                height: 280px;
             }
         }
     </style>
 </head>
 
 <body>
+
     <header class="main-header">
         <button id="menu-btn" class="mobile-toggle">
             <i data-lucide="menu" width="24" height="24"></i>
         </button>
+
         <nav class="nav-links">
             <a href="index.html" class="nav-link"><span>Home</span><span>Home</span></a>
 
-            <div class="nav-item">
-                <button class="nav-link dropdown-toggle"><span>Projects</span><span>Projects</span></button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="projects.html#residential">Residential Townships</a>
-                    <a class="dropdown-item" href="projects.html#villas">Villas &amp; Row Housing</a>
-                    <a class="dropdown-item" href="projects.html#commercial">Commercial &amp; Mixed-Use</a>
-                    <a class="dropdown-item" href="projects.html#redevelopment">Redevelopment Projects</a>
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>Projects</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
+                </div>
+                <div class="nav-dropdown-content">
+                    <a href="projects.html#residential-townships">Residential Townships</a>
+                    <a href="projects.html#villas-row-housing">Villas & Row Housing</a>
+                    <a href="projects.html#commercial-mixed-use">Commercial & Mixed-Use</a>
+                    <a href="projects.html#redevelopment-projects">Redevelopment Projects</a>
                 </div>
             </div>
 
-            <div class="nav-item">
-                <button class="nav-link dropdown-toggle"><span>Services</span><span>Services</span></button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="services.html#redevelopment">Redevelopment</a>
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>Services</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
+                </div>
+                <div class="nav-dropdown-content">
+                    <a href="services.html#redevelopment">Redevelopment</a>
                 </div>
             </div>
 
-            <div class="nav-item">
-                <button class="nav-link dropdown-toggle"><span>About Us</span><span>About Us</span></button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="about.html#company-profile">Company Profile</a>
-                    <a class="dropdown-item" href="about.html#leadership">Leadership Team</a>
-                    <a class="dropdown-item" href="about.html#vision-mission">Vision &amp; Mission</a>
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>About Us</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
+                </div>
+                <div class="nav-dropdown-content">
+                    <a href="about.html#company-profile">Company Profile</a>
+                    <a href="about.html#leadership-team">Leadership Team</a>
+                    <a href="about.html#vision-mission">Vision & Mission</a>
                 </div>
             </div>
 
-            <a href="contact.html" class="nav-link"><span>Get a Quote</span><span>Get a Quote</span></a>
+            <a href="contact.html" class="nav-cta">Get a Quote</a>
         </nav>
-        <a href="index.html" class="logo-link">
-            <img src="./assets/images/logo.png" alt="JSK Buildwell Logo">
+
+        <a href="#" class="logo-link">
+            <!-- style="font-size: 1.5rem; font-weight: 500; position: absolute; left: 50%; transform: translateX(-50%);"> -->
+            <!-- JSK Buildwell -->
+            <img src="./assets/images/logo.png" alt="" srcset="">
         </a>
+        <!-- <div class="header-actions">
+                <i data-lucide="user" class="user-icon" width="20" height="20" style="cursor: pointer;"></i>
+                <i data-lucide="search" width="20" height="20" style="cursor: pointer;"></i>
+                <div class="lang-switch">
+                    <span>ENG</span>
+                    <i data-lucide="globe" width="16" height="16"></i>
+                </div>
+                <div class="cart-icon" style="cursor: pointer;">
+                    <i data-lucide="shopping-bag" width="20" height="20"></i>
+                    <div class="cart-dot"></div>
+                </div>
+            </div> -->
     </header>
 
     <div id="mobile-menu" class="mobile-menu-overlay">
         <a href="index.html" class="mobile-link">Home</a>
-        <a href="projects.html" class="mobile-link">Residential Townships</a>
-        <a href="projects.html#villas" class="mobile-link">Villas &amp; Row Housing</a>
-        <a href="projects.html#commercial" class="mobile-link">Commercial &amp; Mixed-Use</a>
-        <a href="projects.html#redevelopment" class="mobile-link">Redevelopment Projects</a>
-        <a href="services.html#redevelopment" class="mobile-link">Services — Redevelopment</a>
-        <a href="about.html#company-profile" class="mobile-link">Company Profile</a>
-        <a href="about.html#leadership" class="mobile-link">Leadership Team</a>
-        <a href="about.html#vision-mission" class="mobile-link">Vision &amp; Mission</a>
-        <a href="contact.html" class="mobile-link">Get a Quote</a>
+
+        <details class="mobile-dropdown">
+            <summary class="mobile-link">Projects <i data-lucide="chevron-down" width="16" height="16"></i></summary>
+            <a class="mobile-sublink" href="projects.html#residential-townships">Residential Townships</a>
+            <a class="mobile-sublink" href="projects.html#villas-row-housing">Villas & Row Housing</a>
+            <a class="mobile-sublink" href="projects.html#commercial-mixed-use">Commercial & Mixed-Use</a>
+            <a class="mobile-sublink" href="projects.html#redevelopment-projects">Redevelopment Projects</a>
+        </details>
+
+        <details class="mobile-dropdown">
+            <summary class="mobile-link">Services <i data-lucide="chevron-down" width="16" height="16"></i></summary>
+            <a class="mobile-sublink" href="services.html#redevelopment">Redevelopment</a>
+        </details>
+
+        <details class="mobile-dropdown">
+            <summary class="mobile-link">About Us <i data-lucide="chevron-down" width="16" height="16"></i></summary>
+            <a class="mobile-sublink" href="about.html#company-profile">Company Profile</a>
+            <a class="mobile-sublink" href="about.html#leadership-team">Leadership Team</a>
+            <a class="mobile-sublink" href="about.html#vision-mission">Vision & Mission</a>
+        </details>
+
+        <a href="contact.html" class="mobile-cta">Get a Quote</a>
     </div>
 
     <main class="page-wrapper gallery-page">
@@ -157,12 +200,12 @@
             <div class="slider-wrap project-swiper">
                 <div class="swiper-wrapper gallery-grid">
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-blue" href="siddeshwar-gardens.html">
+                        <a class="gallery-card card-blue" data-aos="fade-up" href="siddeshwar-gardens.html">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
                             </div>
-                            <div class="card-illustra">
+                            <div class="card-illustra image-reveal-wrapper">
                                 <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=900&q=80"
                                     alt="Siddeshwar Gardens visual">
                             </div>
@@ -173,12 +216,13 @@
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-green" href="siddeshwar-gardens.html#harmony">
+                        <a class="gallery-card card-green" data-aos="fade-up" href="siddeshwar-gardens.html#harmony">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
                             </div>
-                            <div class="card-illustra">
+                            <div class="card-illustra image-reveal-wrapper">
+                                <div class="image-reveal-overlay"></div>
                                 <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80"
                                     alt="Harmony tower visual">
                             </div>
@@ -189,7 +233,7 @@
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-yellow" href="siddeshwar-gardens.html#riviera">
+                        <a class="gallery-card card-yellow" data-aos="fade-up" href="siddeshwar-gardens.html#riviera">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
@@ -205,7 +249,7 @@
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-neutral" href="siddeshwar-gardens.html#jasmine">
+                        <a class="gallery-card card-neutral" data-aos="fade-up" href="siddeshwar-gardens.html#jasmine">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
@@ -221,7 +265,7 @@
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-blue" href="siddeshwar-gardens.html#marigold">
+                        <a class="gallery-card card-blue" data-aos="fade-up" href="siddeshwar-gardens.html#marigold">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
@@ -254,7 +298,7 @@
             <div class="slider-wrap project-swiper">
                 <div class="swiper-wrapper gallery-grid">
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-green" href="siddeshwar-gardens-row-houses.html">
+                        <a class="gallery-card card-green" data-aos="fade-up" href="siddeshwar-gardens-row-houses.html">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
@@ -270,7 +314,7 @@
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-yellow" href="bungalow-94.html">
+                        <a class="gallery-card card-yellow" data-aos="fade-up" href="bungalow-94.html">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
@@ -286,7 +330,7 @@
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-neutral" href="bungalow-95.html">
+                        <a class="gallery-card card-neutral" data-aos="fade-up" href="bungalow-95.html">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
@@ -319,7 +363,7 @@
             <div class="slider-wrap project-swiper">
                 <div class="swiper-wrapper gallery-grid">
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-blue" href="narayan-pushp-chs.html">
+                        <a class="gallery-card card-blue" data-aos="fade-up" href="narayan-pushp-chs.html">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
@@ -335,7 +379,7 @@
                         </a>
                     </div>
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-green" href="om-satyam-niwas-chs.html">
+                        <a class="gallery-card card-green" data-aos="fade-up" href="om-satyam-niwas-chs.html">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
@@ -368,7 +412,7 @@
             <div class="slider-wrap project-swiper">
                 <div class="swiper-wrapper gallery-grid">
                     <div class="swiper-slide">
-                        <a class="gallery-card reveal-up card-yellow" href="glacia.html">
+                        <a class="gallery-card card-yellow" data-aos="fade-up" href="glacia.html">
                             <div class="card-top arrow-only">
                                 <div class="card-arrow"><i data-lucide="arrow-up-right" width="18" height="18"></i>
                                 </div>
@@ -434,6 +478,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
         lucide.createIcons();
         window.addEventListener('load', () => document.body.classList.add('loaded'));
@@ -460,18 +505,14 @@
             });
         });
 
-        function setupScrollReveal() {
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        obs.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2 });
-            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+        // Initialize AOS (Animate On Scroll)
+        if (window.AOS) {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
         }
-        setupScrollReveal();
 
         function initSwipers() {
             document.querySelectorAll('.project-swiper').forEach(swiperEl => {
@@ -482,7 +523,7 @@
 
                 const swiper = new Swiper(swiperEl, {
                     slidesPerView: 3,
-                    spaceBetween: 16,
+                    spaceBetween: 20,
                     navigation: {
                         nextEl,
                         prevEl
@@ -522,6 +563,7 @@
         }
         initSwipers();
     </script>
+
 </body>
 
 </html>
