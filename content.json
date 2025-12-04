@@ -1,0 +1,172 @@
+{
+  "projectCategories": [
+    {
+      "categoryName": "Residential Townships",
+      "projects": [
+        {
+          "projectName": "Siddeshwar Gardens",
+          "location": "Kolshet Road, Thane",
+          "totalArea": "500,000 sq.ft",
+          "phases": [
+            {
+              "phase": "Phase I",
+              "description": "Initial Phase of Siddeshwar Gardens contributing to rapid growth of Kolshet Road area.",
+              "buildings": [
+                {
+                  "name": "Harmony",
+                  "type": "Residential Tower",
+                  "floors": 15,
+                  "configuration": ["2 BHK", "3 BHK"],
+                  "area": "110,000 sq.ft",
+                  "highlights": [
+                    "Scenic Yeoor Hills view",
+                    "Completed in less than 2 years"
+                  ],
+                  "status": "Delivered"
+                }
+              ]
+            },
+            {
+              "phase": "Phase II",
+              "description": "Modern high-rise towers with contemporary amenities.",
+              "buildings": [
+                {
+                  "name": "Riviera",
+                  "type": "Residential Tower",
+                  "floors": 20,
+                  "configuration": ["2 BHK", "E-3 BHK", "3 BHK"],
+                  "highlights": [
+                    "Modern amenities",
+                    "Located in the heart of Kolshet"
+                  ],
+                  "status": "Delivered"
+                },
+                {
+                  "name": "Jasmine",
+                  "type": "Residential Tower",
+                  "floors": 19,
+                  "configuration": ["1.5 BHK", "2 BHK"],
+                  "highlights": [
+                    "Premium residential tower",
+                    "Efficient layouts for compact living"
+                  ],
+                  "status": "Delivered"
+                },
+                {
+                  "name": "Marigold",
+                  "type": "Residential Tower",
+                  "floors": 27,
+                  "configuration": ["2 BHK", "3 BHK"],
+                  "highlights": [
+                    "27-storey high-rise above Siddeshwar Gardens",
+                    "Designed for modern lifestyle living"
+                  ],
+                  "status": "Under Construction"
+                }
+              ]
+            }
+          ],
+          "amenities": [
+            "Tennis Court",
+            "Clubhouse",
+            "Gymnasium",
+            "Swimming Pool"
+          ]
+        }
+      ]
+    },
+    {
+      "categoryName": "Villas & Row Housing",
+      "projects": [
+        {
+          "projectName": "Siddeshwar Gardens – Row Houses",
+          "location": "Kolshet Road, Thane",
+          "type": "Premium Row Houses",
+          "units": 8,
+          "status": "Delivered"
+        },
+        {
+          "projectName": "Bungalow 1 – Plot No. 94",
+          "location": "Kolshet Road, Thane",
+          "type": "Luxury Bungalow",
+          "specifications": {
+            "plotArea": "466 Sq.Mts",
+            "structure": "261.23 Sq.Mts",
+            "balconyAndVerandah": "29.29 Sq.Mts",
+            "staircaseAndLift": "31.38 Sq.Mts",
+            "parking": "11.29 Sq.Mts",
+            "totalBuiltUpArea": "333.19 Sq.Mts"
+          },
+          "status": "Delivered"
+        },
+        {
+          "projectName": "Bungalow 2 – Plot No. 95",
+          "location": "Kolshet Road, Thane",
+          "type": "Luxury Bungalow",
+          "specifications": {
+            "plotArea": "344 Sq.Mts",
+            "structure": "185.72 Sq.Mts",
+            "balconyAndVerandah": "23.83 Sq.Mts",
+            "staircaseAndLift": "30.18 Sq.Mts",
+            "parking": "14.88 Sq.Mts",
+            "totalBuiltUpArea": "254.61 Sq.Mts"
+          },
+          "status": "Delivered"
+        }
+      ]
+    },
+    {
+      "categoryName": "Commercial & Mixed-Use Developments",
+      "projects": [
+        {
+          "projectName": "Glacia",
+          "location": "Tembhi Naka, Thane (1.5 km from Thane Railway Station)",
+          "type": "Mixed-Use Development",
+          "floors": 6,
+          "units": {
+            "residential": "2 BHK Apartments",
+            "commercial": "Office Spaces (350 to 850 sq.ft)"
+          },
+          "highlights": [
+            "Efficient space planning",
+            "Fiber optic infrastructure on each floor"
+          ],
+          "status": "Delivered"
+        }
+      ]
+    },
+    {
+      "categoryName": "Redevelopment Projects",
+      "projects": [
+        {
+          "projectName": "Narayan Pushp CHS",
+          "location": "Mulund West, Mumbai",
+          "type": "Redevelopment",
+          "structure": "Stilt + 8 Floors",
+          "configuration": ["2 BHK", "3 BHK"],
+          "timeline": {
+            "start": "June 2018",
+            "completion": "December 2023"
+          },
+          "status": "Completed"
+        },
+        {
+          "projectName": "Om Satyam Niwas CHS",
+          "location": "Borivali, Mumbai",
+          "type": "Redevelopment",
+          "structure": "Ground Floor Shops + 2 Floors Podium Parking + Residential Floors (3rd to 15th)",
+          "units": {
+            "residential": 43,
+            "commercial": 18
+          },
+          "configuration": ["2 BHK", "3 BHK"],
+          "timeline": {
+            "start": "January 2018",
+            "completion": "June 2023"
+          },
+          "status": "Completed"
+        }
+      ]
+    }
+  ]
+}
