@@ -17,33 +17,109 @@
 </head>
 
 <body>
-    <header class="main-header">
+     <header class="main-header">
         <button id="menu-btn" class="mobile-toggle">
             <i data-lucide="menu" width="24" height="24"></i>
         </button>
+
         <nav class="nav-links">
             <a href="index.html" class="nav-link"><span>Home</span><span>Home</span></a>
-            <a href="projects.html" class="nav-link"><span>Projects</span><span>Projects</span></a>
-            <a href="services.html" class="nav-link"><span>Services</span><span>Services</span></a>
-            <a href="about.html" class="nav-link"><span>About</span><span>About</span></a>
-            <a href="news.html" class="nav-link"><span>News</span><span>News</span></a>
-            <a href="careers.html" class="nav-link"><span>Careers</span><span>Careers</span></a>
-            <a href="contact.html" class="nav-link"><span>Contact</span><span>Contact</span></a>
+
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>Projects</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
+                </div>
+                <div class="nav-dropdown-content grid-2">
+                    <!-- Left Column (4 projects) -->
+                    <div class="category">
+                        <a href="./projects/Siddeshwar-Garden.html" class="category-title">Siddeshwar Gardens</a>
+                    </div>
+                    <div class="category">
+                        <a href="./projects/Siddeshwar Gardens–Row Houses.html" class="category-title">Siddeshwar Gardens – Row
+                            Houses</a>
+                    </div>
+                    <div class="category">
+                        <a href="./projects/Bungalow 1.html" class="category-title">Bungalow 1 – Plot No. 94</a>
+                    </div>
+                    <div class="category">
+                        <a href="./projects/Bungalow 2.html" class="category-title">Bungalow 2 – Plot No. 95</a>
+                    </div>
+
+                    <!-- Right Column (4 projects) -->
+                    <div class="category">
+                        <a href="./projects/Glacia.html" class="category-title">Glacia</a>
+                    </div>
+                    <div class="category">
+                        <a href="./projects/Narayan Pushp CHS.html" class="category-title">Narayan Pushp CHS</a>
+                    </div>
+                    <div class="category">
+                        <a href="./projects/Om-Satyam-Niwas-CHS.html" class="category-title">Om Satyam Niwas CHS</a>
+                    </div>
+                    <div class="category">
+                        <a href="./projects/Jasmine.html" class="category-title">Jasmine Tower</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>Services</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
+                </div>
+                <div class="nav-dropdown-content">
+                    <a href="services.html#redevelopment">Redevelopment</a>
+                </div>
+            </div>
+
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>About Us</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
+                </div>
+                <div class="nav-dropdown-content">
+                    <a href="about.html#company-profile">Company Profile</a>
+                    <a href="about.html#leadership-team">Leadership Team</a>
+                    <a href="about.html#vision-mission">Vision & Mission</a>
+                </div>
+            </div>
+
+            <a href="contact.html" class="nav-cta">Get a Quote</a>
         </nav>
-        <a href="index.html" class="logo-link">
-            <img src="./assets/images/logo.png" alt="JSK Buildwell Logo">
+
+        <a href="#" class="logo-link">
+            <!-- style="font-size: 1.5rem; font-weight: 500; position: absolute; left: 50%; transform: translateX(-50%);"> -->
+            <!-- JSK Buildwell -->
+            <img src="./assets/images/logo.png" alt="" srcset="">
         </a>
+        <!-- <div class="header-actions">
+                <i data-lucide="user" class="user-icon" width="20" height="20" style="cursor: pointer;"></i>
+                <i data-lucide="search" width="20" height="20" style="cursor: pointer;"></i>
+                <div class="lang-switch">
+                    <span>ENG</span>
+                    <i data-lucide="globe" width="16" height="16"></i>
+                </div>
+                <div class="cart-icon" style="cursor: pointer;">
+                    <i data-lucide="shopping-bag" width="20" height="20"></i>
+                    <div class="cart-dot"></div>
+                </div>
+            </div> -->
     </header>
 
     <div id="mobile-menu" class="mobile-menu-overlay">
-        <a href="index.html" class="mobile-link">Home</a>
-        <a href="projects.html" class="mobile-link">Projects</a>
-        <a href="services.html" class="mobile-link">Services</a>
-        <a href="about.html" class="mobile-link">About</a>
-        <a href="news.html" class="mobile-link">News</a>
-        <a href="careers.html" class="mobile-link">Careers</a>
-        <a href="contact.html" class="mobile-link">Contact</a>
-    </div>
+        <a href="./index.html" class="mobile-link">Home</a>
+
+        <details class="mobile-dropdown">
+            <summary class="mobile-link">Projects <i data-lucide="chevron-down" width="16" height="16"></i></summary>
+            <a class="mobile-sublink" href="./projects/Siddeshwar-Garden.html">Siddeshwar Gardens</a>
+            <a class="mobile-sublink" href="./projects/Siddeshwar Gardens–Row Houses.html">Row Houses</a>
+            <a class="mobile-sublink" href="./projects/Bungalow 1.html">Bungalow 1 – Plot No. 94</a>
+            <a class="mobile-sublink" href="./projects/Bungalow 2.html">Bungalow 2 – Plot No. 95</a>
+            <a class="mobile-sublink" href="./projects/Glacia.html">Glacia</a>
+            <a class="mobile-sublink" href="./projects/Narayan Pushp CHS.html">Narayan Pushp CHS</a>
+            <a class="mobile-sublink" href="./projects/Om-Satyam-Niwas-CHS.html">Om Satyam Niwas CHS</a>
+            <a class="mobile-sublink" href="./projects/Jasmine.html">Jasmine Tower</a>
+        </details>
 
     <main class="page-wrapper">
         <section class="container page-hero reveal-up">

@@ -2496,14 +2496,15 @@ textarea.form-input {
 .nav-dropdown-content.grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-width: 500px;
+  min-width: 430px;
   padding: 1rem;
-  gap: 1.5rem;
+  gap: 0px
 }
 
 /* Category styling for grid dropdowns */
 .category {
   padding: 0;
+  margin: -7px
 }
 
 .category-title {
