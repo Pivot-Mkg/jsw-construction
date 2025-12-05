@@ -115,12 +115,16 @@
     content: '';
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 43%;
     width: 12px;
     height: 12px;
     border-top: 2px solid #fff;
     border-right: 2px solid #fff;
     transform: translate(-50%, -50%) rotate(225deg);
+}
+
+.amenities-prev::after{
+    left: 58%;
 }
 
 .amenities-next::after {
