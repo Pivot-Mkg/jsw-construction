@@ -2492,6 +2492,37 @@ textarea.form-input {
   z-index: 1000;
 }
 
+/* Grid layout for dropdown with multiple columns */
+.nav-dropdown-content.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-width: 500px;
+  padding: 1rem;
+  gap: 1.5rem;
+}
+
+/* Category styling for grid dropdowns */
+.category {
+  padding: 0;
+}
+
+.category-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 0.5rem;
+  text-transform: none;
+  letter-spacing: normal;
+  display: block;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.category-title:hover {
+  color: var(--accent-gold);
+  padding-left: 0.3rem;
+}
+
 .nav-dropdown:hover .nav-dropdown-content {
   opacity: 1;
   visibility: visible;
