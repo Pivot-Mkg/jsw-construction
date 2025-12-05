@@ -22,11 +22,16 @@
     <link rel="stylesheet" href="assets/styles/pages.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
+    <style>
+        .simple-footer {
+            margin-top: 0;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Header -->
-     <header class="main-header">
+    <header class="main-header">
         <button id="menu-btn" class="mobile-toggle">
             <i data-lucide="menu" width="24" height="24"></i>
         </button>
@@ -165,8 +170,52 @@
 
         <section class="section-shell">
             <div class="container">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                    <div data-aos="fade-right">
+                        <h3 class="dm-san" style="margin-bottom: 1rem; font-size: 1.8rem;padding-top: 1rem;">Our
+                            Commitment</h3>
+                        <div class="commitment-list"
+                            style="display: flex; flex-direction: column; gap: 1.5rem;padding-top: 1rem;">
+                            <div class="commitment-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                                <i data-lucide="sparkles" width="24" height="24"
+                                    style="flex-shrink: 0; margin-top: 0.2em;"></i>
+                                <div>
+                                    <b>Modernization:</b> We carefully integrate contemporary
+                                    amenities and features, ensuring that residents enjoy the latest conveniences while
+                                    preserving the building&#39;s unique character.
+                                </div>
+                            </div>
+
+                            <div class="commitment-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                                <i data-lucide="shield-check" width="24" height="24"
+                                    style="flex-shrink: 0; margin-top: 0.2em;"></i>
+                                <div>
+                                    <b>Sustainability:</b> We adhere to the most stringent construction and safety
+                                    standards, incorporating sustainable practices to minimize environmental impact.
+                                </div>
+                            </div>
+
+                            <div class="commitment-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                                <i data-lucide="users" width="24" height="24"
+                                    style="flex-shrink: 0; margin-top: 0.2em;"></i>
+                                <div>
+                                    <b>Community Building:</b> We create spaces that foster connection and interaction,
+                                    encouraging a thriving community within the building and its surroundings.
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <p class="font_8 wixui-rich-text__text"><span class="wixGuard wixui-rich-text__text"></span></p>
+                    </div>
+                    <div data-aos="fade-left" style="height: 80%;">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800"
+                            alt="Modern Building"
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    </div>
+                </div>
                 <div
-                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem;">
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 4rem;">
                     <div data-aos="fade-right">
                         <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=800"
                             alt="Redevelopment" style="width: 100%; border-radius: 8px;">
@@ -179,38 +228,7 @@
                             lasting value to properties.</p>
                     </div>
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
-                    <div data-aos="fade-right">
-                        <h3 class="dm-san" style="margin-bottom: 1rem; font-size: 1.8rem;">Our Commitment</h3>
-                        <p class="font_8 wixui-rich-text__text">
-                            <i data-lucide="sparkles" width="24" height="24"></i><b>Modernization:</b> We carefully
-                            integrate
-                            contemporary
-                            amenities and features, ensuring that residents enjoy the latest conveniences while
-                            preserving the building&#39;s unique character.<br class="wixui-rich-text__text">
-                            Safety &amp;
-                            <br><br>
-                            <i data-lucide="shield-check" width="24" height="24"></i><b>Sustainability:</b> We adhere to
-                            the most stringent construction and safety
-                            standards, incorporating sustainable practices to minimize environmental impact.<br
-                                class="wixui-rich-text__text">
-                            <br>
-                            <i data-lucide="users" width="24" height="24"></i><b>Community Building:</b> We create
-                            spaces that foster connection and interaction, encouraging a
-                            thriving community within the building and its surroundings.<br
-                                class="wixui-rich-text__text">
-                            Our commitment to excellence and innovation sets us apart. We&#39;re passionate about
-                            breathing new life into legacy structures, transforming them into vibrant, modern spaces
-                            that meet the needs of today&#39;s residents.
-                        </p>
 
-                        <p class="font_8 wixui-rich-text__text"><span class="wixGuard wixui-rich-text__text"></span></p>
-                    </div>
-                    <div data-aos="fade-left" style="height: 80%;">
-                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800"
-                            alt="Modern Building" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
-                    </div>
-                </div>
             </div>
         </section>
 
