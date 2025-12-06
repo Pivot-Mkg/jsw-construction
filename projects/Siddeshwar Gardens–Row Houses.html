@@ -157,7 +157,7 @@
             <div class="container about-flex">
 
                 <!-- LEFT CONTENT -->
-                <div class="about-left">
+                <div class="about-left" data-aos="fade-right" data-aos-duration="1000">
                     <!-- <h5 class="about-eyebrow">ABOUT</h5> -->
 
                     <h3 class="section-title">
@@ -179,7 +179,7 @@
                 </div>
 
                 <!-- RIGHT IMAGE -->
-                <div class="about-right">
+                <div class="about-right" data-aos="fade-left" data-aos-duration="1000">
                     <img src="../assets/images/about-img.jpg" alt="Project Image">
                 </div>
 
@@ -187,7 +187,7 @@
         </section>
 
         <!-- AMENITIES SECTION -->
-        <section class="section-shell" id="amenities">
+        <section class="section-shell" id="amenities" data-aos="fade-up" data-aos-duration="1000">
             <div class="container amenities-container">
 
                 <h2 class="amenities-title">
@@ -229,7 +229,7 @@
         </section>
 
         <!-- CONFIGURATION SECTION -->
-        <section class="section-shell" id="configuration">
+        <section class="section-shell" id="configuration" data-aos="fade-up" data-aos-duration="1000">
             <div class="container configuration-container">
 
                 <h2 class="amenities-title">
@@ -262,11 +262,8 @@
             </div>
         </section>
 
-
-
-
         <!-- CTA SECTION -->
-        <section class="cta-section">
+        <section class="cta-section" data-aos="fade-up" data-aos-duration="1000">
             <div class="cta-banner">
                 <div class="cta-body">
                     <div class="eyebrow">Private Showings</div>
@@ -408,6 +405,15 @@
                 1200: { slidesPerView: 3 }
             }
         });
+
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true,
+            easing: 'ease-out'
+        });
+
     </script>
 
 

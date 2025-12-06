@@ -260,6 +260,12 @@ footer .logo-link {
   /* padding-top: 0; */
 }
 
+/* Ensure the last direct child inside a section-shell has no top padding
+   This helps avoid double spacing when stacking sections or calls-to-action */
+.section-shell>*:last-child {
+  padding-top: 0 !important;
+}
+
 .container {
   width: min(1200px, 90vw);
   margin: 0 auto;
