@@ -8,9 +8,7 @@
     <meta name="description"
         content="Reach JSK Buildwell for project consultations, site visits, and partnership opportunities.">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Lenis smooth scroll (loaded before navigation module) -->
     <script src="https://unpkg.com/@studio-freight/lenis@latest/dist/lenis.min.js"></script>
-    <!-- Navigation Module -->
     <script src="./assets/js/navigation.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +16,6 @@
         href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/pages.css">
-    <!-- AOS Animate On Scroll -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </head>
@@ -38,7 +35,6 @@
                     <i data-lucide="chevron-down" width="14" height="14"></i>
                 </div>
                 <div class="nav-dropdown-content grid-2">
-                    <!-- Left Column (4 projects) -->
                     <div class="category">
                         <a href="./projects/Siddeshwar-Garden.html" class="category-title">Siddeshwar Gardens</a>
                     </div>
@@ -52,8 +48,6 @@
                     <div class="category">
                         <a href="./projects/Bungalow 2.html" class="category-title">Bungalow 2 – Plot No. 95</a>
                     </div>
-
-                    <!-- Right Column (4 projects) -->
                     <div class="category">
                         <a href="./projects/Glacia.html" class="category-title">Glacia</a>
                     </div>
@@ -71,7 +65,6 @@
 
             <a href="./services.html" class="nav-link"><span>Services</span><span>Services</span></a>
 
-
             <div class="nav-dropdown">
                 <div class="nav-dropdown-toggle">
                     <span>About Us</span>
@@ -87,23 +80,9 @@
             <a href="contact.html" class="nav-cta">Get a Quote</a>
         </nav>
 
-        <a href="#" class="logo-link">
-            <!-- style="font-size: 1.5rem; font-weight: 500; position: absolute; left: 50%; transform: translateX(-50%);"> -->
-            <!-- JSK Buildwell -->
+        <a href="index.html" class="logo-link">
             <img src="./assets/images/logo.png" alt="" srcset="">
         </a>
-        <!-- <div class="header-actions">
-                <i data-lucide="user" class="user-icon" width="20" height="20" style="cursor: pointer;"></i>
-                <i data-lucide="search" width="20" height="20" style="cursor: pointer;"></i>
-                <div class="lang-switch">
-                    <span>ENG</span>
-                    <i data-lucide="globe" width="16" height="16"></i>
-                </div>
-                <div class="cart-icon" style="cursor: pointer;">
-                    <i data-lucide="shopping-bag" width="20" height="20"></i>
-                    <div class="cart-dot"></div>
-                </div>
-            </div> -->
     </header>
 
     <div id="mobile-menu" class="mobile-menu-overlay">
@@ -120,6 +99,14 @@
             <a class="mobile-sublink" href="./projects/Om-Satyam-Niwas-CHS.html">Om Satyam Niwas CHS</a>
             <a class="mobile-sublink" href="./projects/Jasmine.html">Jasmine Tower</a>
         </details>
+        <a href="./services.html" class="mobile-link">Services</a>
+        <details class="mobile-dropdown">
+            <summary class="mobile-link">About Us <i data-lucide="chevron-down" width="16" height="16"></i></summary>
+            <a class="mobile-sublink" href="about.html#company-profile">Company Profile</a>
+            <a class="mobile-sublink" href="about.html#leadership-team">Leadership Team</a>
+            <a class="mobile-sublink" href="about.html#vision-mission">Vision & Mission</a>
+        </details>
+        <a href="contact.html" class="mobile-cta btn-pill">Get a Quote</a>
     </div>
 
     <main class="page-wrapper">
@@ -130,7 +117,6 @@
                 <p class="hero-copy">Share your vision and we will set up a tailored consultation, on site or virtually.
                 </p>
                 <div class="hero-meta">
-                    <!-- <span class="pill"><i data-lucide="clock" width="16" height="16"></i> Response within 24 hrs</span> -->
                     <span class="pill"><i data-lucide="map-pin" width="16" height="16"></i> Mumbai | Pune |
                         Alibaug</span>
                 </div>
@@ -143,7 +129,6 @@
         <section class="section-shell">
             <div class="container contact-grid">
                 <div class="info-card" data-aos="fade-right" data-aos-delay="200">
-                    <!-- <div class="label">Studios & Sites</div> -->
                     <h3>Visit us</h3>
                     <div class="list-grid">
                         <div class="list-item"><i data-lucide="map-pin" width="18" height="18"></i> Mumbai Studio -
@@ -161,25 +146,50 @@
                 </div>
 
                 <div class="info-card" data-aos="fade-left" data-aos-delay="200">
-                    <!-- <div class="label">Message Us</div> -->
-                    <!-- <h3>Tell us about your project</h3> -->
-                    <form class="list-grid"
-                        onsubmit="event.preventDefault(); alert('Thanks, we will be in touch soon.')">
+                    <form id="contactForm" class="list-grid">
                         <div class="form-grid">
-                            <input class="form-input" type="text" name="name" placeholder="Your Name" required>
-                            <input class="form-input" type="email" name="email" placeholder="Email" required>
+                            <div class="form-field">
+                                <input class="form-input" type="text" name="name" id="name" placeholder="Your Name"
+                                    required>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-field">
+                                <input class="form-input" type="email" name="email" id="email" placeholder="Email"
+                                    required>
+                                <span class="error-message"></span>
+                            </div>
                         </div>
                         <div class="form-grid">
-                            <input class="form-input" type="text" name="phone" placeholder="Phone" required>
-                            <input class="form-input" type="text" name="city" placeholder="City" required>
+                            <div class="form-field">
+                                <input class="form-input" type="tel" name="phone" id="phone" placeholder="Phone"
+                                    required>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="form-field">
+                                <input class="form-input" type="text" name="city" id="city" placeholder="City" required>
+                                <span class="error-message"></span>
+                            </div>
                         </div>
                         <div class="form-grid full">
-                            <textarea class="form-input" rows="4" name="message"
-                                placeholder="Project vision, site location, timeline"></textarea>
+                            <div class="form-field">
+                                <textarea class="form-input" rows="4" name="message" id="message"
+                                    placeholder="Project vision, site location, timeline"></textarea>
+                                <span class="error-message"></span>
+                            </div>
                         </div>
-                        <button type="submit" class="btn-pill">
-                            Send Message
-                            <i data-lucide="arrow-right" width="16" height="16"></i>
+                        <button type="submit" class="btn-pill" id="submitBtn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loader">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" opacity="0.25" />
+                                    <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round">
+                                        <animateTransform attributeName="transform" type="rotate" from="0 12 12"
+                                            to="360 12 12" dur="1s" repeatCount="indefinite" />
+                                    </path>
+                                </svg>
+                            </span>
+                            <!-- <i data-lucide="arrow-right" width="16" height="16" class="btn-icon"></i> -->
                         </button>
                     </form>
                 </div>
@@ -240,6 +250,77 @@
         </div>
     </footer>
 
+    <style>
+        .form-field {
+            position: relative;
+        }
+
+        .error-message {
+            display: block;
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .error-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-input.error {
+            border-color: #e74c3c;
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        .form-input.success {
+            border-color: #27ae60;
+        }
+
+        /* Keep the contact submit button stable while loading */
+        #submitBtn {
+            min-width: 190px;
+            justify-content: center;
+        }
+
+        #submitBtn .btn-loader {
+            display: none;
+            width: 18px;
+            height: 18px;
+            color: #fff;
+        }
+
+        #submitBtn.loading .btn-loader {
+            display: inline-flex;
+        }
+
+        #submitBtn.loading .btn-icon {
+            display: none !important;
+        }
+
+        #submitBtn.loading .btn-text {
+            opacity: 0.9;
+        }
+    </style>
+
     <script>
         lucide.createIcons();
         window.addEventListener('load', () => document.body.classList.add('loaded'));
@@ -279,7 +360,6 @@
         }
         setupScrollReveal();
 
-        // Initialize AOS (Animate On Scroll)
         AOS.init({
             duration: 800,
             offset: 100,
@@ -287,7 +367,6 @@
             easing: 'ease-out'
         });
 
-        // Initialize Lenis smooth scrolling
         if (typeof Lenis !== 'undefined') {
             try {
                 const lenis = new Lenis({
@@ -306,6 +385,145 @@
                 console.warn('Lenis init failed:', e);
             }
         }
+
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoader = submitBtn.querySelector('.btn-loader');
+        const btnIcon = submitBtn.querySelector('.btn-icon');
+
+        function setLoadingState(isLoading) {
+            submitBtn.disabled = isLoading;
+            submitBtn.classList.toggle('loading', isLoading);
+            btnText.textContent = isLoading ? 'Sending...' : 'Send Message';
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validatePhone(phone) {
+            return /^[0-9]{10}$/.test(phone.replace(/\s/g, ''));
+        }
+
+        function showError(input, message) {
+            const field = input.closest('.form-field');
+            const errorMsg = field.querySelector('.error-message');
+            input.classList.add('error');
+            input.classList.remove('success');
+            errorMsg.textContent = message;
+            errorMsg.classList.add('show');
+        }
+
+        function showSuccess(input) {
+            const field = input.closest('.form-field');
+            const errorMsg = field.querySelector('.error-message');
+            input.classList.remove('error');
+            input.classList.add('success');
+            errorMsg.classList.remove('show');
+        }
+
+        function clearError(input) {
+            const field = input.closest('.form-field');
+            const errorMsg = field.querySelector('.error-message');
+            input.classList.remove('error', 'success');
+            errorMsg.classList.remove('show');
+        }
+
+        document.getElementById('name').addEventListener('blur', function () {
+            if (this.value.trim().length < 2) {
+                showError(this, 'Please enter a valid name');
+            } else {
+                showSuccess(this);
+            }
+        });
+
+        document.getElementById('email').addEventListener('blur', function () {
+            if (!validateEmail(this.value)) {
+                showError(this, 'Please enter a valid email');
+            } else {
+                showSuccess(this);
+            }
+        });
+
+        document.getElementById('phone').addEventListener('blur', function () {
+            if (!validatePhone(this.value)) {
+                showError(this, 'Please enter a valid 10-digit phone number');
+            } else {
+                showSuccess(this);
+            }
+        });
+
+        document.getElementById('city').addEventListener('blur', function () {
+            if (this.value.trim().length < 2) {
+                showError(this, 'Please enter a valid city');
+            } else {
+                showSuccess(this);
+            }
+        });
+
+        form.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', function () {
+                if (this.classList.contains('error')) {
+                    clearError(this);
+                }
+            });
+        });
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            let isValid = true;
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone');
+            const city = document.getElementById('city');
+
+            if (name.value.trim().length < 2) {
+                showError(name, 'Please enter a valid name');
+                isValid = false;
+            }
+
+            if (!validateEmail(email.value)) {
+                showError(email, 'Please enter a valid email');
+                isValid = false;
+            }
+
+            if (!validatePhone(phone.value)) {
+                showError(phone, 'Please enter a valid 10-digit phone number');
+                isValid = false;
+            }
+
+            if (city.value.trim().length < 2) {
+                showError(city, 'Please enter a valid city');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            setLoadingState(true);
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('send-email.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    window.location.href = 'thank-you.html';
+                } else {
+                    throw new Error(result.message || 'Failed to send message');
+                }
+            } catch (error) {
+                alert('Sorry, there was an error sending your message. Please try again or contact us directly.');
+
+                setLoadingState(false);
+            }
+        });
     </script>
 </body>
 

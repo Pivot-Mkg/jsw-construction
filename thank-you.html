@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | JSK Buildwell</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/pages.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f6f4ef;
+            color: #211c14;
+            min-height: 100vh;
+        }
+
+        .thank-you-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3.5rem 1.5rem;
+            background:
+                radial-gradient(1200px 1200px at 15% 10%, rgba(193, 157, 96, 0.18), transparent 55%),
+                radial-gradient(900px 900px at 85% 20%, rgba(68, 55, 35, 0.08), transparent 45%),
+                linear-gradient(135deg, #f8f6f1 0%, #f1ede4 100%);
+        }
+
+        .thank-shell {
+            width: min(1100px, 100%);
+            display: grid;
+            gap: 2rem;
+        }
+
+        .eyebrow {
+            font-size: 0.9rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #8b7a61;
+        }
+
+        .headline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .headline-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .checkmark {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 1px solid rgba(193, 157, 96, 0.45);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #c19d60;
+        }
+
+        .headline h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 4vw, 3rem);
+            line-height: 1.1;
+            color: #1c1812;
+        }
+
+        .lede {
+            font-size: 1.1rem;
+            color: #4f4a42;
+            max-width: 48ch;
+            line-height: 1.7;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            padding: 0.35rem 0;
+            border-bottom: 1px solid #e2d8c9;
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            color: #7a7367;
+            letter-spacing: 0.04em;
+        }
+
+        .meta-value {
+            font-weight: 600;
+            color: #2d271d;
+        }
+
+        .next-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .next-steps h3 {
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #8b7a61;
+        }
+
+        .steps-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+            color: #403a30;
+        }
+
+        .steps-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .steps-list i {
+            color: #c19d60;
+            margin-top: 0.1rem;
+        }
+
+        .links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .text-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: #2d271d;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 0.25rem;
+            transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .text-link:hover {
+            color: #c19d60;
+            border-color: #c19d60;
+            transform: translateY(-2px);
+        }
+
+        .footnote {
+            font-size: 0.95rem;
+            color: #7a7367;
+        }
+
+        @media (max-width: 720px) {
+            .thank-you-wrapper {
+                padding: 3rem 1.25rem;
+            }
+
+            .headline h1 {
+                font-size: clamp(2.1rem, 6vw, 2.6rem);
+            }
+
+            .links {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="thank-you-wrapper">
+        <div class="thank-shell">
+            <div class="headline">
+                <div class="eyebrow">Message received</div>
+                <div class="headline-row">
+                    <div class="checkmark">
+                        <i data-lucide="check" width="28" height="28"></i>
+                    </div>
+                    <h1>Thank you for reaching out.</h1>
+                </div>
+                <p class="lede">Our concierge team has your details. Expect a response within one business day to plan the next conversation and any site visits you prefer.</p>
+            </div>
+
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <span class="meta-label">Response window</span>
+                    <span class="meta-value">Under 24 hours</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Direct line</span>
+                    <span class="meta-value">+91 98765 43210</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Concierge desk</span>
+                    <span class="meta-value">concierge@jskbuildwell.com</span>
+                </div>
+            </div>
+
+            <div class="next-steps">
+                <div>
+                    <h3>While you wait</h3>
+                    <ul class="steps-list">
+                        <li><i data-lucide="map-pin" width="18" height="18"></i>Arrange a walkthrough in Mumbai, Pune, or Alibaug on your schedule.</li>
+                        <li><i data-lucide="folder-open" width="18" height="18"></i>Browse ready-to-move residences and current builds.</li>
+                        <li><i data-lucide="phone" width="18" height="18"></i>Prefer a call now? Our team can ring you back promptly.</li>
+                    </ul>
+                </div>
+                <div class="links">
+                    <a href="index.html" class="text-link">
+                        <i data-lucide="arrow-left" width="18" height="18"></i>Back to home
+                    </a>
+                    <a href="projects.html" class="text-link">
+                        <i data-lucide="arrow-up-right" width="18" height="18"></i>Explore projects
+                    </a>
+                    <a href="contact.html" class="text-link">
+                        <i data-lucide="phone-call" width="18" height="18"></i>Book a call
+                    </a>
+                </div>
+            </div>
+
+            <p class="footnote">You will also receive a confirmation email with this note for your records.</p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        window.addEventListener('load', () => document.body.classList.add('loaded'));
+
+        if (window.gtag) {
+            gtag('event', 'conversion', {
+                'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL',
+                'value': 1.0,
+                'currency': 'INR'
+            });
+        }
+
+        if (window.fbq) {
+            fbq('track', 'Lead');
+        }
+    </script>
+</body>
+
+</html>

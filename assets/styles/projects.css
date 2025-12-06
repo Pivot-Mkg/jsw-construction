@@ -19,7 +19,8 @@
 .about-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #c8a350;  /* Avant gold color */
+    color: #c8a350;
+    /* Avant gold color */
     margin-bottom: 1.5rem;
 }
 
@@ -43,12 +44,15 @@
 @media (max-width: 900px) {
     .about-flex {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .about-right img {
         margin-top: 1rem;
     }
+
 }
+
 /* Title */
 .amenities-title {
     font-size: 2rem;
@@ -102,11 +106,13 @@
 }
 
 .amenities-prev {
-    left: -55px; /* fully outside */
+    left: -55px;
+    /* fully outside */
 }
 
 .amenities-next {
-    right: -55px; /* fully outside */
+    right: -55px;
+    /* fully outside */
 }
 
 /* Arrow Icons */
@@ -123,7 +129,7 @@
     transform: translate(-50%, -50%) rotate(225deg);
 }
 
-.amenities-prev::after{
+.amenities-prev::after {
     left: 58%;
 }
 
@@ -136,6 +142,7 @@
     .amenities-prev {
         left: 0;
     }
+
     .amenities-next {
         right: 0;
     }
@@ -154,7 +161,8 @@
 
 .config-card img {
     width: 100%;
-    height: 450px;             /* SAME as amenities images */
+    height: 450px;
+    /* SAME as amenities images */
     object-fit: cover;
     border-radius: 22px;
     margin-bottom: 1rem;
@@ -209,10 +217,42 @@
 
 /* Responsive */
 @media (max-width: 900px) {
-    .config-prev { left: 0; }
-    .config-next { right: 0; }
+    .config-prev {
+        left: 0;
+    }
+
+    .config-next {
+        right: 0;
+    }
 
     .config-card img {
         height: 300px;
+    }
+
+    .amenity-card img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
+
+    .amenities-next,
+    .config-next {
+        right: 0;
+        bottom: -22px;
+        top: auto;
+    }
+
+    .amenities-prev,
+    .config-prev {
+        left: auto;
+        right: 54px;
+        top: auto;
+        bottom: -22px;
+    }
+
+    .config-card h3 {
+        text-align: left;
     }
 }

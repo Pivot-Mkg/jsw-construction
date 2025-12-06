@@ -25,6 +25,7 @@ body {
   overflow-x: hidden;
   opacity: 0;
   transition: opacity 0.7s ease;
+  overflow-x: hidden;
 }
 
 body.loaded {
@@ -812,7 +813,7 @@ textarea.form-input {
 
 .simple-footer {
   background: var(--bg-color);
-  padding: 5rem 0 3rem;
+  padding: 3rem 0 2rem;
   margin-top: 4rem;
 }
 
@@ -1664,7 +1665,7 @@ textarea.form-input {
 
 @media (max-width: 1024px) {
   .main-header {
-    padding: 0 1.5rem;
+    padding: 0 1.5rem !important;
     justify-content: flex-end;
   }
 
@@ -1802,7 +1803,8 @@ textarea.form-input {
   }
 
   .footer-nav {
-    grid-template-columns: 1fr;
+    /* grid-template-columns: 1fr; */
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
 
@@ -2194,9 +2196,9 @@ textarea.form-input {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--accent-gold);
+  color: var(--bg-color);
   font-weight: 700;
-  padding: 0.75rem 1.5rem;
+  /* padding: 0.75rem 1.5rem; */
   border-radius: 999px;
   background: rgba(193, 157, 96, 0.1);
   border: 1px solid rgba(193, 157, 96, 0.2);
@@ -2759,6 +2761,10 @@ details[open] .mobile-sublink:nth-child(4) {
 
   .mobile-toggle {
     display: block;
+  }
+
+  .section-shell {
+    padding: 2rem 0;
   }
 }
 
