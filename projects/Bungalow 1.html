@@ -5,9 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSK Buildwell | Project Name</title>
-    <meta name="description" content="Explore this premium JSK Buildwell residence with detailed specifications and visuals.">
+    <meta name="description"
+        content="Explore this premium JSK Buildwell residence with detailed specifications and visuals.">
 
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Lenis smooth scroll (loaded before navigation module) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@latest/dist/lenis.min.js"></script>
+    <!-- Navigation Module -->
+    <script src="../assets/js/navigation.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,11 +20,14 @@
         rel="stylesheet">
     <link rel="stylesheet" href="../assets/styles/pages.css">
     <link rel="stylesheet" href="../assets/styles/projects.css">
+    <!-- AOS Animate On Scroll -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </head>
 
 <body>
     <!-- NAVBAR -->
-   <header class="main-header">
+    <header class="main-header">
         <button id="menu-btn" class="mobile-toggle">
             <i data-lucide="menu" width="24" height="24"></i>
         </button>
@@ -38,7 +46,8 @@
                         <a href="../projects/Siddeshwar-Garden.html" class="category-title">Siddeshwar Gardens</a>
                     </div>
                     <div class="category">
-                        <a href="../projects/Siddeshwar Gardens–Row Houses.html" class="category-title">Siddeshwar Gardens – Row
+                        <a href="../projects/Siddeshwar Gardens–Row Houses.html" class="category-title">Siddeshwar
+                            Gardens – Row
                             Houses</a>
                     </div>
                     <div class="category">
@@ -70,7 +79,7 @@
                     <i data-lucide="chevron-down" width="14" height="14"></i>
                 </div>
                 <div class="nav-dropdown-content">
-                    <a href="services.html#redevelopment">Redevelopment</a>
+                    <a href="../services.html#redevelopment">Redevelopment</a>
                 </div>
             </div>
 
@@ -80,13 +89,13 @@
                     <i data-lucide="chevron-down" width="14" height="14"></i>
                 </div>
                 <div class="nav-dropdown-content">
-                    <a href="about.html#company-profile">Company Profile</a>
-                    <a href="about.html#leadership-team">Leadership Team</a>
-                    <a href="about.html#vision-mission">Vision & Mission</a>
+                    <a href="../about.html#company-profile">Company Profile</a>
+                    <a href="../about.html#leadership-team">Leadership Team</a>
+                    <a href="../about.html#vision-mission">Vision & Mission</a>
                 </div>
             </div>
 
-            <a href="contact.html" class="nav-cta">Get a Quote</a>
+            <a href="../contact.html" class="nav-cta">Get a Quote</a>
         </nav>
 
         <a href="#" class="logo-link">
@@ -122,7 +131,7 @@
             <a class="mobile-sublink" href="../projects/Om-Satyam-Niwas-CHS.html">Om Satyam Niwas CHS</a>
             <a class="mobile-sublink" href="../projects/Jasmine.html">Jasmine Tower</a>
         </details>
-        </div>
+    </div>
 
     <main class="page-wrapper">
 
@@ -135,7 +144,7 @@
                     A signature JSK Buildwell residence crafted with timeless architecture, premium materials,
                     and a fully custom interior experience.
                 </p>
-                
+
             </div>
 
             <div class="hero-image">
@@ -143,111 +152,113 @@
             </div>
         </section>
 
-  <!-- ABOUT SECTION -->
-<section class="section-shell reveal-up" id="about-project">
-    <div class="container about-flex">
+        <!-- ABOUT SECTION -->
+        <section class="section-shell reveal-up" id="about-project">
+            <div class="container about-flex">
 
-        <!-- LEFT CONTENT -->
-        <div class="about-left">
-            <!-- <h5 class="about-eyebrow">ABOUT</h5> -->
+                <!-- LEFT CONTENT -->
+                <div class="about-left">
+                    <!-- <h5 class="about-eyebrow">ABOUT</h5> -->
 
-            <h3 class="section-title">
-                Bungalow 1 – Plot No. 94
-            </h3>
+                    <h3 class="section-title">
+                        Bungalow 1 – Plot No. 94
+                    </h3>
 
-            <p class="about-text">
-                Bungalow 1 – Plot No. 94 is a luxury home set on a 466 Sq.Mts plot along Kolshet Road, Thane.
-            </p>
+                    <p class="about-text">
+                        Bungalow 1 – Plot No. 94 is a luxury home set on a 466 Sq.Mts plot along Kolshet Road, Thane.
+                    </p>
 
-            <p class="about-text">
-               With a total built-up area of 333.19 Sq.Mts, the residence features a 261.23 Sq.Mts structure, spacious balconies and verandahs, a dedicated staircase and lift area, and convenient parking.
-               Elegantly planned for comfort and privacy, this premium bungalow has been successfully delivered.       
-            </p>
-        </div>
-
-        <!-- RIGHT IMAGE -->
-        <div class="about-right">
-            <img src="../assets/images/about-img.jpg" alt="Project Image">
-        </div>
-
-    </div>
-</section>
-
-<!-- AMENITIES SECTION -->
-<section class="section-shell reveal-up" id="amenities">
-    <div class="container amenities-container">
-
-        <h2 class="amenities-title">
-            AMENITIES, <span>REDEFINING LUXURY LIVING</span>
-        </h2>
-
-        <!-- Arrows outside the wrapper -->
-        <div class="amenities-prev"></div>
-        <div class="amenities-next"></div>
-
-        <div class="swiper amenities-swiper">
-           <div class="swiper-wrapper">
-
-                <!-- 4 amenities -->
-                <div class="swiper-slide amenity-card">
-                    <img src="../assets/images/amenities/2151891129.jpg" alt="Tennis Court">
-                    <h3>Tennis Court</h3>
+                    <p class="about-text">
+                        With a total built-up area of 333.19 Sq.Mts, the residence features a 261.23 Sq.Mts structure,
+                        spacious balconies and verandahs, a dedicated staircase and lift area, and convenient parking.
+                        Elegantly planned for comfort and privacy, this premium bungalow has been successfully
+                        delivered.
+                    </p>
                 </div>
 
-                <div class="swiper-slide amenity-card">
-                    <img src="../assets/images/amenities/clubhouse.jpg" alt="Clubhouse">
-                    <h3>Clubhouse</h3>
-                </div>
-
-                <div class="swiper-slide amenity-card">
-                    <img src="../assets/images/amenities/gym.jpg" alt="Gymnasium">
-                    <h3>GYMNASIUM</h3>
-                </div>
-
-                <div class="swiper-slide amenity-card">
-                    <img src="../assets/images/amenities/swimming-pool.jpg" alt="Infinity Pool">
-                    <h3>Infinity Pool</h3>
+                <!-- RIGHT IMAGE -->
+                <div class="about-right">
+                    <img src="../assets/images/about-img.jpg" alt="Project Image">
                 </div>
 
             </div>
-        </div>
+        </section>
 
-    </div>
-</section>
+        <!-- AMENITIES SECTION -->
+        <section class="section-shell reveal-up" id="amenities">
+            <div class="container amenities-container">
 
-<!-- CONFIGURATION SECTION -->
-<section class="section-shell reveal-up" id="configuration">
-    <div class="container configuration-container">
+                <h2 class="amenities-title">
+                    AMENITIES, <span>REDEFINING LUXURY LIVING</span>
+                </h2>
 
-        <h2 class="amenities-title">
-            CONFIGURATION, <span>SPACIOUS LIVING OPTIONS</span>
-        </h2>
+                <!-- Arrows outside the wrapper -->
+                <div class="amenities-prev"></div>
+                <div class="amenities-next"></div>
 
-        <!-- Arrows -->
-        <div class="config-prev"></div>
-        <div class="config-next"></div>
+                <div class="swiper amenities-swiper">
+                    <div class="swiper-wrapper">
 
-        <!-- Swiper -->
-        <div class="swiper config-swiper">
-            <div class="swiper-wrapper">
+                        <!-- 4 amenities -->
+                        <div class="swiper-slide amenity-card">
+                            <img src="../assets/images/amenities/2151891129.jpg" alt="Tennis Court">
+                            <h3>Tennis Court</h3>
+                        </div>
 
-                <!-- CONFIG 1 -->
-                <div class="swiper-slide config-card">
-                    <img src="./assets/images/configuration/2BHK.jpg" alt="2 BHK">
-                    <h3>2 BHK</h3>
-                </div>
+                        <div class="swiper-slide amenity-card">
+                            <img src="../assets/images/amenities/clubhouse.jpg" alt="Clubhouse">
+                            <h3>Clubhouse</h3>
+                        </div>
 
-                <!-- CONFIG 2 -->
-                <div class="swiper-slide config-card">
-                    <img src="./assets/images/configuration/E-3BHK.jpg" alt="E-3 BHK">
-                    <h3>3 BHK</h3>
+                        <div class="swiper-slide amenity-card">
+                            <img src="../assets/images/amenities/gym.jpg" alt="Gymnasium">
+                            <h3>GYMNASIUM</h3>
+                        </div>
+
+                        <div class="swiper-slide amenity-card">
+                            <img src="../assets/images/amenities/swimming-pool.jpg" alt="Infinity Pool">
+                            <h3>Infinity Pool</h3>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
-        </div>
+        </section>
 
-    </div>
-</section>
+        <!-- CONFIGURATION SECTION -->
+        <section class="section-shell reveal-up" id="configuration">
+            <div class="container configuration-container">
+
+                <h2 class="amenities-title">
+                    CONFIGURATION, <span>SPACIOUS LIVING OPTIONS</span>
+                </h2>
+
+                <!-- Arrows -->
+                <div class="config-prev"></div>
+                <div class="config-next"></div>
+
+                <!-- Swiper -->
+                <div class="swiper config-swiper">
+                    <div class="swiper-wrapper">
+
+                        <!-- CONFIG 1 -->
+                        <div class="swiper-slide config-card">
+                            <img src="../assets/images/configuration/2BHK.jpg" alt="2 BHK">
+                            <h3>2 BHK</h3>
+                        </div>
+
+                        <!-- CONFIG 2 -->
+                        <div class="swiper-slide config-card">
+                            <img src="../assets/images/configuration/E-3BHK.jpg" alt="E-3 BHK">
+                            <h3>3 BHK</h3>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
 
 
 
@@ -259,11 +270,12 @@
                     <div class="eyebrow">Private Showings</div>
                     <h2 class="dm-san cta-title">Walk a finished villa before you decide.</h2>
                     <p class="cta-text">
-                        Schedule a hosted walkthrough across Mumbai, Pune, or Alibaug and see our build quality up close.
+                        Schedule a hosted walkthrough across Mumbai, Pune, or Alibaug and see our build quality up
+                        close.
                     </p>
                     <div class="cta-actions">
                         <a class="btn-pill" href="../contact.html">Book a site visit</a>
-                        <a class="cta-link" href="../projects.html">View current projects 
+                        <a class="cta-link" href="../projects.html">View current projects
                             <i data-lucide="arrow-right" width="16" height="16"></i>
                         </a>
                     </div>
@@ -356,45 +368,73 @@
     </script>
 
     <!-- Swiper CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<script>
-var swiper = new Swiper(".amenities-swiper", {
-    slidesPerView: 3,
-    spaceBetween: 40,
-    loop: true,
-    navigation: {
-        nextEl: ".amenities-next",
-        prevEl: ".amenities-prev",
-    },
-    breakpoints: {
-        320: { slidesPerView: 1 },
-        640: { slidesPerView: 1 },
-        900: { slidesPerView: 2 },
-        1200: { slidesPerView: 3 }
-    }
-});
+    <script>
+        var swiper = new Swiper(".amenities-swiper", {
+            slidesPerView: 3,
+            spaceBetween: 40,
+            loop: true,
+            navigation: {
+                nextEl: ".amenities-next",
+                prevEl: ".amenities-prev",
+            },
+            breakpoints: {
+                320: { slidesPerView: 1 },
+                640: { slidesPerView: 1 },
+                900: { slidesPerView: 2 },
+                1200: { slidesPerView: 3 }
+            }
+        });
 
-</script>
+    </script>
 
-<script>
-var configSwiper = new Swiper(".config-swiper", {
-    slidesPerView: 3,
-    spaceBetween: 40,
-    loop: false,
-    navigation: {
-        nextEl: ".config-next",
-        prevEl: ".config-prev",
-    },
-    breakpoints: {
-        320: { slidesPerView: 1 },
-        640: { slidesPerView: 1 },
-        900: { slidesPerView: 2 },
-        1200: { slidesPerView: 3 }
-    }
-});
-</script>
+    <script>
+        var configSwiper = new Swiper(".config-swiper", {
+            slidesPerView: 3,
+            spaceBetween: 40,
+            loop: false,
+            navigation: {
+                nextEl: ".config-next",
+                prevEl: ".config-prev",
+            },
+            breakpoints: {
+                320: { slidesPerView: 1 },
+                640: { slidesPerView: 1 },
+                900: { slidesPerView: 2 },
+                1200: { slidesPerView: 3 }
+            }
+        });
+
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true,
+            easing: 'ease-out'
+        });
+
+        // Initialize Lenis smooth scrolling
+        if (typeof Lenis !== 'undefined') {
+            try {
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    smooth: true
+                });
+
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+
+                requestAnimationFrame(raf);
+                window.lenis = lenis;
+            } catch (e) {
+                console.warn('Lenis init failed:', e);
+            }
+        }
+    </script>
 
 
 

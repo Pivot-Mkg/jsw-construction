@@ -8,12 +8,19 @@
     <meta name="description"
         content="Reach JSK Buildwell for project consultations, site visits, and partnership opportunities.">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Lenis smooth scroll (loaded before navigation module) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@latest/dist/lenis.min.js"></script>
+    <!-- Navigation Module -->
+    <script src="./assets/js/navigation.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/pages.css">
+    <!-- AOS Animate On Scroll -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 </head>
 
 <body>
@@ -120,10 +127,10 @@
             <a class="mobile-sublink" href="./projects/Om-Satyam-Niwas-CHS.html">Om Satyam Niwas CHS</a>
             <a class="mobile-sublink" href="./projects/Jasmine.html">Jasmine Tower</a>
         </details>
-        </div>
+    </div>
 
     <main class="page-wrapper">
-        <section class="container page-hero reveal-up">
+        <section class="container page-hero ">
             <div class="hero-content">
                 <div class="eyebrow">Connect</div>
                 <h1 class="dm-san">Let's plan your next residence.</h1>
@@ -142,7 +149,7 @@
 
         <section class="section-shell">
             <div class="container contact-grid">
-                <div class="info-card reveal-up">
+                <div class="info-card" data-aos="fade-right" data-aos-delay="200">
                     <!-- <div class="label">Studios & Sites</div> -->
                     <h3>Visit us</h3>
                     <div class="list-grid">
@@ -160,7 +167,7 @@
                     </div>
                 </div>
 
-                <div class="info-card reveal-up">
+                <div class="info-card" data-aos="fade-left" data-aos-delay="200">
                     <!-- <div class="label">Message Us</div> -->
                     <!-- <h3>Tell us about your project</h3> -->
                     <form class="list-grid"
@@ -186,9 +193,9 @@
             </div>
         </section>
 
-        <section class="cta-section reveal-up">
+        <section class="cta-section ">
             <div class="cta-banner">
-                <div class="cta-body">
+                <div class="cta-body" data-aos="fade-up" data-aos-delay="200">
                     <div class="eyebrow">Private Showings</div>
                     <h2 class="dm-san cta-title">Walk a finished villa before you decide.</h2>
                     <p class="cta-text">Schedule a hosted walkthrough across Mumbai, Pune, or Alibaug and see our build
@@ -278,6 +285,34 @@
             document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
         }
         setupScrollReveal();
+
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true,
+            easing: 'ease-out'
+        });
+
+        // Initialize Lenis smooth scrolling
+        if (typeof Lenis !== 'undefined') {
+            try {
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    smooth: true
+                });
+
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+
+                requestAnimationFrame(raf);
+                window.lenis = lenis;
+            } catch (e) {
+                console.warn('Lenis init failed:', e);
+            }
+        }
     </script>
 </body>
 
