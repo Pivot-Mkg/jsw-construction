@@ -511,16 +511,24 @@
                     body: formData
                 });
 
-                const result = await response.json();
+                const raw = await response.text();
+                let result;
 
-                if (result.success) {
-                    window.location.href = 'thank-you.html';
-                } else {
-                    throw new Error(result.message || 'Failed to send message');
+                try {
+                    result = JSON.parse(raw);
+                } catch (parseError) {
+                    throw new Error(`Server did not return JSON. Status ${response.status}. Body: ${raw.slice(0, 200)}`);
                 }
-            } catch (error) {
-                alert('Sorry, there was an error sending your message. Please try again or contact us directly.');
 
+                if (response.ok && result.success) {
+                    window.location.href = 'thank-you.html';
+                    return;
+                }
+
+                throw new Error(result.message || `Failed to send message (status ${response.status})`);
+            } catch (error) {
+                console.error('Contact form submit failed:', error);
+                alert(`Sorry, there was an error sending your message: ${error.message}. Please try again or contact us directly.`);
                 setLoadingState(false);
             }
         });

@@ -4,6 +4,15 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
+// Keep warnings/notices from breaking JSON responses
+ini_set('display_errors', '0');
+set_error_handler(function ($severity, $message, $file, $line) {
+    // Convert warnings to JSON so the frontend can surface a clean message
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => $message]);
+    exit;
+});
+
 // Handle CORS preflight quickly
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
