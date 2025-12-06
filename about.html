@@ -21,7 +21,7 @@
 
 <body>
     <!-- Header -->
-     <header class="main-header">
+    <header class="main-header">
         <button id="menu-btn" class="mobile-toggle">
             <i data-lucide="menu" width="24" height="24"></i>
         </button>
@@ -40,7 +40,8 @@
                         <a href="./projects/Siddeshwar-Garden.html" class="category-title">Siddeshwar Gardens</a>
                     </div>
                     <div class="category">
-                        <a href="./projects/Siddeshwar Gardens–Row Houses.html" class="category-title">Siddeshwar Gardens – Row
+                        <a href="./projects/Siddeshwar Gardens–Row Houses.html" class="category-title">Siddeshwar
+                            Gardens – Row
                             Houses</a>
                     </div>
                     <div class="category">
@@ -155,7 +156,7 @@
             </div>
         </section>
 
-        <section class="section-shell" style="margin-top: 0;">
+        <section id="company-profile" class="section-shell" style="margin-top: 0;">
             <div class="container">
                 <div class="info-card" data-aos="fade-up"
                     style="padding-top: 0; max-width: 900px; margin: 0 auto; text-align: center;">
@@ -169,7 +170,7 @@
             </div>
         </section>
 
-        <section style="background-color: #fff;">
+        <section id="vision-mission" style="background-color: #fff;">
             <div class="container">
                 <div class="mv-section">
                     <div class="mv-row">
@@ -197,7 +198,7 @@
             </div>
         </section>
 
-        <section class="section-shell">
+        <section id="leadership-team" class="section-shell">
             <div class="container">
                 <div class="section-heading">
                     <h2 class="section-title dm-san">Leadership</h2>
@@ -314,6 +315,67 @@
             once: true,
             offset: 100
         });
+
+        // Initialize Lenis for smooth scrolling and handle hash links
+        if (typeof Lenis !== 'undefined') {
+            try {
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    smooth: true
+                });
+
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+
+                requestAnimationFrame(raf);
+
+                // Helper: scroll element to vertical center of viewport (Lenis if available, fallback native)
+                function scrollToCenter(el) {
+                    if (!el) return;
+                    const rect = el.getBoundingClientRect();
+                    const elTop = rect.top + window.scrollY;
+                    const elHeight = rect.height || el.offsetHeight || 0;
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                    const targetY = Math.max(0, Math.round(elTop - (viewportHeight / 2 - elHeight / 2)));
+                    try {
+                        lenis.scrollTo(targetY);
+                    } catch (e) {
+                        window.scrollTo({ top: targetY, behavior: 'smooth' });
+                    }
+                }
+
+                // If page loaded with a hash, smooth-scroll to it (centered)
+                window.addEventListener('load', () => {
+                    if (location.hash) {
+                        const targetEl = document.querySelector(location.hash);
+                        if (targetEl) {
+                            // slight delay to allow AOS/layout to settle
+                            setTimeout(() => scrollToCenter(targetEl), 120);
+                        }
+                    }
+                });
+
+                // Intercept clicks on same-page hash links to use Lenis and center target
+                document.addEventListener('click', (e) => {
+                    const a = e.target.closest('a[href^="#"]');
+                    if (!a) return;
+                    const hash = a.getAttribute('href');
+                    if (hash && hash.startsWith('#')) {
+                        const target = document.querySelector(hash);
+                        if (target) {
+                            e.preventDefault();
+                            scrollToCenter(target);
+                            // update URL without jumping
+                            history.pushState(null, '', hash);
+                        }
+                    }
+                });
+            } catch (err) {
+                console.warn('Lenis init failed on about page:', err);
+            }
+        }
 
         document.querySelectorAll('.tilt-card').forEach(card => {
             const resetTilt = () => {
