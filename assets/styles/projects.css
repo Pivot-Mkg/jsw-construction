@@ -512,8 +512,37 @@ body.modal-open {
     padding: 1.25rem;
     border-radius: 14px;
     /* box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06); */
+    max-height: 46vh; /* Match the image height for balanced scrolling */
+    overflow-y: auto; /* Enable vertical scrolling only */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #c8a350 #f1f5f9; 
+}
+/* Webkit browsers (Chrome, Safari, Edge) custom scrollbar */
+.project-modal__text::-webkit-scrollbar {
+    width: 6px;
 }
 
+.project-modal__text::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.project-modal__text::-webkit-scrollbar-thumb {
+    background: #c8a350;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+
+.project-modal__text::-webkit-scrollbar-thumb:hover {
+    background: #b89347;
+}
+
+/* Responsive adjustment */
+@media (max-width: 900px) {
+    .project-modal__text {
+        max-height: 360px; /* Match the responsive image height */
+    }
+}
 .project-modal__text h4 {
     margin: 0.4rem 0 0;
     font-size: 1rem;
