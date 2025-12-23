@@ -1676,6 +1676,45 @@
                 padding: 1.3rem;
             }
         }
+
+
+.values__grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.values__title {
+  margin: 0 0 10px;
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #203a73; /* deep blue like your image */
+}
+
+.values__text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1f2937;
+  max-width: 520px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .values__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .values__title {
+    font-size: 24px;
+  }
+}
+
     </style>
 </head>
 
@@ -1858,6 +1897,38 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section class="our-portfolio-section" style="padding: 3rem 0;">
+            <h3 class="section-title reveal-up">
+             Our Portfolio:<br>Shaping Mumbai’s Skyline
+            </h3>
+            <p class="section-subtitle reveal-up">
+                At JSK Buildwell, we build on a proven legacy of delivering exceptional properties to redefine skylines
+                and transform landscapes. Every development is thoughtfully crafted to foster vibrant, enduring
+                communities while setting new benchmarks in design, quality, and execution. Guided by integrity and
+                driven by excellence, we go beyond construction to deliver unmatched service, lasting value, and spaces
+                that stand the test of time.
+            </p>
+            <div class="values__grid reveal-up">
+            <div class="values__card">
+      <h3 class="values__title">Innovation</h3>
+      <p class="values__text">
+        Forward-thinking designs and sustainable solutions. Quality: Exceeding
+        client expectations with world-class construction standards. Community:
+        Creating spaces that foster connection, growth, and longevity.
+      </p>
+    </div>
+
+    <div class="values__card">
+      <h3 class="values__title">Commitment to Excellence</h3>
+      <p class="values__text">
+        We are dedicated to creating long-term value, enriching urban
+        environments, and delivering projects that stand the test of time
+        building for today and for future generations.
+      </p>
+    </div>
+  </div>
         </section>
 
         <!-- SECTION 2: CAROUSEL -->
