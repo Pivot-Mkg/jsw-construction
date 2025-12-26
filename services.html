@@ -26,6 +26,15 @@
         .simple-footer {
             margin-top: 0;
         }
+
+        @media (max-width: 768px) {
+            .section-shell-container {
+            display: flex !important;
+            flex-direction: column!important;
+            gap: 3rem!important;
+        }
+        }
+        
     </style>
 </head>
 
@@ -163,7 +172,7 @@
 
         <section class="section-shell">
             <div class="container">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                <div class="section-shell-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
                     <div data-aos="fade-right">
                         <h3 class="dm-san" style="margin-bottom: 1rem; font-size: 1.8rem;padding-top: 1rem;">Our
                             Commitment</h3>
