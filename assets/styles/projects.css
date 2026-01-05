@@ -271,12 +271,12 @@
     flex-wrap: wrap;
     gap: 1em;
     max-width: fit-content;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
 .content-list .name,
 .value {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     display: block;
     font-weight: bold;
 
