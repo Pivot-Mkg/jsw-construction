@@ -375,6 +375,7 @@
 }
 
 /* Project modal styles */
+html.modal-open,
 body.modal-open {
     overflow: hidden;
 }
@@ -403,6 +404,7 @@ body.modal-open {
     pointer-events: auto;
     visibility: visible;
     overflow: hidden;
+    overscroll-behavior: contain;
 }
 
 .project-modal {
@@ -512,11 +514,16 @@ body.modal-open {
     padding: 1.25rem;
     border-radius: 14px;
     /* box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06); */
-    max-height: 46vh; /* Match the image height for balanced scrolling */
-    overflow-y: auto; /* Enable vertical scrolling only */
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: #c8a350 #f1f5f9; 
+    max-height: 46vh;
+    /* Match the image height for balanced scrolling */
+    overflow-y: auto;
+    /* Enable vertical scrolling only */
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: #c8a350 #f1f5f9;
+    overscroll-behavior: contain;
 }
+
 /* Webkit browsers (Chrome, Safari, Edge) custom scrollbar */
 .project-modal__text::-webkit-scrollbar {
     width: 6px;
@@ -540,9 +547,11 @@ body.modal-open {
 /* Responsive adjustment */
 @media (max-width: 900px) {
     .project-modal__text {
-        max-height: 360px; /* Match the responsive image height */
+        max-height: 360px;
+        /* Match the responsive image height */
     }
 }
+
 .project-modal__text h4 {
     margin: 0.4rem 0 0;
     font-size: 1rem;

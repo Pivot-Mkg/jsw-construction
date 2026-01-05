@@ -110,7 +110,7 @@
         p.section-subtitle {
             text-align: center;
             color: var(--text-muted);
-            max-width: 600px;
+            /* max-width: 600px; */
             margin: 0 auto 2rem auto;
             line-height: 1.6;
             font-size: 1rem;
@@ -1477,7 +1477,7 @@
                 margin-bottom: 2rem !important;
             }
 
-          
+
 
             .final-subtitle {
                 color: #d1d5db;
@@ -1678,99 +1678,102 @@
             .contact-form {
                 padding: 1.3rem;
             }
-              .final-section{
+
+            .final-section {
                 margin-left: 0 !important;
 
             }
         }
 
 
-.values__grid {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
-}
+        .values__grid {
+            /* max-width: 1100px;  */
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
 
-.values__title {
-  margin: 0 0 10px;
-  font-size: 28px;
-  line-height: 1.15;
-  font-weight: 700;
-  color:  var(--accent-gold);; /* deep blue like your image */
-}
+        .values__title {
+            margin: 0 0 10px;
+            font-size: 28px;
+            line-height: 1.15;
+            font-weight: 700;
+            color: var(--accent-gold);
+            ;
+            /* deep blue like your image */
+        }
 
-.values__text {
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #1f2937;
-  max-width: 520px;
-}
+        .values__text {
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #1f2937;
+            max-width: 520px;
+        }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .values__grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .values__grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
 
-  .values__title {
-    font-size: 24px;
-  }
-}
-
-
-/* Content spacing fix */
-.portfolio-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
-}
+            .values__title {
+                font-size: 24px;
+            }
+        }
 
 
-/* Card wrapper */
-.values__card {
-  background: #ffffff61;
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-      min-height: 450px;
-}
+        /* Content spacing fix */
+        .portfolio-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
 
-/* Image wrapper */
-.values__image {
-  width: 100%;
-  height: 220px;
-  margin-bottom: 1.25rem;
-  border-radius: 16px;
-  overflow: hidden;
-}
 
-.values__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+        /* Card wrapper */
+        .values__card {
+            background: #ffffff61;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            /* min-height: 450px; */
+            height: 100%;
+        }
 
-/* Adjust text spacing */
-.values__title {
-  margin-top: 0;
-}
+        /* Image wrapper */
+        .values__image {
+            width: 100%;
+            height: 220px;
+            margin-bottom: 1.25rem;
+            border-radius: 16px;
+            overflow: hidden;
+        }
 
-/* Mobile refinement */
-@media (max-width: 900px) {
-  .values__image {
-    height: 180px;
-  }
-}
+        .values__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
+        /* Adjust text spacing */
+        .values__title {
+            margin-top: 0;
+        }
+
+        /* Mobile refinement */
+        @media (max-width: 900px) {
+            .values__image {
+                height: 180px;
+            }
+        }
     </style>
 </head>
 
@@ -1866,7 +1869,7 @@
             <summary class="mobile-link">Projects <i data-lucide="chevron-down" width="16" height="16"></i></summary>
             <a class="mobile-sublink" href="./projects/Siddeshwar-Garden.html">Siddeshwar Gardens</a>
             <a class="mobile-sublink" href="./projects/Siddeshwar-Gardens-Row-Houses.html">Row Houses</a>
-           <a class="mobile-sublink" href="./projects/Casa-Benau-94.html">CASA BENAU 94 &amp; 95</a>
+            <a class="mobile-sublink" href="./projects/Casa-Benau-94.html">CASA BENAU 94 &amp; 95</a>
             <!-- <a class="mobile-sublink" href="./projects/Casa-Benau-95.html">CASA BENAU 95</a> -->
             <a class="mobile-sublink" href="./projects/Glacia.html">Glacia</a>
             <a class="mobile-sublink" href="./projects/Narayan-Pushp-CHS.html">Narayan Pushp CHS</a>
@@ -1958,55 +1961,55 @@
         <section class="our-portfolio-section" style="padding: 0;">
 
 
-  <!-- Content Wrapper -->
-  <div class="portfolio-content" style="padding: 3rem 0;">
-    <h3 class="section-title reveal-up">
-      Our Portfolio:<br />Shaping Mumbai’s Skyline
-    </h3>
+            <!-- Content Wrapper -->
+            <div class="portfolio-content" style="padding: 3rem 0;">
+                <h3 class="section-title reveal-up">
+                    Our Portfolio:<br />Shaping Mumbai’s Skyline
+                </h3>
 
-    <p class="section-subtitle reveal-up">
-      At JSK Buildwell, we build on a proven legacy of delivering exceptional
-      properties to redefine skylines and transform landscapes. Every
-      development is thoughtfully crafted to foster vibrant, enduring
-      communities while setting new benchmarks in design, quality, and
-      execution. Guided by integrity and driven by excellence, we go beyond
-      construction to deliver unmatched service, lasting value, and spaces
-      that stand the test of time.
-    </p>
+                <p class="section-subtitle reveal-up">
+                    At JSK Buildwell, we build on a proven legacy of delivering exceptional
+                    properties to redefine skylines and transform landscapes. Every
+                    development is thoughtfully crafted to foster vibrant, enduring
+                    communities while setting new benchmarks in design, quality, and
+                    execution. Guided by integrity and driven by excellence, we go beyond
+                    construction to deliver unmatched service, lasting value, and spaces
+                    that stand the test of time.
+                </p>
 
-    <div class="values__grid reveal-up">
+                <div class="values__grid reveal-up">
 
-  <div class="values__card">
-    <div class="values__image">
-      <img src="./assets/images/innovation-img.jpg" alt="Innovation in design">
-    </div>
+                    <div class="values__card">
+                        <div class="values__image">
+                            <img src="./assets/images/innovation-img.jpg" alt="Innovation in design">
+                        </div>
 
-    <h3 class="values__title">Innovation</h3>
-    <p class="values__text">
-      Forward-thinking designs and sustainable solutions. Quality:
-      Exceeding client expectations with world-class construction
-      standards. Community: Creating spaces that foster connection,
-      growth, and longevity.
-    </p>
-  </div>
+                        <h3 class="values__title">Innovation</h3>
+                        <p class="values__text">
+                            Forward-thinking designs and sustainable solutions. Quality:
+                            Exceeding client expectations with world-class construction
+                            standards. Community: Creating spaces that foster connection,
+                            growth, and longevity.
+                        </p>
+                    </div>
 
-  <div class="values__card">
-    <div class="values__image">
-      <img src="./assets/images/commitment-to-excellance.jpg" alt="Commitment to excellence">
-    </div>
+                    <div class="values__card">
+                        <div class="values__image">
+                            <img src="./assets/images/commitment-to-excellance.jpg" alt="Commitment to excellence">
+                        </div>
 
-    <h3 class="values__title">Commitment to Excellence</h3>
-    <p class="values__text">
-      We are dedicated to creating long-term value, enriching urban
-      environments, and delivering projects that stand the test of time
-      building for today and for future generations.
-    </p>
-  </div>
+                        <h3 class="values__title">Commitment to Excellence</h3>
+                        <p class="values__text">
+                            We are dedicated to creating long-term value, enriching urban
+                            environments, and delivering projects that stand the test of time
+                            building for today and for future generations.
+                        </p>
+                    </div>
 
-</div>
+                </div>
 
-  </div>
-</section>
+            </div>
+        </section>
 
 
         <!-- SECTION 2: CAROUSEL -->
