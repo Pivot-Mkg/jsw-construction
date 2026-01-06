@@ -27,23 +27,6 @@
             margin-top: 0;
         }
 
-        /* Enhanced UI Refinements */
-        .page-hero {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-        }
-
-        .hero-content h1 {
-            color: #1e293b;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .hero-copy {
-            color: #64748b;
-            font-size: 1.125rem;
-            line-height: 1.6;
-        }
 
         .section-title {
             color: #0f172a;
@@ -57,33 +40,6 @@
             line-height: 1.6;
         }
 
-        .highlight-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            border-color: #cbd5e1;
-        }
-
-        .highlight-card h3 {
-            color: #1e293b;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            font-size: 1.25rem;
-        }
-
-        .highlight-card p {
-            color: #64748b;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
 
         .list-item {
             display: flex;
@@ -99,19 +55,26 @@
         }
 
         .list-item span {
-            color: #475569;
+            color: #ffffff;
             line-height: 1.5;
         }
 
         .commitment-item {
-            background: #f8fafc;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #3b82f6;
+            background: #ffffff;
+            padding: 1.5rem 1.75rem;
+            border-radius: 12px;
+            /* border-left: 6px solid #2563eb; */
+            box-shadow: 0 8px 20px rgba(12, 19, 35, 0.06);
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            overflow: hidden;
         }
 
         .commitment-item b {
-            color: #1e293b;
+            color: #0b2a52;
+            font-weight: 800;
+            margin-right: 0.35rem;
         }
 
         .commitment-item div {
@@ -120,19 +83,32 @@
         }
 
         .commitment-item i {
-            color: #3b82f6;
+            color: #0b2a52;
+            flex-shrink: 0;
+            background: #fef7f4;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 6px 14px rgba(12, 19, 35, 0.05);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Slightly larger heading for the commitment section */
+        .commitment-heading {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0b2a52;
+            margin-bottom: 1rem;
         }
 
         @media (max-width: 768px) {
             .section-shell-container {
                 display: flex !important;
-                flex-direction: column!important;
-                gap: 3rem!important;
+                flex-direction: column !important;
+                gap: 3rem !important;
             }
-            
-            .highlight-card {
-                padding: 1.5rem;
-            }
+
         }
     </style>
 </head>
@@ -268,101 +244,111 @@
                 <div class="section-heading">
                     <div>
                         <h2 class="section-title">What We Build & Redevelop</h2>
-                        <p class="section-description">Solutions grounded in the JSK_Brochure_Final—crafted for societies,
+                        <p class="section-description">Solutions crafted for
+                            societies,
                             homeowners, and investors seeking clarity, speed, and certainty.</p>
                     </div>
                 </div>
 
                 <div class="highlight-grid">
-                    <article class="highlight-card" data-aos="fade-up">
+                    <article class="highlight-card featured" data-aos="fade-up">
+                        <div class="service-icon"><i data-lucide="zap" width="28" height="28"></i></div>
                         <h3 class="dm-san">New Residential Construction</h3>
-                        <p>Development of residential towers and townships with meticulous phasing and delivery control.</p>
+                        <p>Development of residential towers and townships with meticulous phasing and delivery control.
+                        </p>
                         <div class="list-grid">
                             <div class="list-item">
-                                <i data-lucide="map-pin" width="20" height="20"></i>
+                                <span class="list-number">1</span>
                                 <span>Primary locations: Thane and Mumbai suburbs.</span>
                             </div>
                             <div class="list-item">
-                                <i data-lucide="building-2" width="20" height="20"></i>
+                                <span class="list-number">2</span>
                                 <span>Example: Siddeshwar Gardens - 5 lakh sq. ft., multi-phase development.</span>
                             </div>
                         </div>
                     </article>
 
                     <article class="highlight-card" data-aos="fade-up" data-aos-delay="50">
+                        <div class="service-icon"><i data-lucide="shield-check" width="24" height="24"></i></div>
                         <h3 class="dm-san">Society Redevelopment</h3>
                         <p>Redevelopment of aging residential buildings with a single accountable partner.</p>
                         <div class="list-grid">
                             <div class="list-item">
-                                <i data-lucide="stamp" width="20" height="20"></i>
+                                <span class="list-number">1</span>
                                 <span>Regulatory approvals, tenant relocation, construction, and handover.</span>
                             </div>
                             <div class="list-item">
-                                <i data-lucide="shield-check" width="20" height="20"></i>
-                                <span><b>We handle everything: regulatory approvals, tenant relocation, construction, and handover.</b></span>
+                                <span class="list-number">2</span>
+                                <span>We handle everything: regulatory approvals, tenant relocation, construction,
+                                    and handover.</span>
                             </div>
                         </div>
                     </article>
 
                     <article class="highlight-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-icon"><i data-lucide="sun" width="24" height="24"></i></div>
                         <h3 class="dm-san">Luxury Second Homes</h3>
                         <p>Standalone luxury villas in Goa designed for calm escapes and strong yields.</p>
                         <div class="list-grid">
                             <div class="list-item">
-                                <i data-lucide="sun" width="20" height="20"></i>
+                                <span class="list-number">1</span>
                                 <span>Vacation homes with boutique-grade finishes.</span>
                             </div>
                             <div class="list-item">
-                                <i data-lucide="wallet" width="20" height="20"></i>
+                                <span class="list-number">2</span>
                                 <span>Rental income properties with investor-friendly planning.</span>
                             </div>
                         </div>
                     </article>
 
                     <article class="highlight-card" data-aos="fade-up" data-aos-delay="150">
+                        <div class="service-icon"><i data-lucide="home" width="24" height="24"></i></div>
                         <h3 class="dm-san">Mixed-Use Redevelopment</h3>
-                        <p>Mixed use redevelopment (Residential + Commercial) that keeps footfall, parking, and access in balance.</p>
+                        <p>Mixed use redevelopment (Residential + Commercial) that keeps footfall, parking, and access
+                            in balance.</p>
                         <div class="list-grid">
                             <div class="list-item">
-                                <i data-lucide="home" width="20" height="20"></i>
+                                <span class="list-number">1</span>
                                 <span>Residential apartments planned for light, ventilation, and efficient cores.</span>
                             </div>
                             <div class="list-item">
-                                <i data-lucide="briefcase" width="20" height="20"></i>
+                                <span class="list-number">2</span>
                                 <span>Commercial spaces tuned for retail and office viability.</span>
                             </div>
                         </div>
                     </article>
 
                     <article class="highlight-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-icon"><i data-lucide="clipboard-check" width="24" height="24"></i></div>
                         <h3 class="dm-san">Regulatory Approval Management</h3>
                         <p>Dedicated approvals desk embedded into every redevelopment mandate.</p>
                         <div class="list-grid">
                             <div class="list-item">
-                                <i data-lucide="clipboard-check" width="20" height="20"></i>
+                                <span class="list-number">1</span>
                                 <span>IOD, CC, OC, and RERA registration.</span>
                             </div>
                             <div class="list-item">
-                                <i data-lucide="landmark" width="20" height="20"></i>
+                                <span class="list-number">2</span>
                                 <span>BMC / TMC liaison with proactive compliance tracking.</span>
                             </div>
                         </div>
                     </article>
 
                     <article class="highlight-card" data-aos="fade-up" data-aos-delay="250">
+                        <div class="service-icon"><i data-lucide="book-open" width="24" height="24"></i></div>
                         <h3 class="dm-san">Free Redevelopment Consultation</h3>
                         <p>Free, no-obligation consultation for housing societies exploring redevelopment.</p>
                         <div class="list-grid">
                             <div class="list-item">
-                                <i data-lucide="book-open" width="20" height="20"></i>
+                                <span class="list-number">1</span>
                                 <span>Explain the redevelopment process step-by-step.</span>
                             </div>
                             <div class="list-item">
-                                <i data-lucide="activity" width="20" height="20"></i>
+                                <span class="list-number">2</span>
                                 <span>Feasibility assessment tailored to your society.</span>
                             </div>
                             <div class="list-item">
-                                <i data-lucide="message-circle" width="20" height="20"></i>
+                                <span class="list-number">3</span>
                                 <span>Address committee questions transparently.</span>
                             </div>
                         </div>
@@ -373,9 +359,10 @@
 
         <section class="section-shell">
             <div class="container">
-                <div class="section-shell-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                <div class="section-shell-container"
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: stretch;">
                     <div data-aos="fade-right">
-                        <h3 class="dm-san" style="margin-bottom: 1rem; font-size: 1.8rem;padding-top: 1rem;">Our
+                        <h3 class="dm-san commitment-heading" style="margin-bottom: 1rem; font-size: 1.8rem;">Our
                             Commitment</h3>
                         <div class="commitment-list"
                             style="display: flex; flex-direction: column; gap: 1.5rem;padding-top: 1rem;">
@@ -411,10 +398,10 @@
 
                         <p class="font_8 wixui-rich-text__text"><span class="wixGuard wixui-rich-text__text"></span></p>
                     </div>
-                    <div data-aos="fade-left" style="height: 80%;">
+                    <div data-aos="fade-left" style="height: 100%;">
                         <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=800"
                             alt="Modern Building"
-                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                            style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block;">
                     </div>
                 </div>
                 <div
