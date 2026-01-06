@@ -27,62 +27,190 @@
 
 <style>
     /* Villas Snapshot – exact editorial grid */
-.villas-snapshot {
-    /* padding: 6rem 0; */
-}
+    .villas-snapshot {
+        /* padding: 6rem 0; */
+    }
 
-.villas-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem 4rem;
-    /* align-items: center; */
-}
-
-.villas-cell.image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.villas-cell.text {
-    margin-top: 5rem;
-    max-width: 520px;
-}
-
-.villas-cell.text p {
-    margin-bottom: 1.2rem;
-}
-
-.villas-small {
-    font-size: 0.95rem;
-    opacity: 0.85;
-}
-
-.villas-points {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 1.5rem;
-}
-
-.villas-points li {
-    margin-bottom: 0.55rem;
-    font-size: 0.95rem;
-}
-
-/* Mobile */
-@media (max-width: 900px) {
     .villas-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem 4rem;
+        /* align-items: center; */
+    }
+
+    .villas-cell.image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 13px;
+    }
+
+    .about-right {
+        height: 100%;
+    }
+
+    .about-right img {
+        height: 100%;
     }
 
     .villas-cell.text {
-        max-width: 100%;
+        margin-top: 5rem;
+        max-width: 520px;
     }
-}
 
+    .villas-cell.text p {
+        margin-bottom: 1.2rem;
+    }
+
+    .villas-small {
+        font-size: 0.95rem;
+        opacity: 0.85;
+    }
+
+    .villas-points {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 1.5rem;
+    }
+
+    .villas-points li {
+        margin-bottom: 0.55rem;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: var(--text-main);
+        background: rgba(193, 157, 96, 0.06);
+        border: 1px solid rgba(193, 157, 96, 0.16);
+        border-radius: 12px;
+        padding: 0.55rem 0.75rem;
+        transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+    }
+
+    .villas-points li svg {
+        width: 18px;
+        height: 18px;
+        color: var(--accent-gold);
+        flex-shrink: 0;
+    }
+
+    .villas-points li:hover {
+        transform: translateY(-2px);
+        border-color: var(--accent-gold);
+        background: rgba(193, 157, 96, 0.1);
+        box-shadow: 0 8px 18px rgba(12, 19, 35, 0.08);
+    }
+
+    .villas-card {
+        /* background: #ffffff;
+        border: 1px solid rgba(193, 157, 96, 0.18);
+        border-radius: 16px; */
+        /* padding: 1rem 1.25rem; */
+        /* box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); */
+        backdrop-filter: blur(6px);
+        transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .villas-card:hover {
+        transform: translateY(-3px);
+        /* border-color: var(--accent-gold); */
+        /* box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1); */
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+        .villas-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .villas-cell.text {
+            max-width: 100%;
+        }
+    }
+
+    .points-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .point-card {
+        background: #ffffff;
+        border: 1px solid rgba(193, 157, 96, 0.18);
+        border-radius: 16px;
+        padding: 1rem 1.25rem;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        min-height: 220px;
+        transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+    }
+
+    .point-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent-gold);
+        box-shadow: 0 18px 40px rgba(12, 19, 35, 0.12);
+    }
+
+    .point-head {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .point-img {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+        border-radius: 10px;
+        display: block;
+        transition: transform 0.36s cubic-bezier(.2, .9, .2, 1), filter 0.36s ease;
+        box-shadow: 0 8px 20px rgba(12, 19, 35, 0.06);
+    }
+
+    .point-title {
+        font-size: 1rem;
+        text-transform: none;
+        letter-spacing: 0.01em;
+        font-weight: 700;
+        color: var(--accent-gold);
+        margin-top: 0.6rem;
+    }
+
+    .point-subtext {
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-top: 0.35rem;
+        font-size: 0.95rem;
+    }
+
+    /* Hover interactions */
+    .point-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--accent-gold);
+        box-shadow: 0 22px 48px rgba(12, 19, 35, 0.12);
+    }
+
+    .point-card:hover .point-img {
+        transform: scale(1.04);
+        filter: saturate(1.06) contrast(1.02);
+    }
+
+    .point-card .spacer {
+        margin-top: auto;
+    }
+
+    @media (max-width: 900px) {
+        .points-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
+
 <body>
     <!-- NAVBAR -->
     <header class="main-header">
@@ -196,10 +324,9 @@
         <section class="container page-hero">
             <div class="hero-content">
                 <div class="eyebrow">Project Showcase</div>
-                <h1 class="dm-san">CASA BENAU 94 &amp;
-                    CASA BENAU 95
+                <h1 class="dm-san">CASA BENAU 94 &amp; 95 <br>
                     Benaulim, South Goa
-                    </h1>
+                </h1>
                 <p class="hero-copy">
                     A signature JSK Buildwell residence crafted with timeless architecture, premium materials,
                     and a fully custom interior experience.
@@ -208,7 +335,7 @@
             </div>
 
             <div class="hero-image">
-                <img src="../assets/images/bunglow-1.jpg" alt="Premium Villa Image">
+                <img src="../assets/images/goa-images/hero-banner.jpeg" alt="Premium Villa Image">
             </div>
         </section>
 
@@ -222,101 +349,114 @@
 
                     <h3 class="section-title">
                         CASA BENAU 94 &amp;
-                    CASA BENAU 95, South Goa
+                        CASA BENAU 95, South Goa
                     </h3>
 
                     <p class="about-text">
                         CASA BENAU 94 &amp;
-                    CASA BENAU 95, South Goa is a private villa in Benaulim, South Goa.
+                        CASA BENAU 95, South Goa is a private villa in Benaulim, South Goa.
                     </p>
 
                     <p class="about-text">
                         JSK Homes brings you closer to the life you have worked and waited for.
-Own a private villa in the heart of Benaulim, South Goa, where your days unfold between your own pool, lush green gardens, and a sun-warmed terrace.
+                        Own a private villa in the heart of Benaulim, South Goa, where your days unfold between your own
+                        pool, lush green gardens, and a sun-warmed terrace.
                     </p>
                     <p class="about-text">
-                        South Goa offers a way of living shaped by calm and quiet—far removed from the rush of everyday life. Here, serenity settles in naturally, inviting a slower rhythm that restores balance to both mind and soul.
+                        South Goa offers a way of living shaped by calm and quiet—far removed from the rush of everyday
+                        life. Here, serenity settles in naturally, inviting a slower rhythm that restores balance to
+                        both mind and soul.
                     </p>
                     <p class="about-text">
-                        Designed for discerning buyers, Casa Benau is set in one of South Goa’s most sought-after villages. Just minutes from Margao yet away from tourist congestion, Benaulim blends everyday convenience with lasting value—driven by limited land availability and strong demand from Mumbai, Bangalore, and NRI buyers.
+                        Designed for discerning buyers, Casa Benau is set in one of South Goa’s most sought-after
+                        villages. Just minutes from Margao yet away from tourist congestion, Benaulim blends everyday
+                        convenience with lasting value—driven by limited land availability and strong demand from
+                        Mumbai, Bangalore, and NRI buyers.
                     </p>
                 </div>
 
                 <!-- RIGHT IMAGE -->
                 <div class="about-right" data-aos="fade-left" data-aos-duration="800">
-                    <img src="../assets/images/about-img.jpg" alt="Project Image">
+                    <img src="../assets/images/goa-images/amenitites.jpeg" alt="Project Image">
                 </div>
 
             </div>
         </section>
-        
-<!-- VILLAS SNAPSHOT SECTION -->
-<section class="section-shell villas-snapshot">
 
-    <div class="container">
+        <!-- VILLAS SNAPSHOT SECTION -->
+        <section class="section-shell villas-snapshot">
+
+            <div class="container">
                 <h2 class="section-title" data-aos="fade-up" data-aos-duration="800">
                     The Villas
                 </h2>
-                <p class="about-text">
-                       Casa Benau comprises two standalone villas – Villa 94 and Villa 95 – built on adjoining plots.
-                Each villa is identical in layout and specifications, designed to maximize privacy, natural light,
-                and indoor–outdoor living that defines the Goan lifestyle.
-                    </p>
-               
+                <p class="about-text" data-aos="fade-up" data-aos-duration="800">
+                    Casa Benau comprises two standalone villas – Villa 94 and Villa 95 – built on adjoining plots.
+                    Each villa is identical in layout and specifications, designed to maximize privacy, natural light,
+                    and indoor–outdoor living that defines the Goan lifestyle.
+                </p>
 
-    <div class="container villas-grid">
 
-        <!-- ROW 1 : IMAGE + TEXT -->
-        <div class="villas-cell image">
-            <img src="../assets/images/villa-1-img.png" alt="Casa Benau Villas View">
-        </div>
+                <div class="container villas-grid">
 
-        <div class="villas-cell text">
+                    <!-- ROW 1 : IMAGE + TEXT -->
+                    <div class="villas-cell image" data-aos="fade-right" data-aos-duration="800">
+                        <img src="../assets/images/goa-images/Casa_Benau.png" alt="Casa Benau Villas View">
+                    </div>
 
-            <p class="villas-small">
-                An exclusive pair of standalone luxury villas, thoughtfully designed across
-                333.19 sq. m and 354.61 sq. m of built-up space.
-            </p>
+                    <div class="villas-cell text" data-aos="fade-left" data-aos-duration="800">
+                        <h2 class="section-title">
+                            Perfectly Nestled in South Goa <br>Benaulim
+                        </h2>
+                        <p class="villas-small">
+                            An exclusive pair of standalone luxury villas, thoughtfully designed across
+                            333.19 sq. m and 354.61 sq. m of built-up space.
+                        </p>
 
-            <ul class="villas-points">
-                <li>2 minutes to Maria Hall markets</li>
-                <li>5 minutes to Benaulim Beach</li>
-                <li>8 minutes to Colva Beach</li>
-                <li>Close proximity to Benaulim Market & restaurants</li>
-                <li>15 minutes from Margao Station / Bus Stand</li>
-                <li>40–60 minutes from Dabolim Airport</li>
-                <li>South Goa calm: quieter, laid-back, slower living</li>
-            </ul>
-        </div>
+                        <div class="villas-card">
+                            <ul class="villas-points">
+                                <li><i data-lucide="shopping-bag"></i>2 minutes to Maria Hall markets</li>
+                                <li><i data-lucide="umbrella"></i>5 minutes to Benaulim Beach</li>
+                                <li><i data-lucide="umbrella"></i>8 minutes to Colva Beach</li>
+                                <li><i data-lucide="shopping-bag"></i>Close proximity to Benaulim Market & restaurants
+                                </li>
+                                <li><i data-lucide="train"></i>15 minutes from Margao Station / Bus Stand</li>
+                                <li><i data-lucide="plane"></i>40–60 minutes from Dabolim Airport</li>
+                                <li><i data-lucide="leaf"></i>South Goa calm: quieter, laid-back, slower living</li>
+                            </ul>
+                        </div>
+                    </div>
 
-        <!-- ROW 2 : TEXT + IMAGE -->
-        <div class="villas-cell text">
-            <h2 class="section-title">
-                A Luxurious<br>Second Home
-            </h2>
+                    <!-- ROW 2 : TEXT + IMAGE -->
+                    <div class="villas-cell text" data-aos="fade-right" data-aos-duration="800">
+                        <h2 class="section-title">
+                            A Luxurious<br>Second Home
+                        </h2>
 
-            <p class="villas-small">
-                Furnished villas with a mix of modern and contemporary living,
-                offering the following amenities:
-            </p>
+                        <p class="villas-small">
+                            Furnished villas with a mix of modern and contemporary living,
+                            offering the following amenities:
+                        </p>
 
-            <ul class="villas-points">
-                <li>4 Ensuite Bedrooms</li>
-                <li>Modular Kitchen</li>
-                <li>Exquisitely Designed Flooring & Bathrooms</li>
-                <li>Individual Private Pool</li>
-                <li>Open Exclusive Terrace</li>
-                <li>Elevator Access</li>
-                <li>Servant Quarters</li>
-            </ul>
-        </div>
+                        <div class="villas-card">
+                            <ul class="villas-points">
+                                <li><i data-lucide="bed"></i>4 Ensuite Bedrooms</li>
+                                <li><i data-lucide="chef-hat"></i>Modular Kitchen</li>
+                                <li><i data-lucide="sparkles"></i>Exquisitely Designed Flooring & Bathrooms</li>
+                                <li><i data-lucide="droplet"></i>Individual Private Pool</li>
+                                <li><i data-lucide="sun"></i>Open Exclusive Terrace</li>
+                                <li><i data-lucide="arrow-up-down"></i>Elevator Access</li>
+                                <li><i data-lucide="home"></i>Servant Quarters</li>
+                            </ul>
+                        </div>
+                    </div>
 
-        <div class="villas-cell image">
-            <img src="../assets/images/second-home-img.png" alt="Luxury Villa Bedroom">
-        </div>
+                    <div class="villas-cell image" data-aos="fade-left" data-aos-duration="800">
+                        <img src="../assets/images/goa-images/luxury-second-home.jpeg" alt="Luxury Villa Bedroom">
+                    </div>
 
-    </div>
-</section>
+                </div>
+        </section>
 
 
 
@@ -348,37 +488,56 @@ quarters, and elevator access. Price guidance is ₹4.5–5.0 crore per villa, s
                         </p> -->
                     </div>
                     <div class="col-right">
-                         <h2 class="section-title" data-aos="fade-up" data-aos-duration="800">
-                    Why South Goa?
-                </h2>
-                        <ul class="content-list">
-                            <li>
-                                <span class="name">LIMITED SUPPLY</span>
-                                <span class="value">South Goa combines tranquility, natural beauty, and exclusivity, attracting
-HNIs seeking privacy and refined living. Limited development and low
-density make it a scarce market with strong appreciation potential.</span>
-                            </li>
-                            <li>
-                                <span class="name">INFRASTRUCTURE UPGRADE</span>
-                                <span class="value">The new Mopa Airport improves access to South Goa, spurring interest in 02 the region.</span>
-                            </li>
-                            <li>
-                                <span class="name">REMOTE WORK SHIFT</span>
-                                <span class="value">Post-COVID demand surge from professionals seeking work-from-anywhere 03 homes.</span>
-                            </li>
-                            <li>
-                                <span class="name">RENTAL YIELDS</span>
-                                <span class="value">Premium villas in South Goa command ₹25,000-50,000/night during 04 peak season (November-February)</span>
-                            </li>
-                            <li>
-                                <span class="name">CAPITAL APPRECIATION</span>
-                                <span class="value">South Goa villa prices have increased 40-60% over the past 5 years</span>
-                            </li>
-                            <!-- <li>
-                                <span class="name">Total Buit Up Area</span>
-                                <span class="value">333.19 Sq.Mts</span>
-                            </li> -->
-                        </ul>
+                        <h2 class="section-title" data-aos="fade-up" data-aos-duration="800">
+                            Why South Goa?
+                        </h2>
+                        <div class="points-grid">
+                            <div class="point-card" data-aos="fade-up" data-aos-duration="800">
+                                <img class="point-img" src="../assets/images/goa-images/limited-supply.jpeg"
+                                    alt="Limited Supply">
+                                <div class="point-title">Limited Supply</div>
+                                <div class="point-subtext">South Goa combines tranquility, natural beauty, and
+                                    exclusivity, attracting HNIs seeking privacy and refined living. Limited development
+                                    and low density make it a scarce market with strong appreciation potential.</div>
+                                <div class="spacer"></div>
+                            </div>
+
+                            <div class="point-card" data-aos="fade-up" data-aos-duration="800">
+                                <img class="point-img" src="../assets/images/goa-images/amenitites.jpeg"
+                                    alt="Infrastructure Upgrade">
+                                <div class="point-title">Infrastructure Upgrade</div>
+                                <div class="point-subtext">The new Mopa Airport improves access to South Goa, spurring
+                                    interest in the region.</div>
+                                <div class="spacer"></div>
+                            </div>
+
+                            <div class="point-card" data-aos="fade-up" data-aos-duration="800">
+                                <img class="point-img" src="../assets/images/goa-images/remote-wrok.jpg"
+                                    alt="Remote Work Shift">
+                                <div class="point-title">Remote Work Shift</div>
+                                <div class="point-subtext">Post-COVID demand surge from professionals seeking
+                                    work-from-anywhere homes.</div>
+                                <div class="spacer"></div>
+                            </div>
+
+                            <div class="point-card" data-aos="fade-up" data-aos-duration="800">
+                                <img class="point-img" src="../assets/images/amenities/bunglow-2-3bhk.jpg"
+                                    alt="Rental Yields">
+                                <div class="point-title">Rental Yields</div>
+                                <div class="point-subtext">Premium villas in South Goa command ₹25,000–50,000 per night
+                                    during peak season (November–February).</div>
+                                <div class="spacer"></div>
+                            </div>
+
+                            <div class="point-card" data-aos="fade-up" data-aos-duration="800">
+                                <img class="point-img" src="../assets/images/amenities/capital-appreciation.jpg"
+                                    alt="Capital Appreciation">
+                                <div class="point-title">Capital Appreciation</div>
+                                <div class="point-subtext">South Goa villa prices have increased 40–60% over the past 5
+                                    years.</div>
+                                <div class="spacer"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -414,13 +573,8 @@ density make it a scarce market with strong appreciation potential.</span>
                         </div>
 
                         <div class="swiper-slide amenity-card">
-                            <img src="../assets/images/amenities/open-terrace.jpg" alt="Clubhouse">
-                            <h3>Open Terrace</h3>
-                        </div>
-
-                        <div class="swiper-slide amenity-card">
-                            <img src="../assets/images/amenities/garden.jpg" alt="Gymnasium">
-                            <h3>Landscaped Gardens</h3>
+                            <img src="../assets/images/goa-images/family-rooms.jpeg" alt="Clubhouse">
+                            <h3>Family Rooms</h3>
                         </div>
 
                         <div class="swiper-slide amenity-card">
@@ -429,46 +583,12 @@ density make it a scarce market with strong appreciation potential.</span>
                         </div>
 
                         <div class="swiper-slide amenity-card">
-                            <img src="../assets/images/amenities/spa-style-bathroom.png" alt="Infinity Pool">
+                            <img src="../assets/images/goa-images/bathroom.jpeg" alt="Infinity Pool">
                             <h3>Spa-Style Bathrooms</h3>
                         </div>
                         <div class="swiper-slide amenity-card">
-                            <img src="../assets/images/amenities/elevator.jpg" alt="Infinity Pool">
-                            <h3>Elevator Access</h3>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- CONFIGURATION SECTION -->
-        <section class="section-shell" id="configuration" data-aos="fade-up" data-aos-duration="800">
-            <div class="container configuration-container">
-
-                <h2 class="amenities-title">
-                    CONFIGURATION, <span>SPACIOUS LIVING OPTIONS</span>
-                </h2>
-
-                <!-- Arrows -->
-                <div class="config-prev"></div>
-                <div class="config-next"></div>
-
-                <!-- Swiper -->
-                <div class="swiper config-swiper">
-                    <div class="swiper-wrapper">
-
-                        <!-- CONFIG 1 -->
-                        <div class="swiper-slide config-card">
-                            <img src="../assets/images/amenities/bunglow-1-2BHK.jpg" alt="2 BHK">
+                            <img src="../assets/images/goa-images/amenitites.jpeg" alt="Infinity Pool">
                             <h3>Smart, Secure Living</h3>
-                        </div>
-
-                        <!-- CONFIG 2 -->
-                        <div class="swiper-slide config-card">
-                            <img src="../assets/images/amenities/bunglow-1-3bhk.jpg" alt="E-3 BHK">
-                            <h3>4 BHK</h3>
                         </div>
 
                     </div>

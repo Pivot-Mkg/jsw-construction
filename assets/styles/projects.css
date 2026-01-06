@@ -31,6 +31,10 @@
     margin-bottom: 1rem;
     color: #333;
     max-width: 90%;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-top: 0.35rem;
+    font-size: 0.95rem;
 }
 
 /* Right Image */
