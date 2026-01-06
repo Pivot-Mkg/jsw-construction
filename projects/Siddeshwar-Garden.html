@@ -372,26 +372,26 @@
             </div>
             <div class="project-modal__body">
                 <div class="project-modal__content">
-                    <div class="project-modal__text" style="max-height:70vh; overflow-y:auto; padding-right:0.5rem;">
+                    <div class="project-modal__text" style="overflow-y:auto; padding-right:0.5rem;">
                         <p class="modal-kicker">Phase I | Delivered</p>
                         <p>A thoughtfully designed 15-storeyed residential tower
                             spanning 1,10,000 sq. ft., offering spacious 2 and 3 BHK
                             apartments with scenic views of the Yeoor Hills.</p>
                         <p>The development features lush landscaped gardens, a dedicated
-children’s playground, a tennis court, and a jogging track, creating a
-well-rounded living environment that balances comfort, recreation,
-and nature.</p>
+                            children’s playground, a tennis court, and a jogging track, creating a
+                            well-rounded living environment that balances comfort, recreation,
+                            and nature.</p>
 
                         <h4>Project Highlights</h4>
                         <p>The project rises 15 storeys high (stilt plus 14 floors) with a total
-built-up area of 1,10,000 sq. ft., comprising 84 apartments 56
-well-planned 2 BHK homes and 28 spacious 3 BHK residences.
-Construction began in March 2008 and was completed within
-21 months by December 2009. A key highlight is the direct,
-uninterrupted views of the Yeoor Hills from the 8th floor upwards.
-The project is fully delivered, with the Occupation Certificate
-received in February 2010.</p>
-                        
+                            built-up area of 1,10,000 sq. ft., comprising 84 apartments 56
+                            well-planned 2 BHK homes and 28 spacious 3 BHK residences.
+                            Construction began in March 2008 and was completed within
+                            21 months by December 2009. A key highlight is the direct,
+                            uninterrupted views of the Yeoor Hills from the 8th floor upwards.
+                            The project is fully delivered, with the Occupation Certificate
+                            received in February 2010.</p>
+
 
                         <h4>Construction of Harmony</h4>
                         <p>Developed as part of Phase I of Siddeshwar Gardens,
@@ -470,10 +470,10 @@ received in February 2010.</p>
                             is the intelligently designed 1.5 BHK configuration, ideal for young
                             professionals and small families. The project is fully delivered, with
                             the Occupation Certificate received in October 2019.</p>
-                        
+
 
                         <h4>Distinctive Features</h4>
-<p>Delivered on schedule, Jasmine stands today as a
+                        <p>Delivered on schedule, Jasmine stands today as a
                             ready, refined residence crafted for modern urban
                         <p>Rising on Kolshet Road one of Thane’s fastestgrowing corridors Jasmine is a 20-storey address
                             that blends smart design with everyday luxury.
@@ -510,17 +510,18 @@ received in February 2010.</p>
                         <p class="modal-kicker">Phase II | 27 Storeys</p>
                         <h4>Project Highlights</h4>
                         <p>The project soars 27 storeys high, comprising a stilt level,
-three podium parking floors, and 23 residential storeys, with
-a total built-up area of 1,65,000 sq. ft. It offers 106 premium
-apartments, including 69 well-designed 2 BHK homes and
-37 spacious 3 BHK residences.</p>
+                            three podium parking floors, and 23 residential storeys, with
+                            a total built-up area of 1,65,000 sq. ft. It offers 106 premium
+                            apartments, including 69 well-designed 2 BHK homes and
+                            37 spacious 3 BHK residences.</p>
 
                         <p> Construction commenced in
-September 2018 and was completed in December 2022 over
-a period of 51 months. As the tallest tower in the complex,
-it enjoys sweeping panoramic views of the Yeoor Hills and
-Thane Creek.</p>
-                        <p>The project is fully delivered, with the Occupation Certificate received in February 2023.</p>
+                            September 2018 and was completed in December 2022 over
+                            a period of 51 months. As the tallest tower in the complex,
+                            it enjoys sweeping panoramic views of the Yeoor Hills and
+                            Thane Creek.</p>
+                        <p>The project is fully delivered, with the Occupation Certificate received in February 2023.
+                        </p>
 
                         <p>Marigold rises 27 storeys at Siddeshwar
                             Gardens ushering in a bold new chapter
@@ -682,25 +683,27 @@ Thane Creek.</p>
 
         // Scroll lock during modal: prevent background page from scrolling
         const wheelHandler = (e) => {
-    if (!document.body.classList.contains('modal-open')) return;
+            if (!document.body.classList.contains('modal-open')) return;
 
-    const modal = document.querySelector('.project-modal-overlay.open');
-    if (!modal) return;
+            const overlay = document.querySelector('.project-modal-overlay.open');
+            if (!overlay) return;
 
-    const textScroller = modal.querySelector('.project-modal__text');
-    if (!textScroller) return;
+            // Prefer the modal container as the scroll target, fall back to the old text scroller
+            const modal = overlay.querySelector('.project-modal');
+            const textScroller = overlay.querySelector('.project-modal__text');
+            const scroller = modal || textScroller;
+            if (!scroller) return;
 
-    // Always prevent default page scroll
-    e.preventDefault();
-
-    // Force scroll into the text container
-    textScroller.scrollTop += e.deltaY;
-};
+            // Prevent the page from scrolling and forward the wheel delta to the modal container
+            e.preventDefault();
+            scroller.scrollTop += e.deltaY;
+        };
 
         const touchMoveHandler = (e) => {
             if (!document.body.classList.contains('modal-open')) return;
-            const scroller = e.target.closest('.project-modal__text');
-            if (!scroller) e.preventDefault();
+            // If touch is inside the modal allow it, otherwise prevent default to lock background
+            const isInsideModal = !!e.target.closest('.project-modal');
+            if (!isInsideModal) e.preventDefault();
         };
 
         const addScrollLock = () => {
@@ -726,17 +729,58 @@ Thane Creek.</p>
             else removeScrollLock();
         };
 
+        // Positioning helpers for the fixed close button so it visually anchors to the modal
+        let _closePositionListeners = new Map();
+
+        const positionCloseButtonForModal = (modal) => {
+            const btn = modal.querySelector('.project-modal-close');
+            if (!btn) return;
+            const rect = modal.getBoundingClientRect();
+            // Place the fixed button near the modal's top-right corner (12px inset)
+            const top = Math.max(8, rect.top + 12);
+            const right = Math.max(8, window.innerWidth - rect.right + 12);
+            btn.style.top = `${top}px`;
+            btn.style.right = `${right}px`;
+        };
+
+        const addClosePositioning = (modal) => {
+            const update = () => positionCloseButtonForModal(modal);
+            // Run once and attach listeners while modal is open
+            update();
+            window.addEventListener('resize', update);
+            window.addEventListener('scroll', update, true);
+            _closePositionListeners.set(modal, update);
+        };
+
+        const removeClosePositioning = (modal) => {
+            const update = _closePositionListeners.get(modal);
+            if (update) {
+                window.removeEventListener('resize', update);
+                window.removeEventListener('scroll', update, true);
+                _closePositionListeners.delete(modal);
+            }
+            const btn = modal.querySelector('.project-modal-close');
+            if (btn) {
+                btn.style.top = '';
+                btn.style.right = '';
+            }
+        };
+
         const openModal = (id) => {
             const modal = document.getElementById(id);
             if (!modal) return;
             modal.classList.add('open');
             modal.setAttribute('aria-hidden', 'false');
             toggleBodyScroll();
+            addClosePositioning(modal);
         };
 
         const closeModal = (modal) => {
+            // If caller passed overlay, find inner modal element
+            const inner = modal.querySelector && modal.querySelector('.project-modal') || modal;
             modal.classList.remove('open');
             modal.setAttribute('aria-hidden', 'true');
+            removeClosePositioning(modal);
             toggleBodyScroll();
         };
 

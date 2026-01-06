@@ -403,7 +403,8 @@ body.modal-open {
     opacity: 1;
     pointer-events: auto;
     visibility: visible;
-    overflow: hidden;
+    /* Allow the overlay to scroll when modal content exceeds viewport */
+    overflow: auto;
     overscroll-behavior: contain;
 }
 
@@ -413,7 +414,8 @@ body.modal-open {
     max-height: 96vh;
     background: #ffffff;
     border-radius: 22px;
-    overflow: hidden;
+    /* Allow the modal itself to scroll if content is tall */
+    overflow: auto;
     position: relative;
     box-shadow: 0 28px 80px rgba(0, 0, 0, 0.26);
     display: flex;
@@ -443,6 +445,10 @@ body.modal-open {
 .project-modal__banner {
     position: relative;
     overflow: hidden;
+    /* Prevent flex container from stretching the banner when modal content grows */
+    flex: 0 0 auto;
+    /* Explicit height on the banner container keeps layout stable */
+    height: 420px;
 }
 
 .project-modal__banner-overlay {
@@ -504,7 +510,8 @@ body.modal-open {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     gap: 1.25rem;
     width: 100%;
-    align-items: start;
+    /* Stretch both columns to equal height so visual matches text height */
+    align-items: stretch;
 }
 
 .project-modal__text {
@@ -514,9 +521,9 @@ body.modal-open {
     padding: 1.25rem;
     border-radius: 14px;
     /* box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06); */
-    max-height: 46vh;
-    /* Match the image height for balanced scrolling */
-    overflow-y: auto;
+    /* Let the modal (outer container) handle scrolling instead of an inner scroll area */
+    max-height: none;
+    overflow-y: visible;
     /* Enable vertical scrolling only */
     scrollbar-width: thin;
     /* Firefox */
@@ -547,8 +554,7 @@ body.modal-open {
 /* Responsive adjustment */
 @media (max-width: 900px) {
     .project-modal__text {
-        max-height: 360px;
-        /* Match the responsive image height */
+        max-height: none;
     }
 }
 
@@ -567,22 +573,26 @@ body.modal-open {
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: stretch;
 }
 
 .project-modal__visual img {
     width: 100%;
-    height: 46vh;
-    max-height: 520px;
+    /* Let the image fill the visual container's full height so it matches the text column */
+    height: 100%;
+    max-height: none;
     object-fit: cover;
     display: block;
 }
 
 .project-modal-close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 42px;
-    height: 42px;
+    /* Keep the close button fixed in the viewport so it remains reachable while modal scrolls */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.62);
     color: #ffffff;
@@ -590,13 +600,22 @@ body.modal-open {
     display: grid;
     place-items: center;
     transition: background 0.2s ease, transform 0.2s ease;
-    z-index: 12;
+    z-index: 3000;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
 .project-modal-close:hover {
     background: rgba(0, 0, 0, 0.8);
     transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+    .project-modal-close {
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+    }
 }
 
 @media (max-width: 900px) {
@@ -611,6 +630,12 @@ body.modal-open {
     .project-modal__banner img {
         height: 320px;
         min-height: 300px;
+    }
+
+    /* On narrow screens the grid becomes a single column — restore a fixed visual height */
+    .project-modal__visual img {
+        height: 320px;
+        max-height: none;
     }
 
     .project-modal__content {
