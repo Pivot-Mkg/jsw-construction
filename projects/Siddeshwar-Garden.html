@@ -23,6 +23,50 @@
     <!-- AOS Animate On Scroll -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <style>
+        .villas-points {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1.5rem;
+        }
+
+        .villas-points li {
+            margin-bottom: 0.55rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-main);
+            background: rgba(193, 157, 96, 0.06);
+            border: 1px solid rgba(193, 157, 96, 0.16);
+            border-radius: 12px;
+            padding: 0.55rem 0.75rem;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+        }
+
+        .villas-points li svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+
+        .villas-points li:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-gold);
+            background: rgba(193, 157, 96, 0.1);
+            box-shadow: 0 8px 18px rgba(12, 19, 35, 0.08);
+        }
+
+        .villas-card {
+            backdrop-filter: blur(6px);
+            transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+        }
+
+        .villas-card:hover {
+            transform: translateY(-3px);
+        }
+    </style>
 </head>
 
 <body>
@@ -179,12 +223,15 @@
                         space, amenities, and connectivity.
                     </p>
 
-                    <p class="about-text">
-                        Spread across a total built-up area of 5,00,000 sq. ft., the development is located on Kolshet
-                        Road, Thane West. Executed in two phases Phase 1 from 2008 to 2010 and Phase 2 from 2015 to
-                        2022 the project comprises 8 row houses and 412 apartments, offering 1.5 BHK, 2 BHK, and 3 BHK
-                        configurations. The development is now 100% delivered and fully occupied.
-                    </p>
+                    <div class="villas-card">
+                        <ul class="villas-points">
+                            <li><i data-lucide="map-pin"></i>Located on Kolshet Road, Thane West</li>
+                            <li><i data-lucide="calendar"></i>Phase 1: 2008-2010, Phase 2: 2015-2022</li>
+                            <li><i data-lucide="home"></i>8 row houses and 412 apartments</li>
+                            <li><i data-lucide="layout"></i>1.5 BHK, 2 BHK, and 3 BHK configurations</li>
+                            <li><i data-lucide="check-circle"></i>100% delivered and fully occupied</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- RIGHT IMAGE -->
