@@ -408,7 +408,8 @@ body.modal-open {
     pointer-events: auto;
     visibility: visible;
     /* Allow the overlay to scroll when modal content exceeds viewport */
-    overflow: auto;
+    /* overflow: auto; */
+    overflow: hidden;
     overscroll-behavior: contain;
 }
 
@@ -631,10 +632,10 @@ body.modal-open {
         height: 90vh;
     }
 
-    .project-modal__banner img {
+    /* .project-modal__banner img {
         height: 320px;
         min-height: 300px;
-    }
+    } */
 
     /* On narrow screens the grid becomes a single column — restore a fixed visual height */
     .project-modal__visual img {
