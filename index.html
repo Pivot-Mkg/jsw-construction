@@ -1791,6 +1791,90 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 10000;
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            min-width: 300px;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .notification-success {
+            border-left-color: var(--accent-gold);
+        }
+
+        .notification-error {
+            border-left-color: #e74c3c;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex: 1;
+        }
+
+        .notification-success .notification-content i {
+            color: var(--accent-gold);
+        }
+
+        .notification-error .notification-content i {
+            color: #e74c3c;
+        }
+
+        .notification-content span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .notification-close:hover {
+            background-color: #f5f5f5;
+        }
+
+        .notification-close i {
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .notification {
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+                transform: translateY(-100px);
+            }
+            
+            .notification.show {
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -2714,17 +2798,17 @@
             const phone = formData.get('phone').trim();
             
             if (!name || !email || !phone) {
-                showMessage('Please fill in all fields.', 'error');
+                showNotification('Please fill in all fields.', 'error');
                 return;
             }
             
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                showMessage('Please enter a valid email address.', 'error');
+                showNotification('Please enter a valid email address.', 'error');
                 return;
             }
             
             if (!/^[\d\s\+\-\(\)]{10,}$/.test(phone)) {
-                showMessage('Please enter a valid phone number.', 'error');
+                showNotification('Please enter a valid phone number.', 'error');
                 return;
             }
             
@@ -2734,7 +2818,7 @@
             btnLoading.style.display = 'inline';
             
             try {
-                const response = await fetch('send-email.php', {
+                const response = await fetch('test-form.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -2742,13 +2826,13 @@
                 const result = await response.json();
                 
                 if (result.success) {
-                    showMessage('Thank you! Your request has been sent successfully. We will contact you soon.', 'success');
+                    showNotification('Thank you! Your request has been sent successfully. We will contact you soon.', 'success');
                     form.reset();
                 } else {
-                    showMessage(result.message || 'Failed to send message. Please try again.', 'error');
+                    showNotification(result.message || 'Failed to send message. Please try again.', 'error');
                 }
             } catch (error) {
-                showMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+                showNotification('Sorry, there was an error sending your message. Please try again.', 'error');
             } finally {
                 // Reset button state
                 submitBtn.disabled = false;
@@ -2767,6 +2851,33 @@
             
             setTimeout(() => {
                 messageDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Branded notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i data-lucide="${type === 'success' ? 'check-circle' : 'alert-circle'}" width="20" height="20"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i data-lucide="x" width="16" height="16"></i>
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+            lucide.createIcons();
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
             }, 5000);
         }
 
