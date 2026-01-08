@@ -1774,6 +1774,22 @@
                 height: 180px;
             }
         }
+
+
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
     </style>
 </head>
 
@@ -1798,7 +1814,7 @@
                     <div class="category">
                         <a href="./projects/Siddeshwar-Garden.html" class="category-title">Siddeshwar Gardens</a>
                     </div>
-                     <!-- <div class="category">
+                    <!-- <div class="category">
                         <a href="./projects/Siddeshwar-Gardens-Row-Houses.html" class="category-title">Siddeshwar
                             Gardens – Row
                             Houses</a>
@@ -2012,6 +2028,51 @@
             </div>
         </section>
 
+        <!-- STATISTICS SECTION -->
+        <section class="stats-section" style="padding: 4rem 0; background: #f8f9fa;">
+            <div class="container">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;" data-aos="fade-up">Our Track
+                    Record</h2>
+                <div class="stats-grid">
+                    <div class="stat-card"
+                        style="text-align: center; padding: 2rem; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-number"
+                            style="font-size: 3rem; font-weight: bold; color: #C19D60; margin-bottom: 0.5rem;">
+                            <span data-counter="18" data-suffix="">0</span>
+                        </div>
+                        <div class="stat-label" style="font-size: 1.1rem; color: #666;">Years in Business</div>
+                    </div>
+                    <div class="stat-card"
+                        style="text-align: center; padding: 2rem; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-number"
+                            style="font-size: 3rem; font-weight: bold; color: #C19D60; margin-bottom: 0.5rem;">
+                            <span data-counter="6" data-suffix=".5L">0.5L</span>
+                        </div>
+                        <div class="stat-label" style="font-size: 1.1rem; color: #666;">Sq Ft Delivered</div>
+                    </div>
+                    <div class="stat-card"
+                        style="text-align: center; padding: 2rem; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
+                        data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-number"
+                            style="font-size: 3rem; font-weight: bold; color: #C19D60; margin-bottom: 0.5rem;">
+                            <span data-counter="1200" data-suffix="+">0+</span>
+                        </div>
+                        <div class="stat-label" style="font-size: 1.1rem; color: #666;">Families Housed</div>
+                    </div>
+                    <div class="stat-card"
+                        style="text-align: center; padding: 2rem; background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
+                        data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat-number"
+                            style="font-size: 3rem; font-weight: bold; color: #C19D60; margin-bottom: 0.5rem;">
+                            <span data-counter="0" data-suffix="">0</span>
+                        </div>
+                        <div class="stat-label" style="font-size: 1.1rem; color: #666;">Delayed Projects</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- SECTION 2: CAROUSEL -->
         <section class="features-section">
@@ -2581,6 +2642,46 @@
             }, { root: null, rootMargin: '0px', threshold: 0.15 });
             document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
         }
+
+        // Counter function that preserves suffixes
+        function animateCounter(element, target, suffix = '') {
+            const start = 0;
+            const duration = 2000;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(start + (target - start) * progress);
+
+                element.textContent = current + suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Initialize counters when elements are visible
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const target = parseInt(element.dataset.counter);
+                    const suffix = element.dataset.suffix || '';
+                    animateCounter(element, target, suffix);
+                    counterObserver.unobserve(element);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe all counter elements
+        document.querySelectorAll('[data-counter]').forEach(el => {
+            counterObserver.observe(el);
+        });
+
     </script>
 </body>
 
