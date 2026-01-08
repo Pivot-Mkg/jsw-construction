@@ -2273,15 +2273,17 @@
                     today.</p>
 
                 <!-- New Contact Form -->
-                <form class="contact-form" onsubmit="event.preventDefault();">
-                    <input type="text" class="form-input" placeholder="Your Name" required>
-                    <input type="email" class="form-input" placeholder="Email Address" required>
-                    <input type="number" class="form-input" placeholder="Phone Number" required>
-                    <button type="submit" class="btn-pill">
-                        Request Private Tour
+                <form class="contact-form" id="contactForm">
+                    <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                    <input type="email" name="email" class="form-input" placeholder="Email Address" required>
+                    <input type="tel" name="phone" class="form-input" placeholder="Phone Number" required>
+                    <button type="submit" class="btn-pill" id="submitBtn">
+                        <span class="btn-text">Request Private Tour</span>
+                        <span class="btn-loading" style="display: none;">Sending...</span>
                         <i data-lucide="arrow-right" width="16" height="16"></i>
                     </button>
                 </form>
+                <div id="formMessage" class="form-message" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 8px; text-align: center;"></div>
             </div>
 
             <footer class="site-footer">
@@ -2694,6 +2696,79 @@
         document.querySelectorAll('[data-counter]').forEach(el => {
             counterObserver.observe(el);
         });
+
+        // Form handling
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const formData = new FormData(form);
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            const messageDiv = document.getElementById('formMessage');
+            
+            // Validation
+            const name = formData.get('name').trim();
+            const email = formData.get('email').trim();
+            const phone = formData.get('phone').trim();
+            
+            if (!name || !email || !phone) {
+                showMessage('Please fill in all fields.', 'error');
+                return;
+            }
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            if (!/^[\d\s\+\-\(\)]{10,}$/.test(phone)) {
+                showMessage('Please enter a valid phone number.', 'error');
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            
+            try {
+                const response = await fetch('send-email.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('Thank you! Your request has been sent successfully. We will contact you soon.', 'success');
+                    form.reset();
+                } else {
+                    showMessage(result.message || 'Failed to send message. Please try again.', 'error');
+                }
+            } catch (error) {
+                showMessage('Sorry, there was an error sending your message. Please try again.', 'error');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+            }
+        });
+        
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('formMessage');
+            messageDiv.textContent = text;
+            messageDiv.style.display = 'block';
+            messageDiv.style.backgroundColor = type === 'success' ? '#d4edda' : '#f8d7da';
+            messageDiv.style.color = type === 'success' ? '#155724' : '#721c24';
+            messageDiv.style.border = `1px solid ${type === 'success' ? '#c3e6cb' : '#f5c6cb'}`;
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
 
     </script>
 </body>
