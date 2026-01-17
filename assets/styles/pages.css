@@ -411,7 +411,7 @@ footer .logo-link {
   color: #f8fafc;
   display: grid;
   gap: 1rem;
-  max-width: 600px;
+  max-width: 650px;
 }
 
 .cta-body .eyebrow {
@@ -424,6 +424,7 @@ footer .logo-link {
   font-weight: 800;
   font-size: 0.75rem;
   opacity: 0.9;
+  display: none;
 }
 
 .cta-title {
@@ -1031,6 +1032,10 @@ textarea.form-input {
   z-index: 0;
   transform: translateZ(0);
   border-radius: 14px;
+}
+
+#configuration {
+  display: none;
 }
 
 .highlight-card>* {
