@@ -359,7 +359,8 @@ footer .logo-link {
 }
 
 .page-hero .pill {
-  background: rgba(255, 255, 255, 0.14);
+  /* background: rgba(255, 255, 255, 0.14); */
+  background: #a3824a96;
   color: #f8fafc;
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
