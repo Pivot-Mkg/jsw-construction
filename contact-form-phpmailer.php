@@ -4,14 +4,20 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Enable error reporting for debugging
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+ini_set('error_log', __DIR__ . '/mail-error.log');
+
+function jsonResponse($success, $message, $statusCode = 200, $extra = [])
+{
+    http_response_code($statusCode);
+    echo json_encode(array_merge(['success' => $success, 'message' => $message], $extra));
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
-    exit;
+    jsonResponse(false, 'Method not allowed', 405);
 }
 
 $name = trim($_POST['name'] ?? '');
@@ -21,18 +27,14 @@ $city = trim($_POST['city'] ?? '');
 $message = trim($_POST['message'] ?? '');
 
 if (empty($name) || empty($email) || empty($phone) || empty($city)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Name, email, phone and city are required']);
-    exit;
+    jsonResponse(false, 'Name, email, phone and city are required', 400);
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => 'Invalid email address']);
-    exit;
+    jsonResponse(false, 'Invalid email address', 400);
 }
 
-$to = 'aakash@pivotmkg.com';
+$to = getenv('SMTP_TO') ?: 'aakash@pivotmkg.com';
 $subject = 'New Contact Form Submission - JSK Buildwell';
 
 // Create HTML email content
@@ -71,55 +73,72 @@ $emailMessage .= "
 </body>
 </html>";
 
-// Use PHPMailer without SMTP (uses local mail server)
 try {
-    // Check if PHPMailer is available, otherwise fallback to mail()
-    if (file_exists('vendor/autoload.php')) {
-        require 'vendor/autoload.php';
-        
+    $autoloadPath = __DIR__ . '/vendor/autoload.php';
+    if (file_exists($autoloadPath)) {
+        require $autoloadPath;
+
         $mail = new PHPMailer\PHPMailer\PHPMailer(true);
-        
-        // Use local mail server (no SMTP authentication)
-        $mail->isMail(); // Use PHP's mail() function internally
-        
-        // Recipients
-        $mail->setFrom('noreply@jskbuildwell.com', 'JSK Buildwell');
+        $mail->CharSet = 'UTF-8';
+
+        $smtpHost = getenv('SMTP_HOST') ?: '';
+        $smtpUser = getenv('SMTP_USER') ?: '';
+        $smtpPass = getenv('SMTP_PASS') ?: '';
+        $smtpPort = getenv('SMTP_PORT') ?: '';
+        $smtpSecure = strtolower(getenv('SMTP_SECURE') ?: '');
+
+        $useSmtp = $smtpHost && $smtpUser && $smtpPass;
+        if ($useSmtp) {
+            $mail->isSMTP();
+            $mail->Host = $smtpHost;
+            $mail->SMTPAuth = true;
+            $mail->Username = $smtpUser;
+            $mail->Password = $smtpPass;
+            $mail->Port = $smtpPort ? (int) $smtpPort : 587;
+            if ($smtpSecure && $smtpSecure !== 'none') {
+                $mail->SMTPSecure = $smtpSecure === 'starttls' ? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS : $smtpSecure;
+            } else {
+                $mail->SMTPSecure = $mail->Port === 465
+                    ? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS
+                    : PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            }
+        } else {
+            $mail->isMail();
+        }
+
+        $fromEmail = getenv('SMTP_FROM') ?: 'noreply@jskbuildwell.com';
+        $fromName = getenv('SMTP_FROM_NAME') ?: 'JSK Buildwell';
+
+        $mail->setFrom($fromEmail, $fromName);
         $mail->addAddress($to, 'JSK Buildwell Contact');
         $mail->addReplyTo($email, $name);
-        
-        // Content
+
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body = $emailMessage;
         $mail->AltBody = strip_tags(str_replace('<br>', "\n", $emailMessage));
-        
+
         $mail->send();
         error_log("Email sent successfully using PHPMailer to: $to");
-        echo json_encode(['success' => true, 'message' => 'Message sent successfully']);
-        
-    } else {
-        // Fallback to enhanced mail() function
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= "From: JSK Buildwell <noreply@jskbuildwell.com>" . "\r\n";
-        $headers .= "Reply-To: " . $email . "\r\n";
-        $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-        
-        // Log the attempt
-        error_log("Attempting to send email to: $to using mail() function");
-        
-        if (mail($to, $subject, $emailMessage, $headers)) {
-            error_log("Email sent successfully to: $to");
-            echo json_encode(['success' => true, 'message' => 'Message sent successfully']);
-        } else {
-            error_log("Failed to send email to: $to");
-            throw new Exception('Mail function returned false');
-        }
+        jsonResponse(true, 'Message sent successfully');
     }
-    
+
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers .= "From: JSK Buildwell <noreply@jskbuildwell.com>" . "\r\n";
+    $headers .= "Reply-To: " . $email . "\r\n";
+    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+
+    error_log("Attempting to send email to: $to using mail() function");
+
+    if (mail($to, $subject, $emailMessage, $headers)) {
+        error_log("Email sent successfully to: $to");
+        jsonResponse(true, 'Message sent successfully');
+    }
+
+    error_log("Failed to send email to: $to");
+    jsonResponse(false, 'Mail function returned false', 500);
 } catch (Exception $e) {
     error_log('Mail error: ' . $e->getMessage());
-    http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Failed to send message: ' . $e->getMessage()]);
+    jsonResponse(false, 'Failed to send message: ' . $e->getMessage(), 500);
 }
-?>
