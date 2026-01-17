@@ -74,9 +74,8 @@ $emailMessage .= "
 // Use PHPMailer without SMTP (uses local mail server)
 try {
     // Check if PHPMailer is available, otherwise fallback to mail()
-    if (file_exists('vendor/PHPMailer/src/PHPMailer.php')) {
-        require 'vendor/PHPMailer/src/Exception.php';
-        require 'vendor/PHPMailer/src/PHPMailer.php';
+    if (file_exists('vendor/autoload.php')) {
+        require 'vendor/autoload.php';
         
         $mail = new PHPMailer\PHPMailer\PHPMailer(true);
         
