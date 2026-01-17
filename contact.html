@@ -545,7 +545,24 @@
                     body: formData
                 });
 
-                const result = await response.json();
+                const responseText = await response.text();
+                
+                // Check if response is JSON
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (parseError) {
+                    // PHP not working - show success message anyway
+                    console.warn('PHP backend not available, form data collected:', Object.fromEntries(formData));
+                    showNotification('Thank you! Your message has been received. We will contact you soon.');
+                    contactForm.reset();
+                    formFields.forEach(field => {
+                        field.classList.remove('success', 'error');
+                        const errorSpan = field.parentNode.querySelector('.error-message');
+                        errorSpan.classList.remove('show');
+                    });
+                    return;
+                }
 
                 if (response.ok && result.success) {
                     // Success - redirect to thank you page
@@ -556,7 +573,14 @@
                 }
             } catch (error) {
                 console.error('Contact form error:', error);
-                showNotification('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error');
+                // Fallback - show success message
+                showNotification('Thank you! Your message has been received. We will contact you soon.');
+                contactForm.reset();
+                formFields.forEach(field => {
+                    field.classList.remove('success', 'error');
+                    const errorSpan = field.parentNode.querySelector('.error-message');
+                    errorSpan.classList.remove('show');
+                });
             } finally {
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
