@@ -370,6 +370,10 @@ footer .logo-link {
   color: #f8fafc;
 }
 
+.footer-disclaimer-container {
+  font-size: 13px;
+}
+
 .cta-section {
   /* padding: 3.5rem 0; */
   display: flex;
