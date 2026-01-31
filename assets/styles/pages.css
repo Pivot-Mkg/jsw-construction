@@ -592,7 +592,7 @@ footer .logo-link {
 .list-grid {
   display: grid;
   gap: 1rem;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
 }
 
 .list-item {

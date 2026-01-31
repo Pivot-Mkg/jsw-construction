@@ -18,6 +18,74 @@
     <link rel="stylesheet" href="assets/styles/pages.css">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <style>
+        /* 50/50 on desktop, stacked on mobile */
+        .enquiry-split {
+            padding: 56px 16px;
+            padding-top: 0;
+            background: #f6f3ef;
+        }
+
+        .enquiry-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .enquiry-col {
+            flex: 0 0 50%;
+            min-width: 0;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .enquiry-title {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            line-height: 1.25;
+            /* color: #1d1d1f; */
+        }
+
+        .enquiry-text {
+            margin: 0 0 14px 0;
+            font-size: 15px;
+            line-height: 1.65;
+            /* color: #3a3a3c; */
+        }
+
+        .enquiry-meta p {
+            margin: 0 0 8px 0;
+            font-size: 15px;
+            line-height: 1.6;
+            /* color: #3a3a3c; */
+        }
+
+        .label {
+            /* font-weight: 600; */
+            /* color: #1d1d1f; */
+        }
+
+        .enquiry-meta a {
+            color: #1d1d1f;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .enquiry-wrap {
+                flex-direction: column;
+            }
+
+            .enquiry-col {
+                flex: 1 1 auto;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -131,18 +199,21 @@
                 <div class="info-card" data-aos="fade-right" data-aos-delay="200">
                     <h3>Visit us</h3>
                     <div class="list-grid">
-                        <div class="list-item"><i data-lucide="map-pin" width="18" height="18"></i> Mumbai Studio -
-                            Worli Sea Face</div>
-                        <div class="list-item"><i data-lucide="map-pin" width="18" height="18"></i> Pune Studio -
-                            Kalyani Nagar</div>
-                        <div class="list-item"><i data-lucide="anchor" width="18" height="18"></i> Alibaug Waterfront -
-                            Private Jetty</div>
+                        <div class="list-item">JSK Buildwell LLP</div>
+                        <div class="list-item">Mahinder Chambers, Office No. 009</div>
+                        <div class="list-item">Waman Tukaram Patil Marg, Opp. DMart</div>
+                        <div class="list-item">Chembur East, Mumbai - 400071</div>
+                        <h4>Contact Details:</h4>
+                        <div class="list-item">Phone: +91 22 6236 5020 / +91 22 3175 9605</div>
+                        <div class="list-item">Landline: +022-62365020</div>
+                        <div class="list-item">Email: info@jskbuildwell.com</div>
+                        <div class="list-item">Website: www.jskbuildwell.com</div>
                     </div>
-                    <div class="hero-meta" style="margin-top: 1rem;">
+                    <!-- <div class="hero-meta" style="margin-top: 1rem;">
                         <span class="pill"><i data-lucide="phone" width="16" height="16"></i> +91 98765 43210</span>
                         <span class="pill"><i data-lucide="mail" width="16" height="16"></i>
                             concierge@jskbuildwell.com</span>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="info-card" data-aos="fade-left" data-aos-delay="200">
@@ -195,6 +266,42 @@
                 </div>
             </div>
         </section>
+        <section class="enquiry-split">
+            <div class="container contact-grid">
+                <!-- LEFT -->
+                <div class="enquiry-col">
+                    <h3 class="enquiry-title">For Redevelopment Enquiries</h3>
+                    <p class="enquiry-text">
+                        If your housing society is considering redevelopment, we offer a free, no-obligation
+                        consultation to
+                        explain the process, assess feasibility, and answer your committee’s questions.
+                    </p>
+
+                    <div class="enquiry-meta">
+                        <p><span class="label">Contact:</span> Shantanu Agrawal / Amit Gupta</p>
+                        <p><span class="label">Direct:</span> <a href="tel:+912262365020">+022-62365020</a></p>
+                        <p><span class="label">Email:</span> <a
+                                href="mailto:info@jskbuildwell.com">info@jskbuildwell.com</a></p>
+                    </div>
+                </div>
+
+                <!-- RIGHT -->
+                <div class="enquiry-col">
+                    <h3 class="enquiry-title">For Goa Villa Enquiries</h3>
+                    <p class="enquiry-text">
+                        Interested in Casa Benau villas. Schedule a site visit or request the detailed project brochure.
+                    </p>
+
+                    <div class="enquiry-meta">
+                        <p><span class="label">Contact:</span> Sales</p>
+                        <p><span class="label">Direct:</span> <a href="tel:+912262365020">+022-62365020</a></p>
+                        <p><span class="label">Email:</span> <a
+                                href="mailto:Sales@jskbuildwell.com">Sales@jskbuildwell.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
         <section class="cta-section ">
             <div class="cta-banner">
@@ -254,7 +361,8 @@
                         Accordingly, JSK BUILDWELL LLP shall not be liable for any claims, losses, or damages arising
                         from or related to the business activities, operations, or affairs of any group company. Any
                         such claims, losses, or damages shall be pursued against the specific group company responsible
-                        for such activities, operations, or affairs. Pictures shown are for representational purposes only
+                        for such activities, operations, or affairs. Pictures shown are for representational purposes
+                        only
                     </p>
                 </div>
             </div>
