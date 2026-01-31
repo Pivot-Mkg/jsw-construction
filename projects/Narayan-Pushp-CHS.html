@@ -23,7 +23,52 @@
     <!-- AOS Animate On Scroll -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+     <style>
+        .villas-points {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1.5rem;
+        }
+
+        .villas-points li {
+            margin-bottom: 0.55rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-main);
+            background: rgba(193, 157, 96, 0.06);
+            border: 1px solid rgba(193, 157, 96, 0.16);
+            border-radius: 12px;
+            padding: 0.55rem 0.75rem;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+        }
+
+        .villas-points li svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+
+        .villas-points li:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-gold);
+            background: rgba(193, 157, 96, 0.1);
+            box-shadow: 0 8px 18px rgba(12, 19, 35, 0.08);
+        }
+
+        .villas-card {
+            backdrop-filter: blur(6px);
+            transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+        }
+
+        .villas-card:hover {
+            transform: translateY(-3px);
+        }
+    </style>
 </head>
+
 
 <body>
     <!-- NAVBAR -->
@@ -167,28 +212,29 @@
                     </h3>
 
                     <p class="about-text">
-                        Located in Mulund West, Mumbai, the project comprises a
-                        stilt + 8 storeys structure with two residential wings, A
-                        and B. It offers a total of 72 apartments, including 48 welldesigned 2 BHK homes and 24 spacious
-                        3 BHK residences. </p>
-
-                    <p class="about-text">
-                        Developed as a redevelopment of an original society of
-                        18 members—earlier a ground plus three-storey building
-                        constructed in 1982.
-                        <!-- —the project moved from agreement in
-                        June 2018 to completion in December 2023 over a period
-                        of 66 months.  -->
-                        The development is fully delivered, with the
-                        Occupation Certificate.
-                        <!-- received in January 2024. -->
+                        Developed as a redevelopment of an original society
+of 24 members-earlier a ground plus three-storey
+building constructed in 1982 and completed in
+December 2023.
                     </p>
+                    <p class="about-text">
+                        Well-designed 2 BHK homes and spacious 3 BHK
+residences.</p>
                     <!-- <p class="about-text">
                         Developed as part of Phase II of Siddeshwar Gardens.
                         Project timeline extended by 12 months due to COVID-19
                         construction halt (March 2020 - June 2021). Original
                         members received 30% larger apartments plus corpus fund
                         contribution as per agreement. </p> -->
+                       <h4>Project Highlights</h4>
+                    <div class="villas-card">
+                        <ul class="villas-points">
+                            <li><i data-lucide="zap"></i>Project Type: Residential Society Redevelopment</li>
+                            <li><i data-lucide="wifi"></i>Location: Mulund West</li>
+                            <li><i data-lucide="maximize"></i>Structure: Stilt + 8 Storeys (A+B Wing)</li>
+                             <li><i data-lucide="check-circle"></i>Occupation Certificate received</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- RIGHT IMAGE -->
@@ -340,7 +386,7 @@
                         Accordingly, JSK BUILDWELL LLP shall not be liable for any claims, losses, or damages arising
                         from or related to the business activities, operations, or affairs of any group company. Any
                         such claims, losses, or damages shall be pursued against the specific group company responsible
-                        for such activities, operations, or affairs.
+                        for such activities, operations, or affairs. Pictures shown are for representational purposes only
                     </p>
                 </div>
             </div>
