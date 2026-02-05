@@ -408,7 +408,7 @@ body.modal-open {
     pointer-events: auto;
     visibility: visible;
     /* Allow the overlay to scroll when modal content exceeds viewport */
-    overflow: auto;
+    overflow: hidden;
     overscroll-behavior: contain;
 }
 
@@ -420,8 +420,6 @@ body.modal-open {
     border-radius: 22px;
     /* Allow the modal itself to scroll if content is tall */
     overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
     position: relative;
     box-shadow: 0 28px 80px rgba(0, 0, 0, 0.26);
     display: flex;
@@ -627,6 +625,15 @@ body.modal-open {
 @media (max-width: 900px) {
     .sg-project-card img {
         height: 350px;
+    }
+
+    .project-modal-overlay.open {
+        overflow: auto;
+    }
+
+    .project-modal {
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
     }
 
     .project-modal {

@@ -758,6 +758,7 @@
         // Project modal interactions
         const modalTriggers = document.querySelectorAll('[data-project-modal]');
         const modalOverlays = document.querySelectorAll('.project-modal-overlay');
+        const isMobileView = () => window.matchMedia('(max-width: 900px)').matches;
 
         // Scroll lock during modal: prevent background page from scrolling
         const wheelHandler = (e) => {
@@ -778,6 +779,7 @@
         };
 
         const touchMoveHandler = (e) => {
+            if (!isMobileView()) return;
             if (!document.body.classList.contains('modal-open')) return;
             // If touch is inside the modal allow it, otherwise prevent default to lock background
             const isInsideModal = !!e.target.closest('.project-modal');
