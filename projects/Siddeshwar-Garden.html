@@ -785,9 +785,19 @@
             if (!isInsideModal) e.preventDefault();
         };
 
+        const overlayTouchHandler = (e) => {
+            if (!document.body.classList.contains('modal-open')) return;
+            if (!isMobileView()) return;
+            const isInsideModal = !!e.target.closest('.project-modal');
+            if (!isInsideModal) e.preventDefault();
+        };
+
         const addScrollLock = () => {
             if (isMobileView()) {
                 // Let native touch scrolling handle the modal content on mobile.
+                modalOverlays.forEach(overlay => {
+                    overlay.addEventListener('touchmove', overlayTouchHandler, { passive: false });
+                });
                 return;
             }
             window.addEventListener('wheel', wheelHandler, { passive: false });
@@ -797,6 +807,9 @@
         const removeScrollLock = () => {
             window.removeEventListener('wheel', wheelHandler, { passive: false });
             window.removeEventListener('touchmove', touchMoveHandler, { passive: false });
+            modalOverlays.forEach(overlay => {
+                overlay.removeEventListener('touchmove', overlayTouchHandler, { passive: false });
+            });
         };
 
         const toggleBodyScroll = () => {
