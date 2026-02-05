@@ -178,6 +178,10 @@ p {
   .nav-item .dropdown-menu {
     display: none !important;
   }
+
+  .mv-photo {
+  height: 290px !important;
+}
 }
 
 .mobile-toggle {
