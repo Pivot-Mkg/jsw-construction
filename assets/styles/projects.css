@@ -625,7 +625,7 @@ body.modal-open {
 
 @media (max-width: 900px) {
     .sg-project-card img {
-        height: 180px;
+        height: 350px;
     }
 
     .project-modal {
