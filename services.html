@@ -105,10 +105,10 @@
 
         @media (max-width: 768px) {
             .section-shell-container {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 3rem !important;
-            }
+    display: flex !important;
+    flex-direction: column-reverse !important;
+    gap: 3rem !important;
+}
 
         }
     </style>
@@ -359,13 +359,15 @@
             </div>
         </section>
 
-        <section class="section-shell">
+        <section class="commitment-section-shell">
             <div class="container">
+                <h3 class="dm-san commitment-heading" style="margin-bottom: 1rem; font-size: 1.8rem;">Our
+                            Commitment</h3>
                 <div class="section-shell-container"
                     style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: stretch;">
+                    
                     <div data-aos="fade-right">
-                        <h3 class="dm-san commitment-heading" style="margin-bottom: 1rem; font-size: 1.8rem;">Our
-                            Commitment</h3>
+                        
                         <div class="commitment-list"
                             style="display: flex; flex-direction: column; gap: 1.5rem;padding-top: 1rem;">
                             <div class="commitment-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
@@ -407,7 +409,7 @@
                     </div>
                 </div>
                 <div
-                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 4rem;">
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-top: 4rem;" class="section-shell-container">
                     <div data-aos="fade-right">
                         <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&q=80&w=800"
                             alt="Redevelopment" style="width: 100%; border-radius: 8px;">
