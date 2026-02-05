@@ -779,7 +779,6 @@
         };
 
         const touchMoveHandler = (e) => {
-            if (!isMobileView()) return;
             if (!document.body.classList.contains('modal-open')) return;
             // If touch is inside the modal allow it, otherwise prevent default to lock background
             const isInsideModal = !!e.target.closest('.project-modal');
@@ -787,6 +786,10 @@
         };
 
         const addScrollLock = () => {
+            if (isMobileView()) {
+                // Let native touch scrolling handle the modal content on mobile.
+                return;
+            }
             window.addEventListener('wheel', wheelHandler, { passive: false });
             window.addEventListener('touchmove', touchMoveHandler, { passive: false });
         };
