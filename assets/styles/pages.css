@@ -1784,6 +1784,7 @@ textarea.form-input {
 
   .mv-row {
     grid-template-columns: 1fr;
+    
   }
 
   .mv-grid {
@@ -1822,10 +1823,29 @@ textarea.form-input {
   }
 }
 
+@media (max-width: 991px) {
+
+  .mv-row {
+    grid-template-columns: 1fr;
+    display: flex;
+        flex-direction: column-reverse;
+        align-items: start; 
+  }
+
+  .swap {
+    grid-template-columns: 1fr;
+    display: flex;
+        flex-direction: column;
+        align-items: start; 
+        margin-top: 2.5rem;
+  }
+}
+
 @media (max-width: 640px) {
   h1 {
     font-size: 28px;
   }
+
 
   .container {
     width: 92vw;
