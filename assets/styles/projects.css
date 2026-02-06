@@ -408,7 +408,6 @@ body.modal-open {
     pointer-events: auto;
     visibility: visible;
     /* Allow the overlay to scroll when modal content exceeds viewport */
-    /* overflow: auto; */
     overflow: hidden;
     overscroll-behavior: contain;
 }
@@ -626,6 +625,15 @@ body.modal-open {
 @media (max-width: 900px) {
     .sg-project-card img {
         height: 350px;
+    }
+
+    .project-modal-overlay.open {
+        overflow: auto;
+    }
+
+    .project-modal {
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
     }
 
     .project-modal {
