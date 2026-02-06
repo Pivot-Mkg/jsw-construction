@@ -785,18 +785,40 @@
             if (!isInsideModal) e.preventDefault();
         };
 
+        let mobileTouchStartedInsideModal = false;
+        const isTargetInsideModal = (target) => {
+            const el = target instanceof Element ? target : target && target.parentElement;
+            return !!(el && el.closest('.project-modal'));
+        };
+
+        const overlayTouchStartHandler = (e) => {
+            if (!document.body.classList.contains('modal-open')) return;
+            if (!isMobileView()) return;
+            mobileTouchStartedInsideModal = isTargetInsideModal(e.target);
+            if (!mobileTouchStartedInsideModal) e.preventDefault();
+        };
+
         const overlayTouchHandler = (e) => {
             if (!document.body.classList.contains('modal-open')) return;
             if (!isMobileView()) return;
-            const isInsideModal = !!e.target.closest('.project-modal');
-            if (!isInsideModal) e.preventDefault();
+            // Keep background locked, but never cancel a gesture that started inside modal content.
+            if (!mobileTouchStartedInsideModal && !isTargetInsideModal(e.target)) {
+                e.preventDefault();
+            }
+        };
+
+        const overlayTouchEndHandler = () => {
+            mobileTouchStartedInsideModal = false;
         };
 
         const addScrollLock = () => {
             if (isMobileView()) {
                 // Let native touch scrolling handle the modal content on mobile.
                 modalOverlays.forEach(overlay => {
+                    overlay.addEventListener('touchstart', overlayTouchStartHandler, { passive: false });
                     overlay.addEventListener('touchmove', overlayTouchHandler, { passive: false });
+                    overlay.addEventListener('touchend', overlayTouchEndHandler, { passive: true });
+                    overlay.addEventListener('touchcancel', overlayTouchEndHandler, { passive: true });
                 });
                 return;
             }
@@ -808,8 +830,12 @@
             window.removeEventListener('wheel', wheelHandler, { passive: false });
             window.removeEventListener('touchmove', touchMoveHandler, { passive: false });
             modalOverlays.forEach(overlay => {
+                overlay.removeEventListener('touchstart', overlayTouchStartHandler, { passive: false });
                 overlay.removeEventListener('touchmove', overlayTouchHandler, { passive: false });
+                overlay.removeEventListener('touchend', overlayTouchEndHandler, { passive: true });
+                overlay.removeEventListener('touchcancel', overlayTouchEndHandler, { passive: true });
             });
+            mobileTouchStartedInsideModal = false;
         };
 
         const toggleBodyScroll = () => {
