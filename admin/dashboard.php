@@ -7,7 +7,44 @@ admin_require_login();
 
 $view = ($_GET['view'] ?? 'index') === 'contact' ? 'contact' : 'index';
 $search = trim((string) ($_GET['q'] ?? ''));
+$dateFrom = trim((string) ($_GET['date_from'] ?? ''));
+$dateTo = trim((string) ($_GET['date_to'] ?? ''));
 $error = '';
+
+if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateFrom)) {
+    $dateFrom = '';
+}
+if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $dateTo)) {
+    $dateTo = '';
+}
+
+function dashboard_query(array $overrides = []): string
+{
+    global $view, $search, $dateFrom, $dateTo;
+    $params = [
+        'view' => $view,
+    ];
+
+    if ($search !== '') {
+        $params['q'] = $search;
+    }
+    if ($dateFrom !== '') {
+        $params['date_from'] = $dateFrom;
+    }
+    if ($dateTo !== '') {
+        $params['date_to'] = $dateTo;
+    }
+
+    foreach ($overrides as $key => $value) {
+        if ($value === null || $value === '') {
+            unset($params[$key]);
+        } else {
+            $params[$key] = $value;
+        }
+    }
+
+    return 'dashboard.php?' . http_build_query($params);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = (string) ($_POST['action'] ?? '');
@@ -17,36 +54,133 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Invalid request token.';
     } elseif ($action === 'delete' && $id > 0) {
         admin_delete_submission($id);
-        $redirect = 'dashboard.php?view=' . urlencode($view) . '&deleted=1';
-        if ($search !== '') {
-            $redirect .= '&q=' . urlencode($search);
-        }
-        header('Location: ' . $redirect);
+        header('Location: ' . dashboard_query(['deleted' => '1']));
         exit;
+    } elseif ($action === 'import_csv') {
+        if (!isset($_FILES['import_file']) || (int) ($_FILES['import_file']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+            $error = 'Please choose a valid CSV file.';
+        } else {
+            $tmpPath = (string) ($_FILES['import_file']['tmp_name'] ?? '');
+            $handle = @fopen($tmpPath, 'r');
+            if (!$handle) {
+                $error = 'Unable to read uploaded CSV.';
+            } else {
+                $header = fgetcsv($handle);
+                if (!is_array($header)) {
+                    $error = 'CSV appears empty.';
+                } else {
+                    $normalizedHeader = array_map(static function ($col): string {
+                        return strtolower(trim((string) $col));
+                    }, $header);
+                    $map = array_flip($normalizedHeader);
+
+                    $required = ['name', 'email', 'phone'];
+                    if ($view === 'contact') {
+                        $required[] = 'city';
+                    }
+
+                    $missing = array_values(array_filter($required, static function ($field) use ($map): bool {
+                        return !array_key_exists($field, $map);
+                    }));
+
+                    if ($missing) {
+                        $error = 'Missing required CSV columns: ' . implode(', ', $missing);
+                    } else {
+                        $imported = 0;
+                        $skipped = 0;
+
+                        while (($row = fgetcsv($handle)) !== false) {
+                            $name = trim((string) ($row[$map['name']] ?? ''));
+                            $email = trim((string) ($row[$map['email']] ?? ''));
+                            $phone = trim((string) ($row[$map['phone']] ?? ''));
+                            $city = trim((string) ($row[$map['city']] ?? ''));
+                            $message = trim((string) ($row[$map['message']] ?? ''));
+
+                            if ($name === '' || $email === '' || $phone === '') {
+                                $skipped++;
+                                continue;
+                            }
+                            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                                $skipped++;
+                                continue;
+                            }
+                            if ($view === 'contact' && $city === '') {
+                                $skipped++;
+                                continue;
+                            }
+
+                            admin_insert_submission([
+                                'form_type' => $view,
+                                'name' => $name,
+                                'email' => $email,
+                                'phone' => $phone,
+                                'city' => $view === 'contact' ? $city : null,
+                                'message' => $view === 'contact' ? $message : null,
+                                'ip_address' => 'import',
+                                'user_agent' => 'csv import',
+                            ]);
+                            $imported++;
+                        }
+
+                        fclose($handle);
+                        header('Location: ' . dashboard_query([
+                            'imported' => (string) $imported,
+                            'skipped' => (string) $skipped,
+                        ]));
+                        exit;
+                    }
+                }
+                if (is_resource($handle)) {
+                    fclose($handle);
+                }
+            }
+        }
     }
 }
 
-$counts = admin_submission_counts();
 $rows = admin_submissions_by_type($view);
-$allCountForView = count($rows);
 
-if ($search !== '') {
-    $rows = array_values(array_filter($rows, static function (array $row) use ($search): bool {
-        $needle = strtolower($search);
-        $haystack = strtolower(implode(' ', [
-            (string) ($row['id'] ?? ''),
-            (string) ($row['name'] ?? ''),
-            (string) ($row['email'] ?? ''),
-            (string) ($row['phone'] ?? ''),
-            (string) ($row['city'] ?? ''),
-            (string) ($row['message'] ?? ''),
-            (string) ($row['created_at'] ?? ''),
-        ]));
-        return strpos($haystack, $needle) !== false;
+if ($search !== '' || $dateFrom !== '' || $dateTo !== '') {
+    $rows = array_values(array_filter($rows, static function (array $row) use ($search, $dateFrom, $dateTo): bool {
+        if ($dateFrom !== '' || $dateTo !== '') {
+            $created = (string) ($row['created_at'] ?? '');
+            $createdTs = strtotime($created);
+            if ($createdTs === false) {
+                return false;
+            }
+            if ($dateFrom !== '') {
+                $fromTs = strtotime($dateFrom . ' 00:00:00');
+                if ($fromTs !== false && $createdTs < $fromTs) {
+                    return false;
+                }
+            }
+            if ($dateTo !== '') {
+                $toTs = strtotime($dateTo . ' 23:59:59');
+                if ($toTs !== false && $createdTs > $toTs) {
+                    return false;
+                }
+            }
+        }
+
+        if ($search !== '') {
+            $needle = strtolower($search);
+            $haystack = strtolower(implode(' ', [
+                (string) ($row['id'] ?? ''),
+                (string) ($row['name'] ?? ''),
+                (string) ($row['email'] ?? ''),
+                (string) ($row['phone'] ?? ''),
+                (string) ($row['city'] ?? ''),
+                (string) ($row['message'] ?? ''),
+                (string) ($row['created_at'] ?? ''),
+            ]));
+            if (strpos($haystack, $needle) === false) {
+                return false;
+            }
+        }
+
+        return true;
     }));
 }
-
-$filteredCount = count($rows);
 
 function initials_from_name(string $name): string
 {
@@ -78,9 +212,7 @@ function initials_from_name(string $name): string
                         secondary: "#1E293B",
                         "sidebar-light": "#F8F8F8",
                         "background-light": "#FAF9F6",
-                        "surface-light": "#FFFFFF",
-                        "gold-accent": "#C19D60",
-                        "text-dark": "#334155"
+                        "surface-light": "#FFFFFF"
                     },
                     fontFamily: {
                         sans: ["Inter", "sans-serif"]
@@ -92,34 +224,39 @@ function initials_from_name(string $name): string
 </head>
 <body class="bg-background-light text-slate-800 font-sans antialiased">
 <div class="flex h-screen overflow-hidden">
-    <aside class="hidden md:flex flex-col w-64 bg-sidebar-light border-r border-slate-200 shadow-xl">
-        <div class="p-6 flex items-center justify-center border-b border-slate-200">
-            <div class="flex flex-col items-center">
-                <span class="material-icons text-primary text-4xl mb-2">apartment</span>
-                <h1 class="text-xl font-bold tracking-wide text-secondary">JSK Buildwell</h1>
-                <span class="text-xs text-primary uppercase tracking-widest font-medium">Admin Panel</span>
+    <aside id="sidebar" class="hidden md:flex flex-col w-64 bg-sidebar-light border-r border-slate-200 shadow-xl transition-all duration-300">
+        <div class="p-4 flex items-center justify-between border-b border-slate-200">
+            <div class="flex items-center gap-3 min-w-0">
+                <span class="material-icons text-primary text-3xl">apartment</span>
+                <div class="sidebar-text">
+                    <h1 class="text-base font-bold tracking-wide text-secondary leading-tight">JSK Buildwell</h1>
+                    <span class="text-[10px] text-primary uppercase tracking-widest font-medium">Admin Panel</span>
+                </div>
             </div>
+            <button id="sidebarToggle" type="button" class="rounded-md p-1.5 text-slate-500 hover:text-primary hover:bg-white border border-slate-200">
+                <span id="sidebarToggleIcon" class="material-icons text-base">chevron_left</span>
+            </button>
         </div>
+
         <nav class="flex-1 py-6 space-y-2 px-3">
-            <a class="flex items-center px-4 py-3 text-slate-600 hover:bg-slate-100 hover:text-primary rounded-lg transition-colors group" href="dashboard.php?view=<?= admin_e($view) ?><?= $search !== '' ? '&q=' . urlencode($search) : '' ?>">
-                <span class="material-icons text-slate-400 group-hover:text-primary mr-3">dashboard</span>
-                <span class="font-medium">Dashboard</span>
+            <a class="sidebar-link flex items-center px-4 py-3 text-slate-600 hover:bg-slate-100 hover:text-primary rounded-lg transition-colors group" href="<?= admin_e(dashboard_query()) ?>">
+                <span class="sidebar-icon material-icons text-slate-400 group-hover:text-primary mr-3">dashboard</span>
+                <span class="sidebar-text font-medium">Dashboard</span>
             </a>
-            <a class="flex items-center px-4 py-3 <?= $view === 'index' ? 'bg-white text-primary shadow-sm ring-1 ring-primary/20' : 'text-slate-600 hover:bg-slate-100 hover:text-primary' ?> rounded-lg transition-colors" href="dashboard.php?view=index<?= $search !== '' ? '&q=' . urlencode($search) : '' ?>">
-                <span class="material-icons <?= $view === 'index' ? 'text-primary' : 'text-slate-400' ?> mr-3">table_chart</span>
-                <span class="font-medium">Index Forms</span>
-                <span class="ml-auto <?= $view === 'index' ? 'bg-primary text-white' : 'bg-slate-200 text-slate-600' ?> text-xs font-bold px-2 py-0.5 rounded-full"><?= (int) $counts['index'] ?></span>
+            <a class="sidebar-link flex items-center px-4 py-3 <?= $view === 'index' ? 'bg-white text-primary shadow-sm ring-1 ring-primary/20' : 'text-slate-600 hover:bg-slate-100 hover:text-primary' ?> rounded-lg transition-colors" href="<?= admin_e(dashboard_query(['view' => 'index'])) ?>">
+                <span class="sidebar-icon material-icons <?= $view === 'index' ? 'text-primary' : 'text-slate-400' ?> mr-3">table_chart</span>
+                <span class="sidebar-text font-medium">Index Forms</span>
             </a>
-            <a class="flex items-center px-4 py-3 <?= $view === 'contact' ? 'bg-white text-primary shadow-sm ring-1 ring-primary/20' : 'text-slate-600 hover:bg-slate-100 hover:text-primary' ?> rounded-lg transition-colors" href="dashboard.php?view=contact<?= $search !== '' ? '&q=' . urlencode($search) : '' ?>">
-                <span class="material-icons <?= $view === 'contact' ? 'text-primary' : 'text-slate-400' ?> mr-3">contact_mail</span>
-                <span class="font-medium">Contact Forms</span>
-                <span class="ml-auto <?= $view === 'contact' ? 'bg-primary text-white' : 'bg-slate-200 text-slate-600' ?> text-xs font-bold px-2 py-0.5 rounded-full"><?= (int) $counts['contact'] ?></span>
+            <a class="sidebar-link flex items-center px-4 py-3 <?= $view === 'contact' ? 'bg-white text-primary shadow-sm ring-1 ring-primary/20' : 'text-slate-600 hover:bg-slate-100 hover:text-primary' ?> rounded-lg transition-colors" href="<?= admin_e(dashboard_query(['view' => 'contact'])) ?>">
+                <span class="sidebar-icon material-icons <?= $view === 'contact' ? 'text-primary' : 'text-slate-400' ?> mr-3">contact_mail</span>
+                <span class="sidebar-text font-medium">Contact Forms</span>
             </a>
         </nav>
+
         <div class="p-4 border-t border-slate-200">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold border border-primary/20">A</div>
-                <div class="flex-1 min-w-0">
+                <div class="sidebar-text flex-1 min-w-0">
                     <p class="text-sm font-medium text-secondary truncate">aakash</p>
                     <p class="text-xs text-slate-500 truncate"><?= admin_e((string) $_SESSION['admin_email']) ?></p>
                 </div>
@@ -141,12 +278,6 @@ function initials_from_name(string $name): string
                 <h2 class="text-2xl font-bold text-secondary"><?= $view === 'index' ? 'Index Forms' : 'Contact Forms' ?></h2>
                 <p class="text-sm text-slate-500 mt-1">Manage submission entries from your website forms.</p>
             </div>
-            <div class="flex items-center gap-4">
-                <a class="text-sm font-medium text-secondary hover:text-primary transition-colors flex items-center gap-1" href="logout.php">
-                    Logout
-                    <span class="material-icons text-sm">logout</span>
-                </a>
-            </div>
         </header>
 
         <main class="flex-1 p-6 md:p-8 bg-background-light">
@@ -159,26 +290,49 @@ function initials_from_name(string $name): string
             <?php if (isset($_GET['updated'])): ?>
                 <div class="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">Entry updated.</div>
             <?php endif; ?>
-
-            <div class="mb-8 flex flex-wrap gap-3">
-                <a class="px-6 py-2.5 rounded-full <?= $view === 'index' ? 'bg-primary text-white' : 'bg-white text-slate-600 border border-slate-200 hover:border-primary/50 hover:text-primary' ?> font-semibold shadow-sm transition-all" href="dashboard.php?view=index<?= $search !== '' ? '&q=' . urlencode($search) : '' ?>">
-                    Index Form (<?= (int) $counts['index'] ?>)
-                </a>
-                <a class="px-6 py-2.5 rounded-full <?= $view === 'contact' ? 'bg-primary text-white' : 'bg-white text-slate-600 border border-slate-200 hover:border-primary/50 hover:text-primary' ?> font-semibold shadow-sm transition-all" href="dashboard.php?view=contact<?= $search !== '' ? '&q=' . urlencode($search) : '' ?>">
-                    Contact Form (<?= (int) $counts['contact'] ?>)
-                </a>
-            </div>
+            <?php if (isset($_GET['imported'])): ?>
+                <div class="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+                    Imported <?= (int) $_GET['imported'] ?> row(s)<?= isset($_GET['skipped']) ? '; skipped ' . (int) $_GET['skipped'] . ' invalid row(s).' : '.' ?>
+                </div>
+            <?php endif; ?>
 
             <div class="bg-surface-light rounded-xl shadow-lg border border-slate-100 overflow-hidden">
-                <div class="px-6 py-4 border-b border-slate-100 flex flex-wrap justify-between items-center gap-3 bg-slate-50/30">
-                    <form class="relative" method="get">
+                <div class="px-6 py-4 border-b border-slate-100 bg-slate-50/30 flex flex-wrap justify-between items-end gap-3">
+                    <form class="flex flex-wrap items-end gap-3" method="get">
                         <input type="hidden" name="view" value="<?= admin_e($view) ?>">
-                        <span class="material-icons absolute left-3 top-2.5 text-primary text-sm">search</span>
-                        <input class="pl-9 pr-4 py-2 text-sm border-slate-200 rounded-lg bg-white focus:ring-primary focus:border-primary w-72 shadow-sm" name="q" placeholder="Search entries..." type="text" value="<?= admin_e($search) ?>"/>
+                        <div class="relative">
+                            <span class="material-icons absolute left-3 top-2.5 text-primary text-sm">search</span>
+                            <input class="pl-9 pr-4 py-2 text-sm border-slate-200 rounded-lg bg-white focus:ring-primary focus:border-primary w-72 shadow-sm" name="q" placeholder="Search entries..." type="text" value="<?= admin_e($search) ?>"/>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-500 mb-1">From</label>
+                            <input class="py-2 px-3 text-sm border-slate-200 rounded-lg bg-white focus:ring-primary focus:border-primary shadow-sm" name="date_from" type="date" value="<?= admin_e($dateFrom) ?>">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-500 mb-1">To</label>
+                            <input class="py-2 px-3 text-sm border-slate-200 rounded-lg bg-white focus:ring-primary focus:border-primary shadow-sm" name="date_to" type="date" value="<?= admin_e($dateTo) ?>">
+                        </div>
+                        <button class="inline-flex items-center px-4 py-2 border border-primary rounded-lg text-primary bg-white hover:bg-primary hover:text-white transition-colors text-sm font-medium shadow-sm" type="submit">
+                            <span class="material-icons text-sm mr-1">filter_alt</span>
+                            Apply
+                        </button>
+                        <a class="inline-flex items-center px-4 py-2 border border-slate-200 rounded-lg text-slate-600 bg-white hover:border-primary/40 hover:text-primary transition-colors text-sm font-medium shadow-sm" href="<?= admin_e(dashboard_query(['q' => '', 'date_from' => '', 'date_to' => ''])) ?>">
+                            Clear
+                        </a>
                     </form>
-                    <div class="text-xs text-slate-500">
-                        Showing <span class="font-semibold text-slate-800"><?= (int) $filteredCount ?></span> of <span class="font-semibold text-slate-800"><?= (int) $allCountForView ?></span> <?= $view === 'index' ? 'index' : 'contact' ?> submissions
-                    </div>
+                    <form class="flex items-end gap-2" method="post" enctype="multipart/form-data">
+                        <?= csrf_input() ?>
+                        <input type="hidden" name="action" value="import_csv">
+                        <label class="inline-flex items-center px-3 py-2 border border-slate-200 rounded-lg text-slate-600 bg-white hover:border-primary/40 hover:text-primary transition-colors text-sm font-medium shadow-sm cursor-pointer">
+                            <span class="material-icons text-sm mr-1">upload_file</span>
+                            Choose CSV
+                            <input type="file" name="import_file" accept=".csv,text/csv" class="hidden" required>
+                        </label>
+                        <button class="inline-flex items-center px-4 py-2 border border-primary rounded-lg text-primary bg-white hover:bg-primary hover:text-white transition-colors text-sm font-medium shadow-sm" type="submit">
+                            <span class="material-icons text-sm mr-1">file_upload</span>
+                            Import <?= $view === 'index' ? 'Index' : 'Contact' ?>
+                        </button>
+                    </form>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -268,17 +422,51 @@ function initials_from_name(string $name): string
                         </tbody>
                     </table>
                 </div>
-
-                <div class="px-6 py-4 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between">
-                    <span class="text-xs text-slate-500">
-                        Showing <span class="font-medium text-slate-900"><?= $filteredCount > 0 ? 1 : 0 ?></span>
-                        to <span class="font-medium text-slate-900"><?= (int) $filteredCount ?></span>
-                        of <span class="font-medium text-slate-900"><?= (int) $allCountForView ?></span> results
-                    </span>
-                </div>
             </div>
         </main>
     </div>
 </div>
+
+<script>
+    (function () {
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('sidebarToggle');
+        const toggleIcon = document.getElementById('sidebarToggleIcon');
+        const key = 'jsk_admin_sidebar_collapsed';
+
+        if (!sidebar || !toggleBtn || !toggleIcon) {
+            return;
+        }
+
+        function setCollapsed(collapsed) {
+            sidebar.classList.toggle('w-64', !collapsed);
+            sidebar.classList.toggle('w-20', collapsed);
+
+            document.querySelectorAll('.sidebar-text').forEach((el) => {
+                el.classList.toggle('hidden', collapsed);
+            });
+
+            document.querySelectorAll('.sidebar-link').forEach((el) => {
+                el.classList.toggle('justify-center', collapsed);
+            });
+
+            document.querySelectorAll('.sidebar-icon').forEach((el) => {
+                el.classList.toggle('mr-3', !collapsed);
+                el.classList.toggle('mr-0', collapsed);
+            });
+
+            toggleIcon.textContent = collapsed ? 'chevron_right' : 'chevron_left';
+            localStorage.setItem(key, collapsed ? '1' : '0');
+        }
+
+        const initial = localStorage.getItem(key) === '1';
+        setCollapsed(initial);
+
+        toggleBtn.addEventListener('click', function () {
+            const collapsed = sidebar.classList.contains('w-20');
+            setCollapsed(!collapsed);
+        });
+    })();
+</script>
 </body>
 </html>
