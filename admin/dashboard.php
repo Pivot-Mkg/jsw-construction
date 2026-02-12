@@ -56,85 +56,6 @@
         admin_delete_submission($id);
         header('Location: ' . dashboard_query(['deleted' => '1']));
         exit;
-    } elseif ($action === 'import_csv') {
-        if (! isset($_FILES['import_file']) || (int) ($_FILES['import_file']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
-            $error = 'Please choose a valid CSV file.';
-        } else {
-            $tmpPath = (string) ($_FILES['import_file']['tmp_name'] ?? '');
-            $handle  = @fopen($tmpPath, 'r');
-            if (! $handle) {
-                $error = 'Unable to read uploaded CSV.';
-            } else {
-                $header = fgetcsv($handle);
-                if (! is_array($header)) {
-                    $error = 'CSV appears empty.';
-                } else {
-                    $normalizedHeader = array_map(static function ($col): string {
-                        return strtolower(trim((string) $col));
-                    }, $header);
-                    $map = array_flip($normalizedHeader);
-
-                    $required = ['name', 'email', 'phone'];
-                    if ($view === 'contact') {
-                        $required[] = 'city';
-                    }
-
-                    $missing = array_values(array_filter($required, static function ($field) use ($map): bool {
-                        return ! array_key_exists($field, $map);
-                    }));
-
-                    if ($missing) {
-                        $error = 'Missing required CSV columns: ' . implode(', ', $missing);
-                    } else {
-                        $imported = 0;
-                        $skipped  = 0;
-
-                        while (($row = fgetcsv($handle)) !== false) {
-                            $name    = trim((string) ($row[$map['name']] ?? ''));
-                            $email   = trim((string) ($row[$map['email']] ?? ''));
-                            $phone   = trim((string) ($row[$map['phone']] ?? ''));
-                            $city    = trim((string) ($row[$map['city']] ?? ''));
-                            $message = trim((string) ($row[$map['message']] ?? ''));
-
-                            if ($name === '' || $email === '' || $phone === '') {
-                                $skipped++;
-                                continue;
-                            }
-                            if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                                $skipped++;
-                                continue;
-                            }
-                            if ($view === 'contact' && $city === '') {
-                                $skipped++;
-                                continue;
-                            }
-
-                            admin_insert_submission([
-                                'form_type'  => $view,
-                                'name'       => $name,
-                                'email'      => $email,
-                                'phone'      => $phone,
-                                'city'       => $view === 'contact' ? $city : null,
-                                'message'    => $view === 'contact' ? $message : null,
-                                'ip_address' => 'import',
-                                'user_agent' => 'csv import',
-                            ]);
-                            $imported++;
-                        }
-
-                        fclose($handle);
-                        header('Location: ' . dashboard_query([
-                            'imported' => (string) $imported,
-                            'skipped'  => (string) $skipped,
-                        ]));
-                        exit;
-                    }
-                }
-                if (is_resource($handle)) {
-                    fclose($handle);
-                }
-            }
-        }
     }
     }
 
@@ -180,6 +101,40 @@
 
         return true;
     }));
+    }
+
+    if (($_GET['export'] ?? '') === 'csv') {
+    $filename = 'jsk-' . $view . '-submissions-' . date('Ymd-His') . '.csv';
+    header('Content-Type: text/csv; charset=UTF-8');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    $out = fopen('php://output', 'w');
+
+    if ($view === 'contact') {
+        fputcsv($out, ['name', 'email', 'phone', 'city', 'message', 'created_at']);
+        foreach ($rows as $row) {
+            fputcsv($out, [
+                (string) ($row['name'] ?? ''),
+                (string) ($row['email'] ?? ''),
+                (string) ($row['phone'] ?? ''),
+                (string) ($row['city'] ?? ''),
+                (string) ($row['message'] ?? ''),
+                (string) ($row['created_at'] ?? ''),
+            ]);
+        }
+    } else {
+        fputcsv($out, ['name', 'email', 'phone', 'created_at']);
+        foreach ($rows as $row) {
+            fputcsv($out, [
+                (string) ($row['name'] ?? ''),
+                (string) ($row['email'] ?? ''),
+                (string) ($row['phone'] ?? ''),
+                (string) ($row['created_at'] ?? ''),
+            ]);
+        }
+    }
+
+    fclose($out);
+    exit;
     }
 
     function initials_from_name(string $name): string
@@ -318,12 +273,6 @@
                 <div class="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
                     Entry updated.</div>
                 <?php endif; ?>
-                <?php if (isset($_GET['imported'])): ?>
-                <div class="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
-                    Imported <?php echo (int) $_GET['imported'] ?>
-                    row(s)<?php echo isset($_GET['skipped']) ? '; skipped ' . (int) $_GET['skipped'] . ' invalid row(s).' : '.' ?>
-                </div>
-                <?php endif; ?>
 
                 <div class="bg-surface-light rounded-xl border border-slate-100 overflow-hidden">
                     <div
@@ -361,19 +310,11 @@
                                 Clear
                             </a>
                         </form>
-                        <form id="csvImportForm" class="flex items-end gap-2" method="post"
-                            enctype="multipart/form-data">
-                            <?php echo csrf_input() ?>
-                            <input type="hidden" name="action" value="import_csv">
-                            <input id="csvImportInput" type="file" name="import_file" accept=".csv,text/csv"
-                                class="hidden" required>
-                            <button id="csvImportTrigger"
-                                class="inline-flex items-center px-4 py-2 border border-primary rounded-lg text-primary bg-white hover:bg-primary hover:text-white transition-colors text-sm font-medium shadow-sm"
-                                type="button">
-                                <span class="material-icons text-sm mr-1">file_upload</span>
-                                Import CSV
-                            </button>
-                        </form>
+                        <a class="inline-flex items-center justify-center w-10 h-10 border border-primary rounded-lg text-primary bg-white hover:bg-primary hover:text-white transition-colors shadow-sm"
+                            href="<?php echo admin_e(dashboard_query(['export' => 'csv'])) ?>"
+                            title="Export CSV" aria-label="Export CSV">
+                            <span class="material-icons text-[18px]">file_download</span>
+                        </a>
                     </div>
 
                     <div class="overflow-x-auto">
@@ -512,10 +453,13 @@
             if (sidebarHeader) {
                 sidebarHeader.classList.toggle('p-4', !collapsed);
                 sidebarHeader.classList.toggle('p-2', collapsed);
+                sidebarHeader.classList.toggle('justify-between', !collapsed);
+                sidebarHeader.classList.toggle('justify-center', collapsed);
             }
             if (sidebarBrandWrap) {
                 sidebarBrandWrap.classList.toggle('gap-3', !collapsed);
                 sidebarBrandWrap.classList.toggle('gap-1', collapsed);
+                sidebarBrandWrap.classList.toggle('hidden', collapsed);
             }
 
             toggleIcon.textContent = collapsed ? 'chevron_right' : 'chevron_left';
@@ -526,7 +470,7 @@
         setCollapsed(initial);
 
         toggleBtn.addEventListener('click', function() {
-            const collapsed = sidebar.classList.contains('w-20');
+            const collapsed = sidebar.classList.contains('w-24');
             setCollapsed(!collapsed);
         });
     })();
@@ -544,20 +488,6 @@
             });
         });
 
-        var importForm = document.getElementById('csvImportForm');
-        var importInput = document.getElementById('csvImportInput');
-        var importTrigger = document.getElementById('csvImportTrigger');
-
-        if (importForm && importInput && importTrigger) {
-            importTrigger.addEventListener('click', function() {
-                importInput.click();
-            });
-            importInput.addEventListener('change', function() {
-                if (importInput.files && importInput.files.length > 0) {
-                    importForm.submit();
-                }
-            });
-        }
     })();
     </script>
 </body>
