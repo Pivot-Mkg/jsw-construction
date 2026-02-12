@@ -21,6 +21,6 @@ jobs:
           lftp -f "
           set ftp:ssl-allow no  # Disable SSL for FTP
           open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}:21  # Specify custom port if needed
-          mirror -R ./ /  # Ensure this path matches your GoDaddy FTP structure
+          mirror -R --exclude-glob .git* --exclude-glob .github* --exclude-glob admin/data/*.sqlite --exclude-glob admin/data/*.db --exclude-glob admin/data/sessions/* --exclude-glob *.log ./ /  # Ensure this path matches your GoDaddy FTP structure
           quit
           "

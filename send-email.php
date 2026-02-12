@@ -49,13 +49,39 @@ try {
 $to = 'aakash@pivotmkg.com';
 $subject = 'New Private Tour Request - JSK Buildwell';
 
-$messageBody = "<html><body>";
-$messageBody .= "<h2>New Private Tour Request</h2>";
-$messageBody .= "<p><strong>Name:</strong> " . htmlspecialchars($name) . "</p>";
-$messageBody .= "<p><strong>Email:</strong> " . htmlspecialchars($email) . "</p>";
-$messageBody .= "<p><strong>Phone:</strong> " . htmlspecialchars($phone) . "</p>";
-$messageBody .= "<p><strong>Submitted:</strong> " . date('Y-m-d H:i:s') . "</p>";
-$messageBody .= "</body></html>";
+$safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+$safeEmail = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+$safePhone = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
+$submittedAt = date('Y-m-d H:i:s');
+
+$messageBody = "
+<!doctype html>
+<html>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+</head>
+<body style='margin:0;padding:24px;background:#f7f4ee;font-family:Arial,sans-serif;color:#1f2937;'>
+  <table role='presentation' cellpadding='0' cellspacing='0' width='100%' style='max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #eadfcf;border-radius:14px;overflow:hidden;'>
+    <tr>
+      <td style='background:#c19d60;color:#ffffff;padding:18px 22px;font-size:20px;font-weight:700;'>
+        JSK Buildwell - Private Tour Request
+      </td>
+    </tr>
+    <tr>
+      <td style='padding:22px;'>
+        <p style='margin:0 0 16px;font-size:14px;color:#6b7280;'>A new private tour request has been submitted.</p>
+        <table role='presentation' cellpadding='0' cellspacing='0' width='100%' style='border-collapse:collapse;'>
+          <tr><td style='padding:10px 0;border-top:1px solid #f1f1f1;width:130px;color:#6b7280;font-size:13px;'>Name</td><td style='padding:10px 0;border-top:1px solid #f1f1f1;font-size:14px;font-weight:600;'>$safeName</td></tr>
+          <tr><td style='padding:10px 0;border-top:1px solid #f1f1f1;color:#6b7280;font-size:13px;'>Email</td><td style='padding:10px 0;border-top:1px solid #f1f1f1;font-size:14px;font-weight:600;'>$safeEmail</td></tr>
+          <tr><td style='padding:10px 0;border-top:1px solid #f1f1f1;color:#6b7280;font-size:13px;'>Phone</td><td style='padding:10px 0;border-top:1px solid #f1f1f1;font-size:14px;font-weight:600;'>$safePhone</td></tr>
+          <tr><td style='padding:10px 0;border-top:1px solid #f1f1f1;color:#6b7280;font-size:13px;'>Submitted</td><td style='padding:10px 0;border-top:1px solid #f1f1f1;font-size:14px;font-weight:600;'>$submittedAt</td></tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>";
 
 $headers = "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";

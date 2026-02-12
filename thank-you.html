@@ -6,254 +6,392 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <title>Thank You | JSK Buildwell</title>
+    <meta name="description" content="Thank you for contacting JSK Buildwell. Our team will reach out shortly.">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="./assets/js/navigation.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles/pages.css">
+    <link rel="stylesheet" href="./assets/styles/pages.css">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: #f6f4ef;
+            background: #f4f1eb;
             color: #211c14;
-            min-height: 100vh;
-        }
-
-        .thank-you-wrapper {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 3.5rem 1.5rem;
-            background:
-                radial-gradient(1200px 1200px at 15% 10%, rgba(193, 157, 96, 0.18), transparent 55%),
-                radial-gradient(900px 900px at 85% 20%, rgba(68, 55, 35, 0.08), transparent 45%),
-                linear-gradient(135deg, #f8f6f1 0%, #f1ede4 100%);
         }
 
         .thank-shell {
-            width: min(1100px, 100%);
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 9.5rem 1.5rem 5rem;
+        }
+
+        .thank-grid {
             display: grid;
-            gap: 2rem;
+            grid-template-columns: 1.3fr 0.8fr;
+            gap: 3.5rem;
+            align-items: start;
         }
 
-        .eyebrow {
-            font-size: 0.9rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: #8b7a61;
-        }
-
-        .headline {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .thank-left {
+            padding-top: 1rem;
         }
 
         .headline-row {
             display: flex;
             align-items: center;
             gap: 1rem;
+            margin-bottom: 1.1rem;
         }
 
         .checkmark {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            border: 1px solid rgba(193, 157, 96, 0.45);
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            border: 1px solid rgba(193, 157, 96, 0.4);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             color: #c19d60;
+            flex-shrink: 0;
         }
 
-        .headline h1 {
+        .thank-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.4rem, 4vw, 3rem);
-            line-height: 1.1;
-            color: #1c1812;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            line-height: 0.95;
+            margin: 0;
+            color: #1e1b16;
+            /* max-width: 12ch; */
         }
 
-        .lede {
-            font-size: 1.1rem;
-            color: #4f4a42;
-            max-width: 48ch;
+        .thank-copy {
+            margin: 1.4rem 0 2rem;
+            color: #555047;
+            font-size: 1.05rem;
             line-height: 1.7;
+            max-width: 56ch;
         }
 
         .meta-grid {
+            border-top: 1px solid #e3dccf;
+            padding-top: 1.2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 1rem;
-        }
-
-        .meta-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-            padding: 0.35rem 0;
-            border-bottom: 1px solid #e2d8c9;
+            max-width: 730px;
         }
 
         .meta-label {
-            font-size: 0.9rem;
-            color: #7a7367;
-            letter-spacing: 0.04em;
+            display: block;
+            font-size: 0.73rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #918a7f;
+            margin-bottom: 0.24rem;
+            font-weight: 600;
         }
 
         .meta-value {
+            font-size: 1.12rem;
+            color: #26211a;
             font-weight: 600;
-            color: #2d271d;
+            line-height: 1.35;
         }
 
-        .next-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            align-items: start;
+        .footnote {
+            margin-top: 2rem;
+            color: #8e8679;
+            font-size: 0.94rem;
+            font-style: italic;
         }
 
-        .next-steps h3 {
-            font-size: 1rem;
-            letter-spacing: 0.08em;
+        .thank-card {
+            background: #f8f5ef;
+            border: 1px solid #ece3d5;
+            border-radius: 10px;
+            padding: 1.8rem 1.6rem;
+        }
+
+        .card-eyebrow {
+            margin: 0 0 0.9rem;
             text-transform: uppercase;
-            color: #8b7a61;
+            letter-spacing: 0.13em;
+            font-size: 0.78rem;
+            color: #c19d60;
+            font-weight: 700;
         }
 
         .steps-list {
+            margin: 0;
+            padding: 0;
             list-style: none;
             display: grid;
-            gap: 0.75rem;
-            color: #403a30;
+            gap: 1rem;
         }
 
         .steps-list li {
             display: flex;
             align-items: flex-start;
-            gap: 0.6rem;
+            gap: 0.65rem;
+            color: #4b453b;
+            font-size: 1rem;
+            line-height: 1.65;
         }
 
         .steps-list i {
-            color: #c19d60;
-            margin-top: 0.1rem;
+            color: #2f2922;
+            margin-top: 0.18rem;
+            flex-shrink: 0;
         }
 
-        .links {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            align-items: center;
+        .card-links {
+            margin-top: 1.5rem;
+            padding-top: 1.1rem;
+            border-top: 1px dashed #dfd6c8;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.6rem;
         }
 
-        .text-link {
+        .card-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            color: #2d271d;
+            gap: 0.35rem;
             text-decoration: none;
-            border-bottom: 1px solid transparent;
-            padding-bottom: 0.25rem;
-            transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-        }
-
-        .text-link:hover {
-            color: #c19d60;
-            border-color: #c19d60;
-            transform: translateY(-2px);
-        }
-
-        .footnote {
+            color: #2f2a23;
+            font-weight: 600;
             font-size: 0.95rem;
-            color: #7a7367;
+            transition: color 0.25s ease, transform 0.25s ease;
         }
 
-        @media (max-width: 720px) {
-            .thank-you-wrapper {
-                padding: 3rem 1.25rem;
+        .card-link i {
+            width: 16px;
+            height: 16px;
+        }
+
+        .card-link:hover {
+            color: #c19d60;
+            transform: translateX(2px);
+        }
+
+        @media (max-width: 980px) {
+            .thank-shell {
+                padding-top: 8.5rem;
             }
 
-            .headline h1 {
-                font-size: clamp(2.1rem, 6vw, 2.6rem);
+            .thank-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
-            .links {
-                flex-direction: column;
-                align-items: flex-start;
+            .thank-title {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-links {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 
-<body>
-    <div class="thank-you-wrapper">
-        <div class="thank-shell">
-            <div class="headline">
-                <div class="eyebrow">Message received</div>
-                <div class="headline-row">
-                    <div class="checkmark">
-                        <i data-lucide="check" width="28" height="28"></i>
+<body class="loaded">
+    <header class="main-header">
+        <button id="menu-btn" class="mobile-toggle">
+            <i data-lucide="menu" width="24" height="24"></i>
+        </button>
+
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link"><span>Home</span><span>Home</span></a>
+
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>Projects</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
+                </div>
+                <div class="nav-dropdown-content grid-2">
+                    <div class="category">
+                        <a href="./projects/Siddeshwar-Garden.html" class="category-title">Siddeshwar Gardens</a>
                     </div>
-                    <h1>Thank you for reaching out.</h1>
-                </div>
-                <p class="lede">Our concierge team has your details. Expect a response within one business day to plan
-                    the next conversation and any site visits you prefer.</p>
-            </div>
-
-            <div class="meta-grid">
-                <div class="meta-item">
-                    <span class="meta-label">Response window</span>
-                    <span class="meta-value">Under 24 hours</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Direct line</span>
-                    <span class="meta-value">+91 98765 43210</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Concierge desk</span>
-                    <span class="meta-value">concierge@jskbuildwell.com</span>
+                    <div class="category">
+                        <a href="./projects/Casa-Benau.html" class="category-title">CASA BENAU 94 &amp; 95</a>
+                    </div>
+                    <div class="category">
+                        <a href="./projects/Glacia.html" class="category-title">Glacia</a>
+                    </div>
+                    <div class="category">
+                        <a href="./projects/Narayan-Pushp-CHS.html" class="category-title">Narayan Pushp CHS</a>
+                    </div>
+                    <div class="category">
+                        <a href="./projects/Om-Satyam-Niwas-CHS.html" class="category-title">Om Satyam Niwas CHS</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="next-steps">
-                <div>
-                    <h3>While you wait</h3>
-                    <ul class="steps-list">
-                        <li><i data-lucide="map-pin" width="18" height="18"></i>Arrange a walkthrough in Mumbai, Pune,
-                            or Alibaug on your schedule.</li>
-                        <li><i data-lucide="folder-open" width="18" height="18"></i>Browse ready-to-move residences and
-                            current builds.</li>
-                        <li><i data-lucide="phone" width="18" height="18"></i>Prefer a call now? Our team can ring you
-                            back promptly.</li>
-                    </ul>
+            <a href="./services.html" class="nav-link"><span>Services</span><span>Services</span></a>
+
+            <div class="nav-dropdown">
+                <div class="nav-dropdown-toggle">
+                    <span>About Us</span>
+                    <i data-lucide="chevron-down" width="14" height="14"></i>
                 </div>
-                <div class="links">
-                    <a href="index.html" class="text-link">
-                        <i data-lucide="arrow-left" width="18" height="18"></i>Back to home
-                    </a>
-                    <a href="projects.html" class="text-link">
-                        <i data-lucide="arrow-up-right" width="18" height="18"></i>Explore projects
-                    </a>
-                    <a href="contact.html" class="text-link">
-                        <i data-lucide="phone-call" width="18" height="18"></i>Book a call
-                    </a>
+                <div class="nav-dropdown-content">
+                    <a href="about.html#company-profile">Company Profile</a>
+                    <a href="about.html#leadership-team">Leadership Team</a>
+                    <a href="about.html#vision-mission">Vision & Mission</a>
                 </div>
             </div>
 
-            <p class="footnote">You will also receive a confirmation email with this note for your records.</p>
-        </div>
+            <a href="contact.html" class="nav-cta">Get a Quote</a>
+        </nav>
+
+        <a href="index.html" class="logo-link">
+            <img src="./assets/images/logo.png" alt="" srcset="">
+        </a>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu-overlay">
+        <a href="./index.html" class="mobile-link">Home</a>
+
+        <details class="mobile-dropdown">
+            <summary class="mobile-link">Projects <i data-lucide="chevron-down" width="16" height="16"></i></summary>
+            <a class="mobile-sublink" href="./projects/Siddeshwar-Garden.html">Siddeshwar Gardens</a>
+            <a class="mobile-sublink" href="./projects/Casa-Benau.html">CASA BENAU 94 &amp; 95</a>
+            <a class="mobile-sublink" href="./projects/Glacia.html">Glacia</a>
+            <a class="mobile-sublink" href="./projects/Narayan-Pushp-CHS.html">Narayan Pushp CHS</a>
+            <a class="mobile-sublink" href="./projects/Om-Satyam-Niwas-CHS.html">Om Satyam Niwas CHS</a>
+        </details>
+        <a href="./services.html" class="mobile-link">Services</a>
+        <details class="mobile-dropdown">
+            <summary class="mobile-link">About Us <i data-lucide="chevron-down" width="16" height="16"></i></summary>
+            <a class="mobile-sublink" href="about.html#company-profile">Company Profile</a>
+            <a class="mobile-sublink" href="about.html#leadership-team">Leadership Team</a>
+            <a class="mobile-sublink" href="about.html#vision-mission">Vision & Mission</a>
+        </details>
+        <a href="contact.html" class="mobile-cta btn-pill">Get a Quote</a>
     </div>
 
+    <main class="page-wrapper">
+        <section class="thank-shell">
+            <div class="thank-grid">
+                <div class="thank-left">
+                    <div class="headline-row">
+                        <div class="checkmark">
+                            <i data-lucide="check" width="22" height="22"></i>
+                        </div>
+                        <h1 class="thank-title">Thank you for reaching out.</h1>
+                    </div>
+                    <p class="thank-copy">
+                        Our concierge team has your details. Expect a response within one business day to plan
+                        the next conversation and any site visits you prefer.
+                    </p>
+
+                    <div class="meta-grid">
+                        <div>
+                            <span class="meta-label">Response window</span>
+                            <span class="meta-value">Under 24 hours</span>
+                        </div>
+                        <div>
+                            <span class="meta-label">Direct line</span>
+                            <span class="meta-value">+91 98765 43210</span>
+                        </div>
+                        <div>
+                            <span class="meta-label">Concierge desk</span>
+                            <span class="meta-value">concierge@jskbuildwell.com</span>
+                        </div>
+                    </div>
+
+                    <p class="footnote">You will also receive a confirmation email with this note for your records.</p>
+                </div>
+
+                <aside class="thank-card">
+                    <p class="card-eyebrow">While you wait</p>
+                    <ul class="steps-list">
+                        <li>
+                            <i data-lucide="map-pin" width="18" height="18"></i>
+                            Arrange a walkthrough in Mumbai, Pune, or Alibaug on your schedule.
+                        </li>
+                        <li>
+                            <i data-lucide="folder-open" width="18" height="18"></i>
+                            Browse ready-to-move residences and current builds.
+                        </li>
+                        <li>
+                            <i data-lucide="phone" width="18" height="18"></i>
+                            Prefer a call now? Our team can ring you back promptly.
+                        </li>
+                    </ul>
+                    <div class="card-links">
+                        <a href="index.html" class="card-link"><i data-lucide="arrow-left"></i>Back to home</a>
+                        <a href="projects.html" class="card-link"><i data-lucide="arrow-up-right"></i>Explore
+                            projects</a>
+                        <a href="contact.html" class="card-link"><i data-lucide="phone-call"></i>Book a call</a>
+                    </div>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <footer class="simple-footer">
+        <div class="container">
+            <div class="footer-wrapper">
+                <div class="footer-top">
+                    <div class="footer-brand">
+                        <h3 class="brand-name logo-link"><img src="./assets/images/logo.png" alt="" srcset=""></h3>
+                        <p class="brand-tagline">Crafting calm, timeless residences.</p>
+                    </div>
+                    <div class="footer-nav">
+                        <div class="footer-column">
+                            <h4 class="footer-heading">Company</h4>
+                            <a href="index.html" class="footer-link">Home</a>
+                            <a href="about.html" class="footer-link">About</a>
+                            <a href="services.html" class="footer-link">Services</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4 class="footer-heading">Connect</h4>
+                            <a href="#" class="footer-link">LinkedIn</a>
+                            <a href="#" class="footer-link">Instagram</a>
+                            <a href="#" class="footer-link">Facebook</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4 class="footer-heading">Legal</h4>
+                            <a href="contact.html" class="footer-link">Contact</a>
+                            <a href="privacy.html" class="footer-link">Privacy</a>
+                            <a href="terms.html" class="footer-link">Terms</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p class="copyright">&copy; 2026 JSK Buildwell. All rights reserved.</p>
+                </div>
+
+                <div class="footer-bottom" style="padding-top: 0; margin-top: 0;">
+                    <p class="copyright"><b>Disclaimer:</b> Please be advised that JSK BUILDWELL LLP and its affiliated
+                        group companies are separate legal entities, each operating independently. While JSK BUILDWELL
+                        LLP and its partners may have an ownership interest in certain group companies, such ownership
+                        does not create any joint liability for the actions or obligations of the group companies.
+                        Accordingly, JSK BUILDWELL LLP shall not be liable for any claims, losses, or damages arising
+                        from or related to the business activities, operations, or affairs of any group company. Any
+                        such claims, losses, or damages shall be pursued against the specific group company responsible
+                        for such activities, operations, or affairs. Pictures shown are for representational purposes
+                        only
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        lucide.createIcons();
         window.addEventListener('load', () => document.body.classList.add('loaded'));
+        lucide.createIcons();
 
         if (window.gtag) {
             gtag('event', 'conversion', {
