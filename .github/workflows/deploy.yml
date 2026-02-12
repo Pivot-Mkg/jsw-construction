@@ -1,0 +1,25 @@
+name: Deploy to GoDaddy via FTP
+
+on:
+  push:
+    branches:
+      - main # Trigger deployment when pushing to the 'main' branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # Run the deployment on an Ubuntu machine
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2 # Step to checkout the code from GitHub
+
+      - name: Install FTP client
+        run: sudo apt-get install lftp # Install the lftp client for FTP deployment
+
+      - name: Upload files to GoDaddy via FTP
+        run: |
+          lftp -f "
+          open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}
+          mirror -R ./ /public_html  # Upload files from your repo to the public_html directory
+          quit
+          "
