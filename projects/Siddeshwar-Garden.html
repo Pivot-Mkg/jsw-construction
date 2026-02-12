@@ -70,28 +70,28 @@
     </style>
     <link rel="stylesheet" href="../assets/styles/proeject-details.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-   <script>
-  $(function () {
+    <script>
+        $(function () {
 
-    // Open project
-    $(document).on("click", ".view-project-btn", function (e) {
-      e.preventDefault();
+            // Open project
+            $(document).on("click", ".view-project-btn", function (e) {
+                e.preventDefault();
 
-      const projectId = $(this).attr("for");
-      if (!projectId) return;
+                const projectId = $(this).attr("for");
+                if (!projectId) return;
 
-      $(".project-details-swiper-container").hide();
-      $("#" + projectId).stop(true, true).fadeIn(200);
-    });
+                $(".project-details-swiper-container").hide();
+                $("#" + projectId).stop(true, true).fadeIn(200);
+            });
 
-    // Close project
-    $(document).on("click", ".close-project-details-btn", function (e) {
-      e.preventDefault();
-      $(".project-details-swiper-container").hide();
-    });
+            // Close project
+            $(document).on("click", ".close-project-details-btn", function (e) {
+                e.preventDefault();
+                $(".project-details-swiper-container").hide();
+            });
 
-  });
-</script>
+        });
+    </script>
 
 
 </head>
@@ -180,6 +180,7 @@
                 </div>
             </div> -->
     </header>
+
     <div id="mobile-menu" class="mobile-menu-overlay">
         <a href="../index.html" class="mobile-link">Home</a>
 
@@ -439,6 +440,108 @@
             </div>
         </section>
 
+        <!-- FOOTER (same footer, unchanged) -->
+        <footer class="simple-footer">
+            <div class="container">
+                <div class="footer-wrapper">
+                    <div class="footer-top">
+                        <div class="footer-brand">
+                            <h3 class="brand-name logo-link">
+                                <img src="../assets/images/logo.png" alt="">
+                            </h3>
+                            <p class="brand-tagline">Crafting calm, timeless residences.</p>
+                        </div>
+                        <div class="footer-nav">
+                            <div class="footer-column">
+                                <h4 class="footer-heading">Company</h4>
+                                <a href="../index.html" class="footer-link">Home</a>
+                                <a href="../about.html" class="footer-link">About</a>
+                                <!-- <a href="../projects.html" class="footer-link">Projects</a> -->
+                                <a href="../services.html" class="footer-link">Services</a>
+                            </div>
+                            <div class="footer-column">
+                                <h4 class="footer-heading">Connect</h4>
+                                <a href="#" class="footer-link">LinkedIn</a>
+                                <a href="#" class="footer-link">Instagram</a>
+                                <a href="#" class="footer-link">Facebook</a>
+                            </div>
+                            <div class="footer-column">
+                                <h4 class="footer-heading">Legal</h4>
+                                <a href="../contact.html" class="footer-link">Contact</a>
+                                <a href="../privacy.html" class="footer-link">Privacy</a>
+                                <a href="../terms.html" class="footer-link">Terms</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p class="copyright">&copy; 2026 JSK Buildwell. All rights reserved.</p>
+                    </div>
+
+                    <div class="footer-bottom" style="padding-top: 0;margin-top: 0;">
+                        <p class="copyright"><b>Disclaimer:</b> Please be advised that JSK BUILDWELL LLP and its
+                            affiliated
+                            group companies are separate legal entities, each operating independently. While JSK
+                            BUILDWELL
+                            LLP and its partners may have an ownership interest in certain group companies, such
+                            ownership
+                            does not create any joint liability for the actions or obligations of the group companies.
+                            Accordingly, JSK BUILDWELL LLP shall not be liable for any claims, losses, or damages
+                            arising
+                            from or related to the business activities, operations, or affairs of any group company. Any
+                            such claims, losses, or damages shall be pursued against the specific group company
+                            responsible
+                            for such activities, operations, or affairs. Pictures shown are for representational
+                            purposes
+                            only
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+        <!-- JS (Copied exactly from your contact page) -->
+        <script>
+            lucide.createIcons();
+            window.addEventListener('load', () => document.body.classList.add('loaded'));
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            let isMenuOpen = false;
+
+            menuBtn.addEventListener('click', () => {
+                isMenuOpen = !isMenuOpen;
+                mobileMenu.classList.toggle('open', isMenuOpen);
+                menuBtn.innerHTML = isMenuOpen
+                    ? '<i data-lucide="x" width="24" height="24"></i>'
+                    : '<i data-lucide="menu" width="24" height="24"></i>';
+                lucide.createIcons();
+            });
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    isMenuOpen = false;
+                    menuBtn.innerHTML = '<i data-lucide="menu" width="24" height="24"></i>';
+                    lucide.createIcons();
+                });
+            });
+
+            function setupScrollReveal() {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+                document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+            }
+            setupScrollReveal();
+
+        </script>
+
     </main>
 
     <!-- PROJECT MODALS -->
@@ -650,67 +753,117 @@
     <div class="project-details-swiper-container" id="Project-Harmony">
         <div class="project-details-swiper-wrapper">
             <button class="close-project-details-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-x">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
             <!-- Slider main container -->
             <div class="swiper project-details-swiper">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    <div class="project-details-banner">
-                        <img src="../assets/projects/HARMONY.jpg" alt="" srcset="">
-                        <div class="project-details-banner-info">
-                            <h3>Harmony</h3>
-                            <p>15-storey 2 & 3 BHK tower with Yeoor Hill views.</p>
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="project-details-banner">
+                            <img src="../assets/projects/HARMONY.jpg" alt="" srcset="">
+                            <div class="project-details-banner-info">
+                                <h3>Harmony</h3>
+                                <p>15-storey 2 & 3 BHK tower with Yeoor Hill views.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="project-details-text-content">
-                        <strong>Phase I | Delivered</strong>
-                        <p>
-                           Part of Phase I of Siddeshwar Gardens, this 15-storeyed residential tower spans a total
-                            built-up area of 1,10,000 sq. ft. and was completed in under two years. The development
-                            offers well-planned 2 and 3 BHK homes designed for comfortable urban living while being
-                            surrounded by natural serenity.
-                        </p>
-                        <p>
-                            From the 8th floor onwards, residents enjoy uninterrupted views of the Yeoor Hills, creating
-                            a rare blend of city convenience and scenic tranquility. With the Occupation Certificate in
-                            place and thoughtfully curated lifestyle amenities, the project delivers a balanced living
-                            environment for families.
-                        </p>
+                    <div class="swiper-slide">
+                        <div class="project-details-text-content">
+                            <strong>Phase I | Delivered</strong>
+                            <p>
+                                Part of Phase I of Siddeshwar Gardens, this 15-storeyed residential tower spans a total
+                                built-up area of 1,10,000 sq. ft. and was completed in under two years. The development
+                                offers well-planned 2 and 3 BHK homes designed for comfortable urban living while being
+                                surrounded by natural serenity.
+                            </p>
+                            <p>
+                                From the 8th floor onwards, residents enjoy uninterrupted views of the Yeoor Hills,
+                                creating
+                                a rare blend of city convenience and scenic tranquility. With the Occupation Certificate
+                                in
+                                place and thoughtfully curated lifestyle amenities, the project delivers a balanced
+                                living
+                                environment for families.
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="swiper-slide">
-                     <div class="project-details-text-content">
-                        <h4>Project Highlights</h4>
-                       <ul class="villas-points">
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="building" aria-hidden="true" class="lucide lucide-building"><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M12 6h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path><path d="M8 6h.01"></path><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path><rect x="4" y="2" width="16" height="20" rx="2"></rect></svg>Total built-up area of 1,10,000 sq. ft.</li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="square" aria-hidden="true" class="lucide lucide-square"><rect width="18" height="18" x="3" y="3" rx="2"></rect></svg>15-storeyed tower with spacious 2 &amp; 3 BHK homes.</li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="home" aria-hidden="true" class="lucide lucide-home"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Completed in under two years (Phase I – Siddeshwar
+                    <div class="swiper-slide">
+                        <div class="project-details-text-content">
+                            <h4>Project Highlights</h4>
+                            <ul class="villas-points">
+                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" data-lucide="building" aria-hidden="true"
+                                        class="lucide lucide-building">
+                                        <path d="M12 10h.01"></path>
+                                        <path d="M12 14h.01"></path>
+                                        <path d="M12 6h.01"></path>
+                                        <path d="M16 10h.01"></path>
+                                        <path d="M16 14h.01"></path>
+                                        <path d="M16 6h.01"></path>
+                                        <path d="M8 10h.01"></path>
+                                        <path d="M8 14h.01"></path>
+                                        <path d="M8 6h.01"></path>
+                                        <path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
+                                        <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                                    </svg>Total built-up area of 1,10,000 sq. ft.</li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" data-lucide="square" aria-hidden="true"
+                                        class="lucide lucide-square">
+                                        <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                    </svg>15-storeyed tower with spacious 2 &amp; 3 BHK homes.</li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" data-lucide="home" aria-hidden="true"
+                                        class="lucide lucide-home">
+                                        <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                                        <path
+                                            d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
+                                        </path>
+                                    </svg>Completed in under two years (Phase I – Siddeshwar
                                     Gardens)</li>
                                 <!-- <li><i data-lucide="calendar"></i>Construction: March 2008 - December 2009 (21 months)
                                 </li> -->
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mountain" aria-hidden="true" class="lucide lucide-mountain"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg>Uninterrupted Yeoor Hills views from the 8th floor
+                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" data-lucide="mountain" aria-hidden="true"
+                                        class="lucide lucide-mountain">
+                                        <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+                                    </svg>Uninterrupted Yeoor Hills views from the 8th floor
                                     onwards</li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>Occupation Certificate received</li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>Landscaped gardens, playground, tennis court, and
+                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true"
+                                        class="lucide lucide-check-circle">
+                                        <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                        <path d="m9 11 3 3L22 4"></path>
+                                    </svg>Occupation Certificate received</li>
+                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true"
+                                        class="lucide lucide-check-circle">
+                                        <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                        <path d="m9 11 3 3L22 4"></path>
+                                    </svg>Landscaped gardens, playground, tennis court, and
                                     jogging track</li>
                             </ul>
-                     </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!-- If we need pagination -->
-            <div class="swiper-pagination"></div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
 
-            <!-- If we need navigation buttons -->
-            <!-- <div class="swiper-button-prev"></div> -->
-            <!-- <div class="swiper-button-next"></div> -->
+                <!-- If we need navigation buttons -->
+                <!-- <div class="swiper-button-prev"></div> -->
+                <!-- <div class="swiper-button-next"></div> -->
 
             </div>
         </div>
@@ -719,69 +872,109 @@
     <div class="project-details-swiper-container" id="Project-Riviera">
         <div class="project-details-swiper-wrapper">
             <button class="close-project-details-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-x">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
             <!-- Slider main container -->
             <div class="swiper project-details-swiper">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    <div class="project-details-banner">
-                        <img src="../assets/projects/RIVIERA.jpg" alt="" srcset="">
-                        <div class="project-details-banner-info">
-                            <h3>Riviera</h3>
-                            <p>20-storey luxury tower on Kolshet Road.</p>
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="project-details-banner">
+                            <img src="../assets/projects/RIVIERA.jpg" alt="" srcset="">
+                            <div class="project-details-banner-info">
+                                <h3>Riviera</h3>
+                                <p>20-storey luxury tower on Kolshet Road.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="project-details-text-content">
-                        <strong>Phase II | Delivered</strong>
-                        <p>
-                          Rising to 20 storeys with a configuration of stilt plus 18 floors, this residential
-                            development spans a total built-up area of 1,30,000 sq. ft. and forms Phase II of Siddeshwar
-                            Gardens. Construction began in January 2015 and was completed in 38 months by March 2018,
-                            reflecting steady execution and timely delivery.
-                        </p>
-                        <p>
-                          The project offers a well-considered mix of two-bedroom homes, standard three-bedroom
-                            apartments, and extended three-bedroom residences featuring a dedicated utility room. With
-                            the Occupation Certificate received, the development stands as a thoughtfully designed
-                            living space tailored for practical comfort and modern family needs.
-                        </p>
+                    <div class="swiper-slide">
+                        <div class="project-details-text-content">
+                            <strong>Phase II | Delivered</strong>
+                            <p>
+                                Rising to 20 storeys with a configuration of stilt plus 18 floors, this residential
+                                development spans a total built-up area of 1,30,000 sq. ft. and forms Phase II of
+                                Siddeshwar
+                                Gardens. Construction began in January 2015 and was completed in 38 months by March
+                                2018,
+                                reflecting steady execution and timely delivery.
+                            </p>
+                            <p>
+                                The project offers a well-considered mix of two-bedroom homes, standard three-bedroom
+                                apartments, and extended three-bedroom residences featuring a dedicated utility room.
+                                With
+                                the Occupation Certificate received, the development stands as a thoughtfully designed
+                                living space tailored for practical comfort and modern family needs.
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="swiper-slide">
-                     <div class="project-details-text-content">
-                        <h4>Project Highlights</h4>
-                      <div class="villas-card">
-                            <ul class="villas-points">
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="building" aria-hidden="true" class="lucide lucide-building"><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M12 6h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path><path d="M8 6h.01"></path><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path><rect x="4" y="2" width="16" height="20" rx="2"></rect></svg>Total built-up area of 1,30,000 sq. ft.</li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="square" aria-hidden="true" class="lucide lucide-square"><rect width="18" height="18" x="3" y="3" rx="2"></rect></svg>20-storeyed tower (stilt + 18 floors)</li>
+                    <div class="swiper-slide">
+                        <div class="project-details-text-content">
+                            <h4>Project Highlights</h4>
+                            <div class="villas-card">
+                                <ul class="villas-points">
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="building"
+                                            aria-hidden="true" class="lucide lucide-building">
+                                            <path d="M12 10h.01"></path>
+                                            <path d="M12 14h.01"></path>
+                                            <path d="M12 6h.01"></path>
+                                            <path d="M16 10h.01"></path>
+                                            <path d="M16 14h.01"></path>
+                                            <path d="M16 6h.01"></path>
+                                            <path d="M8 10h.01"></path>
+                                            <path d="M8 14h.01"></path>
+                                            <path d="M8 6h.01"></path>
+                                            <path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
+                                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                                        </svg>Total built-up area of 1,30,000 sq. ft.</li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="square"
+                                            aria-hidden="true" class="lucide lucide-square">
+                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                        </svg>20-storeyed tower (stilt + 18 floors)</li>
 
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="home" aria-hidden="true" class="lucide lucide-home"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Mix of 2 BHK, 3 BHK, and extended 3 BHK with utility room
-                                </li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="home"
+                                            aria-hidden="true" class="lucide lucide-home">
+                                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                                            <path
+                                                d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
+                                            </path>
+                                        </svg>Mix of 2 BHK, 3 BHK, and extended 3 BHK with utility room
+                                    </li>
 
 
-                                <!-- <li><i data-lucide="calendar"></i>Construction: January 2015 - March 2018 (38 months)
+                                    <!-- <li><i data-lucide="calendar"></i>Construction: January 2015 - March 2018 (38 months)
                                 </li> -->
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="wrench" aria-hidden="true" class="lucide lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"></path></svg>Extended 3 BHK with dedicated utility room</li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="wrench"
+                                            aria-hidden="true" class="lucide lucide-wrench">
+                                            <path
+                                                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z">
+                                            </path>
+                                        </svg>Extended 3 BHK with dedicated utility room</li>
 
-                            </ul>
+                                </ul>
+                            </div>
                         </div>
-                     </div>
+                    </div>
                 </div>
-            </div>
-            <!-- If we need pagination -->
-            <div class="swiper-pagination"></div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
 
-            <!-- If we need navigation buttons -->
-            <!-- <div class="swiper-button-prev"></div> -->
-            <!-- <div class="swiper-button-next"></div> -->
+                <!-- If we need navigation buttons -->
+                <!-- <div class="swiper-button-prev"></div> -->
+                <!-- <div class="swiper-button-next"></div> -->
 
             </div>
         </div>
@@ -790,65 +983,102 @@
     <div class="project-details-swiper-container" id="Project-Jasmine">
         <div class="project-details-swiper-wrapper">
             <button class="close-project-details-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-x">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
             <!-- Slider main container -->
             <div class="swiper project-details-swiper">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    <div class="project-details-banner">
-                        <img src="../assets/projects/JASMINE.jpg" alt="" srcset="">
-                        <div class="project-details-banner-info">
-                            <h3>Jasmine</h3>
-                            <p>19-storey tower with 1.5 & 2 BHK homes.</p>
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="project-details-banner">
+                            <img src="../assets/projects/JASMINE.jpg" alt="" srcset="">
+                            <div class="project-details-banner-info">
+                                <h3>Jasmine</h3>
+                                <p>19-storey tower with 1.5 & 2 BHK homes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="project-details-text-content">
+                            <strong>Phase II | Delivered</strong>
+                            <p>
+                                Rising on Kolshet Road one of Thane’s fastest-growing
+                                corridors Jasmine is a 19-storey address that blends
+                                smart design with everyday luxury. Offering well-planned
+                                1.5 BHK and 2 BHK homes, it forms a key part of Phase II of
+                                Siddheshwar Gardens.
+
+                            </p>
+                            <p>
+                                Delivered on schedule, Jasmine stands today as a ready,
+                                refined residence—crafted for modern urban living.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="project-details-text-content">
+                            <h4>Project Highlights</h4>
+                            <div class="villas-card">
+                                <ul class="villas-points">
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="building"
+                                            aria-hidden="true" class="lucide lucide-building">
+                                            <path d="M12 10h.01"></path>
+                                            <path d="M12 14h.01"></path>
+                                            <path d="M12 6h.01"></path>
+                                            <path d="M16 10h.01"></path>
+                                            <path d="M16 14h.01"></path>
+                                            <path d="M16 6h.01"></path>
+                                            <path d="M8 10h.01"></path>
+                                            <path d="M8 14h.01"></path>
+                                            <path d="M8 6h.01"></path>
+                                            <path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
+                                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                                        </svg> Kolshet Road, one of Thane’s fastest-growing areas.
+                                    </li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="square"
+                                            aria-hidden="true" class="lucide lucide-square">
+                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                        </svg>A 19-storey luxurious tower.</li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="home"
+                                            aria-hidden="true" class="lucide lucide-home">
+                                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                                            <path
+                                                d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
+                                            </path>
+                                        </svg>Offers 1.5 BHK and 2 BHK apartments.</li>
+                                    <!-- <li><i data-lucide="calendar"></i>Construction: June 2016 - August 2019 (38 months)</li> -->
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="layout"
+                                            aria-hidden="true" class="lucide lucide-layout">
+                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                            <path d="M3 9h18"></path>
+                                            <path d="M9 21V9"></path>
+                                        </svg>Status: Occupation Certificate received.</li>
+
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="project-details-text-content">
-                        <strong>Phase II | Delivered</strong>
-                        <p>
-                         Rising on Kolshet Road one of Thane’s fastest-growing
-                            corridors Jasmine is a 19-storey address that blends
-                            smart design with everyday luxury. Offering well-planned
-                            1.5 BHK and 2 BHK homes, it forms a key part of Phase II of
-                            Siddheshwar Gardens.
-                        
-                        </p>
-                        <p>
-                        Delivered on schedule, Jasmine stands today as a ready,
-                            refined residence—crafted for modern urban living.
-                        </p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                     <div class="project-details-text-content">
-                        <h4>Project Highlights</h4>
-                     <div class="villas-card">
-                            <ul class="villas-points">
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="building" aria-hidden="true" class="lucide lucide-building"><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M12 6h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path><path d="M8 6h.01"></path><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path><rect x="4" y="2" width="16" height="20" rx="2"></rect></svg> Kolshet Road, one of Thane’s fastest-growing areas.
-                                </li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="square" aria-hidden="true" class="lucide lucide-square"><rect width="18" height="18" x="3" y="3" rx="2"></rect></svg>A 19-storey luxurious tower.</li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="home" aria-hidden="true" class="lucide lucide-home"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Offers 1.5 BHK and 2 BHK apartments.</li>
-                                <!-- <li><i data-lucide="calendar"></i>Construction: June 2016 - August 2019 (38 months)</li> -->
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="layout" aria-hidden="true" class="lucide lucide-layout"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>Status: Occupation Certificate received.</li>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
 
-                            </ul>
-                        </div>
-                     </div>
-                </div>
-            </div>
-            <!-- If we need pagination -->
-            <div class="swiper-pagination"></div>
-
-            <!-- If we need navigation buttons -->
-            <!-- <div class="swiper-button-prev"></div> -->
-            <!-- <div class="swiper-button-next"></div> -->
+                <!-- If we need navigation buttons -->
+                <!-- <div class="swiper-button-prev"></div> -->
+                <!-- <div class="swiper-button-next"></div> -->
 
             </div>
         </div>
@@ -858,408 +1088,462 @@
     <div class="project-details-swiper-container" id="Project-Marigold">
         <div class="project-details-swiper-wrapper">
             <button class="close-project-details-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-x">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
             <!-- Slider main container -->
             <div class="swiper project-details-swiper">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    <div class="project-details-banner">
-                        <img src="../assets/projects/MARIGOLD.jpg" alt="" srcset="">
-                        <div class="project-details-banner-info">
-                            <h3>Marigold</h3>
-                            <p>27-storey 2 & 3 BHK residences.</p>
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="project-details-banner">
+                            <img src="../assets/projects/MARIGOLD.jpg" alt="" srcset="">
+                            <div class="project-details-banner-info">
+                                <h3>Marigold</h3>
+                                <p>27-storey 2 & 3 BHK residences.</p>
+                            </div>
                         </div>
                     </div>
+                    <div class="swiper-slide">
+                        <div class="project-details-text-content">
+                            <strong>Phase II | 27 Storeys</strong>
+                            <p>
+                                A stilt plus 27-storey residential building with a total built-up area of 1,65,000 sq.
+                                ft.,
+                                offering well-designed 2 BHK and spacious 3 BHK apartments along with three podium
+                                parking
+                                floors. The project is completed with the Occupation Certificate received.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="project-details-text-content">
+                            <h4>Project Highlights</h4>
+                            <div class="villas-card">
+                                <ul class="villas-points">
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="building"
+                                            aria-hidden="true" class="lucide lucide-building">
+                                            <path d="M12 10h.01"></path>
+                                            <path d="M12 14h.01"></path>
+                                            <path d="M12 6h.01"></path>
+                                            <path d="M16 10h.01"></path>
+                                            <path d="M16 14h.01"></path>
+                                            <path d="M16 6h.01"></path>
+                                            <path d="M8 10h.01"></path>
+                                            <path d="M8 14h.01"></path>
+                                            <path d="M8 6h.01"></path>
+                                            <path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
+                                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+                                        </svg>Stilt + 27 storey structure
+                                    </li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="square"
+                                            aria-hidden="true" class="lucide lucide-square">
+                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                        </svg>Total built-up area of 1,65,000 sq. ft.</li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="square"
+                                            aria-hidden="true" class="lucide lucide-square">
+                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                        </svg>Three podium parking levels</li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="home"
+                                            aria-hidden="true" class="lucide lucide-home">
+                                            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+                                            <path
+                                                d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
+                                            </path>
+                                        </svg>2 BHK and 3 BHK apartments</li>
+                                    <!-- <li><i data-lucide="calendar"></i>Construction: September 2018 - December 2022 (51
+                                    months)</li> -->
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="mountain"
+                                            aria-hidden="true" class="lucide lucide-mountain">
+                                            <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+                                        </svg>Views of the Yeoor Hills and Thane Creek</li>
+                                    <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle"
+                                            aria-hidden="true" class="lucide lucide-check-circle">
+                                            <path d="M21.801 10A10 10 0 1 1 17 3.335"></path>
+                                            <path d="m9 11 3 3L22 4"></path>
+                                        </svg>Occupation Certificate received</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- If we need pagination -->
+                    <div class="swiper-pagination"></div>
+
+                    <!-- If we need navigation buttons -->
+                    <!-- <div class="swiper-button-prev"></div> -->
+                    <!-- <div class="swiper-button-next"></div> -->
+
                 </div>
-                <div class="swiper-slide">
-                    <div class="project-details-text-content">
-                        <strong>Phase II | 27 Storeys</strong>
-                        <p>
-                            A stilt plus 27-storey residential building with a total built-up area of 1,65,000 sq. ft.,
-                            offering well-designed 2 BHK and spacious 3 BHK apartments along with three podium parking
-                            floors. The project is completed with the Occupation Certificate received.
+            </div>
+        </div>
+
+
+
+
+
+        <!-- FOOTER (same footer, unchanged) -->
+        <footer class="simple-footer">
+            <div class="container">
+                <div class="footer-wrapper">
+                    <div class="footer-top">
+                        <div class="footer-brand">
+                            <h3 class="brand-name logo-link">
+                                <img src="../assets/images/logo.png" alt="">
+                            </h3>
+                            <p class="brand-tagline">Crafting calm, timeless residences.</p>
+                        </div>
+                        <div class="footer-nav">
+                            <div class="footer-column">
+                                <h4 class="footer-heading">Company</h4>
+                                <a href="../index.html" class="footer-link">Home</a>
+                                <a href="../about.html" class="footer-link">About</a>
+                                <!-- <a href="../projects.html" class="footer-link">Projects</a> -->
+                                <a href="../services.html" class="footer-link">Services</a>
+                            </div>
+                            <div class="footer-column">
+                                <h4 class="footer-heading">Connect</h4>
+                                <a href="#" class="footer-link">LinkedIn</a>
+                                <a href="#" class="footer-link">Instagram</a>
+                                <a href="#" class="footer-link">Facebook</a>
+                            </div>
+                            <div class="footer-column">
+                                <h4 class="footer-heading">Legal</h4>
+                                <a href="../contact.html" class="footer-link">Contact</a>
+                                <a href="../privacy.html" class="footer-link">Privacy</a>
+                                <a href="../terms.html" class="footer-link">Terms</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p class="copyright">&copy; 2026 JSK Buildwell. All rights reserved.</p>
+                    </div>
+
+                    <div class="footer-bottom" style="padding-top: 0;margin-top: 0;">
+                        <p class="copyright"><b>Disclaimer:</b> Please be advised that JSK BUILDWELL LLP and its
+                            affiliated
+                            group companies are separate legal entities, each operating independently. While JSK
+                            BUILDWELL
+                            LLP and its partners may have an ownership interest in certain group companies, such
+                            ownership
+                            does not create any joint liability for the actions or obligations of the group companies.
+                            Accordingly, JSK BUILDWELL LLP shall not be liable for any claims, losses, or damages
+                            arising
+                            from or related to the business activities, operations, or affairs of any group company. Any
+                            such claims, losses, or damages shall be pursued against the specific group company
+                            responsible
+                            for such activities, operations, or affairs. Pictures shown are for representational
+                            purposes
+                            only
                         </p>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                     <div class="project-details-text-content">
-                        <h4>Project Highlights</h4>
-                    <div class="villas-card">
-                            <ul class="villas-points">
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="building" aria-hidden="true" class="lucide lucide-building"><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M12 6h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M16 6h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path><path d="M8 6h.01"></path><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path><rect x="4" y="2" width="16" height="20" rx="2"></rect></svg>Stilt + 27 storey structure
-                                </li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="square" aria-hidden="true" class="lucide lucide-square"><rect width="18" height="18" x="3" y="3" rx="2"></rect></svg>Total built-up area of 1,65,000 sq. ft.</li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="square" aria-hidden="true" class="lucide lucide-square"><rect width="18" height="18" x="3" y="3" rx="2"></rect></svg>Three podium parking levels</li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="home" aria-hidden="true" class="lucide lucide-home"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>2 BHK and 3 BHK apartments</li>
-                                <!-- <li><i data-lucide="calendar"></i>Construction: September 2018 - December 2022 (51
-                                    months)</li> -->
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mountain" aria-hidden="true" class="lucide lucide-mountain"><path d="m8 3 4 8 5-5 5 15H2L8 3z"></path></svg>Views of the Yeoor Hills and Thane Creek</li>
-                                <li><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle" aria-hidden="true" class="lucide lucide-check-circle"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>Occupation Certificate received</li>
-                            </ul>
-                        </div>
-                </div>
             </div>
-            <!-- If we need pagination -->
-            <div class="swiper-pagination"></div>
-
-            <!-- If we need navigation buttons -->
-            <!-- <div class="swiper-button-prev"></div> -->
-            <!-- <div class="swiper-button-next"></div> -->
-
-            </div>
-        </div>
-    </div>
-  
+        </footer>
 
 
 
-
-    <!-- FOOTER (same footer, unchanged) -->
-    <footer class="simple-footer">
-        <div class="container">
-            <div class="footer-wrapper">
-                <div class="footer-top">
-                    <div class="footer-brand">
-                        <h3 class="brand-name logo-link">
-                            <img src="../assets/images/logo.png" alt="">
-                        </h3>
-                        <p class="brand-tagline">Crafting calm, timeless residences.</p>
-                    </div>
-                    <div class="footer-nav">
-                        <div class="footer-column">
-                            <h4 class="footer-heading">Company</h4>
-                            <a href="../index.html" class="footer-link">Home</a>
-                            <a href="../about.html" class="footer-link">About</a>
-                            <!-- <a href="../projects.html" class="footer-link">Projects</a> -->
-                            <a href="../services.html" class="footer-link">Services</a>
-                        </div>
-                        <div class="footer-column">
-                            <h4 class="footer-heading">Connect</h4>
-                            <a href="#" class="footer-link">LinkedIn</a>
-                            <a href="#" class="footer-link">Instagram</a>
-                            <a href="#" class="footer-link">Facebook</a>
-                        </div>
-                        <div class="footer-column">
-                            <h4 class="footer-heading">Legal</h4>
-                            <a href="../contact.html" class="footer-link">Contact</a>
-                            <a href="../privacy.html" class="footer-link">Privacy</a>
-                            <a href="../terms.html" class="footer-link">Terms</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p class="copyright">&copy; 2026 JSK Buildwell. All rights reserved.</p>
-                </div>
-
-                <div class="footer-bottom" style="padding-top: 0;margin-top: 0;">
-                    <p class="copyright"><b>Disclaimer:</b> Please be advised that JSK BUILDWELL LLP and its affiliated
-                        group companies are separate legal entities, each operating independently. While JSK BUILDWELL
-                        LLP and its partners may have an ownership interest in certain group companies, such ownership
-                        does not create any joint liability for the actions or obligations of the group companies.
-                        Accordingly, JSK BUILDWELL LLP shall not be liable for any claims, losses, or damages arising
-                        from or related to the business activities, operations, or affairs of any group company. Any
-                        such claims, losses, or damages shall be pursued against the specific group company responsible
-                        for such activities, operations, or affairs. Pictures shown are for representational purposes
-                        only
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
-
-    <!-- JS (Copied exactly from your contact page) -->
-    <script>
-        lucide.createIcons();
-        window.addEventListener('load', () => document.body.classList.add('loaded'));
-
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuOpen = false;
-
-        menuBtn.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            mobileMenu.classList.toggle('open', isMenuOpen);
-            menuBtn.innerHTML = isMenuOpen
-                ? '<i data-lucide="x" width="24" height="24"></i>'
-                : '<i data-lucide="menu" width="24" height="24"></i>';
+        <!-- JS (Copied exactly from your contact page) -->
+        <script>
             lucide.createIcons();
-        });
+            window.addEventListener('load', () => document.body.classList.add('loaded'));
 
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                isMenuOpen = false;
-                menuBtn.innerHTML = '<i data-lucide="menu" width="24" height="24"></i>';
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            let isMenuOpen = false;
+
+            menuBtn.addEventListener('click', () => {
+                isMenuOpen = !isMenuOpen;
+                mobileMenu.classList.toggle('open', isMenuOpen);
+                menuBtn.innerHTML = isMenuOpen
+                    ? '<i data-lucide="x" width="24" height="24"></i>'
+                    : '<i data-lucide="menu" width="24" height="24"></i>';
                 lucide.createIcons();
             });
-        });
 
-        function setupScrollReveal() {
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        obs.unobserve(entry.target);
-                    }
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    isMenuOpen = false;
+                    menuBtn.innerHTML = '<i data-lucide="menu" width="24" height="24"></i>';
+                    lucide.createIcons();
                 });
-            }, { threshold: 0.2 });
-            document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
-        }
-        setupScrollReveal();
-
-    </script>
-
-    <!-- Swiper CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <script>
-        const projectDetailsSwiper = new Swiper('.project-details-swiper', {
-            // Optional parameters
-            loop: true,
-
-            // If we need pagination
-            pagination: {
-                el: '.swiper-pagination',
-            },
-
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-
-            // And if we need scrollbar
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
             });
-    </script>
 
-    <script>
-        var swiper = new Swiper(".amenities-swiper", {
-            slidesPerView: 3,
-            spaceBetween: 40,
-            loop: true,
-            navigation: {
-                nextEl: ".amenities-next",
-                prevEl: ".amenities-prev",
-            },
-            breakpoints: {
-                320: { slidesPerView: 1 },
-                640: { slidesPerView: 1 },
-                900: { slidesPerView: 2 },
-                1200: { slidesPerView: 3 }
+            function setupScrollReveal() {
+                const observer = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.2 });
+                document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
             }
-        });
+            setupScrollReveal();
 
-    </script>
+        </script>
 
-    <script>
-        var configSwiper = new Swiper(".config-swiper", {
-            slidesPerView: 3,
-            spaceBetween: 40,
-            loop: false,
-            navigation: {
-                nextEl: ".config-next",
-                prevEl: ".config-prev",
-            },
-            breakpoints: {
-                320: { slidesPerView: 1 },
-                640: { slidesPerView: 1 },
-                900: { slidesPerView: 2 },
-                1200: { slidesPerView: 3 }
-            }
-        });
-        // Initialize AOS (Animate On Scroll)
-        AOS.init({
-            duration: 800,
-            offset: 100,
-            once: true,
-            easing: 'ease-out'
-        });
+        <!-- Swiper CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-        // Project modal interactions
-        const modalTriggers = document.querySelectorAll('[data-project-modal]');
-        const modalOverlays = document.querySelectorAll('.project-modal-overlay');
-        const isMobileView = () => window.matchMedia('(max-width: 900px)').matches;
+        <script>
+            const projectDetailsSwiper = new Swiper('.project-details-swiper', {
+                // Optional parameters
+                loop: true,
 
-        // Scroll lock during modal: prevent background page from scrolling
-        const wheelHandler = (e) => {
-            if (!document.body.classList.contains('modal-open')) return;
+                // If we need pagination
+                pagination: {
+                    el: '.swiper-pagination',
+                },
 
-            const overlay = document.querySelector('.project-modal-overlay.open');
-            if (!overlay) return;
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
 
-            // Prefer the modal container as the scroll target, fall back to the old text scroller
-            const modal = overlay.querySelector('.project-modal');
-            const textScroller = overlay.querySelector('.project-modal__text');
-            const scroller = modal || textScroller;
-            if (!scroller) return;
-
-            // Prevent the page from scrolling and forward the wheel delta to the modal container
-            e.preventDefault();
-            scroller.scrollTop += e.deltaY;
-        };
-
-        const touchMoveHandler = (e) => {
-            if (!document.body.classList.contains('modal-open')) return;
-            // If touch is inside the modal allow it, otherwise prevent default to lock background
-            const isInsideModal = !!e.target.closest('.project-modal');
-            if (!isInsideModal) e.preventDefault();
-        };
-
-        let mobileTouchStartedInsideModal = false;
-        const isTargetInsideModal = (target) => {
-            const el = target instanceof Element ? target : target && target.parentElement;
-            return !!(el && el.closest('.project-modal'));
-        };
-
-        const overlayTouchStartHandler = (e) => {
-            if (!document.body.classList.contains('modal-open')) return;
-            if (!isMobileView()) return;
-            mobileTouchStartedInsideModal = isTargetInsideModal(e.target);
-            if (!mobileTouchStartedInsideModal) e.preventDefault();
-        };
-
-        const overlayTouchHandler = (e) => {
-            if (!document.body.classList.contains('modal-open')) return;
-            if (!isMobileView()) return;
-            // Keep background locked, but never cancel a gesture that started inside modal content.
-            if (!mobileTouchStartedInsideModal && !isTargetInsideModal(e.target)) {
-                e.preventDefault();
-            }
-        };
-
-        const overlayTouchEndHandler = () => {
-            mobileTouchStartedInsideModal = false;
-        };
-
-        const addScrollLock = () => {
-            if (isMobileView()) {
-                // Let native touch scrolling handle the modal content on mobile.
-                modalOverlays.forEach(overlay => {
-                    overlay.addEventListener('touchstart', overlayTouchStartHandler, { passive: false });
-                    overlay.addEventListener('touchmove', overlayTouchHandler, { passive: false });
-                    overlay.addEventListener('touchend', overlayTouchEndHandler, { passive: true });
-                    overlay.addEventListener('touchcancel', overlayTouchEndHandler, { passive: true });
-                });
-                return;
-            }
-            window.addEventListener('wheel', wheelHandler, { passive: false });
-            window.addEventListener('touchmove', touchMoveHandler, { passive: false });
-        };
-
-        const removeScrollLock = () => {
-            window.removeEventListener('wheel', wheelHandler, { passive: false });
-            window.removeEventListener('touchmove', touchMoveHandler, { passive: false });
-            modalOverlays.forEach(overlay => {
-                overlay.removeEventListener('touchstart', overlayTouchStartHandler, { passive: false });
-                overlay.removeEventListener('touchmove', overlayTouchHandler, { passive: false });
-                overlay.removeEventListener('touchend', overlayTouchEndHandler, { passive: true });
-                overlay.removeEventListener('touchcancel', overlayTouchEndHandler, { passive: true });
+                // And if we need scrollbar
+                scrollbar: {
+                    el: '.swiper-scrollbar',
+                },
             });
-            mobileTouchStartedInsideModal = false;
-        };
+        </script>
 
-        const toggleBodyScroll = () => {
-            const activeModal = document.querySelector('.project-modal-overlay.open');
-            const isOpen = !!activeModal;
-            document.body.classList.toggle('modal-open', isOpen);
-            document.documentElement.classList.toggle('modal-open', isOpen);
-            if (window.lenis) {
-                if (isOpen) window.lenis.stop();
-                else window.lenis.start();
-            }
-            if (isOpen) addScrollLock();
-            else removeScrollLock();
-        };
-
-        // Positioning helpers for the fixed close button so it visually anchors to the modal
-        let _closePositionListeners = new Map();
-
-        const positionCloseButtonForModal = (modal) => {
-            const btn = modal.querySelector('.project-modal-close');
-            if (!btn) return;
-            const rect = modal.getBoundingClientRect();
-            // Place the fixed button near the modal's top-right corner (12px inset)
-            const top = Math.max(8, rect.top + 12);
-            const right = Math.max(8, window.innerWidth - rect.right + 12);
-            btn.style.top = `${top}px`;
-            btn.style.right = `${right}px`;
-        };
-
-        const addClosePositioning = (modal) => {
-            const update = () => positionCloseButtonForModal(modal);
-            // Run once and attach listeners while modal is open
-            update();
-            window.addEventListener('resize', update);
-            window.addEventListener('scroll', update, true);
-            _closePositionListeners.set(modal, update);
-        };
-
-        const removeClosePositioning = (modal) => {
-            const update = _closePositionListeners.get(modal);
-            if (update) {
-                window.removeEventListener('resize', update);
-                window.removeEventListener('scroll', update, true);
-                _closePositionListeners.delete(modal);
-            }
-            const btn = modal.querySelector('.project-modal-close');
-            if (btn) {
-                btn.style.top = '';
-                btn.style.right = '';
-            }
-        };
-
-        const openModal = (id) => {
-            const modal = document.getElementById(id);
-            if (!modal) return;
-            modal.classList.add('open');
-            modal.setAttribute('aria-hidden', 'false');
-            toggleBodyScroll();
-            addClosePositioning(modal);
-        };
-
-        const closeModal = (modal) => {
-            // If caller passed overlay, find inner modal element
-            const inner = modal.querySelector && modal.querySelector('.project-modal') || modal;
-            modal.classList.remove('open');
-            modal.setAttribute('aria-hidden', 'true');
-            removeClosePositioning(modal);
-            toggleBodyScroll();
-        };
-
-        modalTriggers.forEach(btn => {
-            btn.addEventListener('click', () => openModal(btn.dataset.projectModal));
-        });
-
-        modalOverlays.forEach(modal => {
-            modal.addEventListener('click', (event) => {
-                if (event.target === modal || event.target.classList.contains('project-modal-close')) {
-                    closeModal(modal);
+        <script>
+            var swiper = new Swiper(".amenities-swiper", {
+                slidesPerView: 3,
+                spaceBetween: 40,
+                loop: true,
+                navigation: {
+                    nextEl: ".amenities-next",
+                    prevEl: ".amenities-prev",
+                },
+                breakpoints: {
+                    320: { slidesPerView: 1 },
+                    640: { slidesPerView: 1 },
+                    900: { slidesPerView: 2 },
+                    1200: { slidesPerView: 3 }
                 }
             });
-        });
 
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
-                modalOverlays.forEach(modal => {
-                    if (modal.classList.contains('open')) {
+        </script>
+
+        <script>
+            var configSwiper = new Swiper(".config-swiper", {
+                slidesPerView: 3,
+                spaceBetween: 40,
+                loop: false,
+                navigation: {
+                    nextEl: ".config-next",
+                    prevEl: ".config-prev",
+                },
+                breakpoints: {
+                    320: { slidesPerView: 1 },
+                    640: { slidesPerView: 1 },
+                    900: { slidesPerView: 2 },
+                    1200: { slidesPerView: 3 }
+                }
+            });
+            // Initialize AOS (Animate On Scroll)
+            AOS.init({
+                duration: 800,
+                offset: 100,
+                once: true,
+                easing: 'ease-out'
+            });
+
+            // Project modal interactions
+            const modalTriggers = document.querySelectorAll('[data-project-modal]');
+            const modalOverlays = document.querySelectorAll('.project-modal-overlay');
+            const isMobileView = () => window.matchMedia('(max-width: 900px)').matches;
+
+            // Scroll lock during modal: prevent background page from scrolling
+            const wheelHandler = (e) => {
+                if (!document.body.classList.contains('modal-open')) return;
+
+                const overlay = document.querySelector('.project-modal-overlay.open');
+                if (!overlay) return;
+
+                // Prefer the modal container as the scroll target, fall back to the old text scroller
+                const modal = overlay.querySelector('.project-modal');
+                const textScroller = overlay.querySelector('.project-modal__text');
+                const scroller = modal || textScroller;
+                if (!scroller) return;
+
+                // Prevent the page from scrolling and forward the wheel delta to the modal container
+                e.preventDefault();
+                scroller.scrollTop += e.deltaY;
+            };
+
+            const touchMoveHandler = (e) => {
+                if (!document.body.classList.contains('modal-open')) return;
+                // If touch is inside the modal allow it, otherwise prevent default to lock background
+                const isInsideModal = !!e.target.closest('.project-modal');
+                if (!isInsideModal) e.preventDefault();
+            };
+
+            let mobileTouchStartedInsideModal = false;
+            const isTargetInsideModal = (target) => {
+                const el = target instanceof Element ? target : target && target.parentElement;
+                return !!(el && el.closest('.project-modal'));
+            };
+
+            const overlayTouchStartHandler = (e) => {
+                if (!document.body.classList.contains('modal-open')) return;
+                if (!isMobileView()) return;
+                mobileTouchStartedInsideModal = isTargetInsideModal(e.target);
+                if (!mobileTouchStartedInsideModal) e.preventDefault();
+            };
+
+            const overlayTouchHandler = (e) => {
+                if (!document.body.classList.contains('modal-open')) return;
+                if (!isMobileView()) return;
+                // Keep background locked, but never cancel a gesture that started inside modal content.
+                if (!mobileTouchStartedInsideModal && !isTargetInsideModal(e.target)) {
+                    e.preventDefault();
+                }
+            };
+
+            const overlayTouchEndHandler = () => {
+                mobileTouchStartedInsideModal = false;
+            };
+
+            const addScrollLock = () => {
+                if (isMobileView()) {
+                    // Let native touch scrolling handle the modal content on mobile.
+                    modalOverlays.forEach(overlay => {
+                        overlay.addEventListener('touchstart', overlayTouchStartHandler, { passive: false });
+                        overlay.addEventListener('touchmove', overlayTouchHandler, { passive: false });
+                        overlay.addEventListener('touchend', overlayTouchEndHandler, { passive: true });
+                        overlay.addEventListener('touchcancel', overlayTouchEndHandler, { passive: true });
+                    });
+                    return;
+                }
+                window.addEventListener('wheel', wheelHandler, { passive: false });
+                window.addEventListener('touchmove', touchMoveHandler, { passive: false });
+            };
+
+            const removeScrollLock = () => {
+                window.removeEventListener('wheel', wheelHandler, { passive: false });
+                window.removeEventListener('touchmove', touchMoveHandler, { passive: false });
+                modalOverlays.forEach(overlay => {
+                    overlay.removeEventListener('touchstart', overlayTouchStartHandler, { passive: false });
+                    overlay.removeEventListener('touchmove', overlayTouchHandler, { passive: false });
+                    overlay.removeEventListener('touchend', overlayTouchEndHandler, { passive: true });
+                    overlay.removeEventListener('touchcancel', overlayTouchEndHandler, { passive: true });
+                });
+                mobileTouchStartedInsideModal = false;
+            };
+
+            const toggleBodyScroll = () => {
+                const activeModal = document.querySelector('.project-modal-overlay.open');
+                const isOpen = !!activeModal;
+                document.body.classList.toggle('modal-open', isOpen);
+                document.documentElement.classList.toggle('modal-open', isOpen);
+                if (window.lenis) {
+                    if (isOpen) window.lenis.stop();
+                    else window.lenis.start();
+                }
+                if (isOpen) addScrollLock();
+                else removeScrollLock();
+            };
+
+            // Positioning helpers for the fixed close button so it visually anchors to the modal
+            let _closePositionListeners = new Map();
+
+            const positionCloseButtonForModal = (modal) => {
+                const btn = modal.querySelector('.project-modal-close');
+                if (!btn) return;
+                const rect = modal.getBoundingClientRect();
+                // Place the fixed button near the modal's top-right corner (12px inset)
+                const top = Math.max(8, rect.top + 12);
+                const right = Math.max(8, window.innerWidth - rect.right + 12);
+                btn.style.top = `${top}px`;
+                btn.style.right = `${right}px`;
+            };
+
+            const addClosePositioning = (modal) => {
+                const update = () => positionCloseButtonForModal(modal);
+                // Run once and attach listeners while modal is open
+                update();
+                window.addEventListener('resize', update);
+                window.addEventListener('scroll', update, true);
+                _closePositionListeners.set(modal, update);
+            };
+
+            const removeClosePositioning = (modal) => {
+                const update = _closePositionListeners.get(modal);
+                if (update) {
+                    window.removeEventListener('resize', update);
+                    window.removeEventListener('scroll', update, true);
+                    _closePositionListeners.delete(modal);
+                }
+                const btn = modal.querySelector('.project-modal-close');
+                if (btn) {
+                    btn.style.top = '';
+                    btn.style.right = '';
+                }
+            };
+
+            const openModal = (id) => {
+                const modal = document.getElementById(id);
+                if (!modal) return;
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden', 'false');
+                toggleBodyScroll();
+                addClosePositioning(modal);
+            };
+
+            const closeModal = (modal) => {
+                // If caller passed overlay, find inner modal element
+                const inner = modal.querySelector && modal.querySelector('.project-modal') || modal;
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+                removeClosePositioning(modal);
+                toggleBodyScroll();
+            };
+
+            modalTriggers.forEach(btn => {
+                btn.addEventListener('click', () => openModal(btn.dataset.projectModal));
+            });
+
+            modalOverlays.forEach(modal => {
+                modal.addEventListener('click', (event) => {
+                    if (event.target === modal || event.target.classList.contains('project-modal-close')) {
                         closeModal(modal);
                     }
                 });
-            }
-        });
-    </script>
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    modalOverlays.forEach(modal => {
+                        if (modal.classList.contains('open')) {
+                            closeModal(modal);
+                        }
+                    });
+                }
+            });
+        </script>
 
 </body>
 
