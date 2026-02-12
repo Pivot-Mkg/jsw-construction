@@ -31,6 +31,23 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(false, 'Invalid email address', 400);
 }
 
+try {
+    require_once __DIR__ . '/admin/includes/db.php';
+    admin_insert_submission([
+        'form_type' => 'contact',
+        'name' => $name,
+        'email' => $email,
+        'phone' => $phone,
+        'city' => $city,
+        'message' => $message,
+        'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
+        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
+    ]);
+} catch (Throwable $e) {
+    error_log('Failed to store contact submission: ' . $e->getMessage());
+    respond(false, 'Failed to save submission', 500);
+}
+
 $to = 'aakash@pivotmkg.com';
 $subject = 'New Contact Form Submission - JSK Buildwell';
 
@@ -58,4 +75,3 @@ if (mail($to, $subject, $messageBody, $headers)) {
 }
 
 respond(false, 'Failed to send message', 500);
-
