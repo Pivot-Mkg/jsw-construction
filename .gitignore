@@ -1,5 +1,5 @@
 admin/data/*.sqlite
 admin/data/*.db
 admin/data/sessions/
+.jsk_admin_data/
 *.log
-

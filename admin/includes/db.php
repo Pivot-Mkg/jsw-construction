@@ -1,8 +1,42 @@
 <?php
 
+function admin_ensure_dir(string $path): bool
+{
+    if (is_dir($path)) {
+        return is_writable($path);
+    }
+    return @mkdir($path, 0750, true);
+}
+
 function admin_data_dir(): string
 {
-    return dirname(__DIR__) . '/data';
+    static $resolved = null;
+    if (is_string($resolved)) {
+        return $resolved;
+    }
+
+    $envDir = trim((string) getenv('ADMIN_DATA_DIR'));
+    $candidates = [];
+
+    if ($envDir !== '') {
+        $candidates[] = rtrim($envDir, '/\\');
+    }
+
+    // Prefer location outside web root to survive code deploys.
+    $candidates[] = dirname(__DIR__, 2) . '/.jsk_admin_data';
+    // Fallback inside admin module.
+    $candidates[] = dirname(__DIR__) . '/data';
+
+    foreach ($candidates as $dir) {
+        if (admin_ensure_dir($dir) && is_writable($dir)) {
+            $resolved = $dir;
+            return $resolved;
+        }
+    }
+
+    // Last-resort path.
+    $resolved = dirname(__DIR__) . '/data';
+    return $resolved;
 }
 
 function admin_db_path(): string
@@ -18,11 +52,20 @@ function admin_db(): PDO
         return $pdo;
     }
 
-    if (!is_dir(admin_data_dir())) {
-        mkdir(admin_data_dir(), 0750, true);
+    $resolvedDir = admin_data_dir();
+    $resolvedDbPath = admin_db_path();
+    $legacyDbPath = dirname(__DIR__) . '/data/app.sqlite';
+
+    if (!is_dir($resolvedDir)) {
+        mkdir($resolvedDir, 0750, true);
     }
 
-    $pdo = new PDO('sqlite:' . admin_db_path());
+    // One-time migration from legacy path if a newer external path is selected.
+    if (!file_exists($resolvedDbPath) && file_exists($legacyDbPath) && realpath($resolvedDbPath) !== realpath($legacyDbPath)) {
+        @copy($legacyDbPath, $resolvedDbPath);
+    }
+
+    $pdo = new PDO('sqlite:' . $resolvedDbPath);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
@@ -183,4 +226,3 @@ function admin_delete_submission(int $id): void
     $stmt = admin_db()->prepare("DELETE FROM submissions WHERE id = :id");
     $stmt->execute([':id' => $id]);
 }
-
