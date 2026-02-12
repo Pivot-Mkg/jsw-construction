@@ -19,7 +19,9 @@ jobs:
       - name: Upload files to GoDaddy via FTP
         run: |
           lftp -f "
+          set ftp:ssl-allow no
           open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}
+
           mirror -R ./ /public_html  # Upload files from your repo to the public_html directory
           quit
           "
