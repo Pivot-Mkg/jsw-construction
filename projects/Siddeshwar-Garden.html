@@ -500,48 +500,6 @@
             </div>
         </footer>
 
-        <!-- JS (Copied exactly from your contact page) -->
-        <script>
-            lucide.createIcons();
-            window.addEventListener('load', () => document.body.classList.add('loaded'));
-
-            const menuBtn = document.getElementById('menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            let isMenuOpen = false;
-
-            menuBtn.addEventListener('click', () => {
-                isMenuOpen = !isMenuOpen;
-                mobileMenu.classList.toggle('open', isMenuOpen);
-                menuBtn.innerHTML = isMenuOpen
-                    ? '<i data-lucide="x" width="24" height="24"></i>'
-                    : '<i data-lucide="menu" width="24" height="24"></i>';
-                lucide.createIcons();
-            });
-
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('open');
-                    isMenuOpen = false;
-                    menuBtn.innerHTML = '<i data-lucide="menu" width="24" height="24"></i>';
-                    lucide.createIcons();
-                });
-            });
-
-            function setupScrollReveal() {
-                const observer = new IntersectionObserver((entries, obs) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
-                            obs.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.2 });
-                document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
-            }
-            setupScrollReveal();
-
-        </script>
-
     </main>
 
     <!-- PROJECT MODALS -->

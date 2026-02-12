@@ -654,7 +654,7 @@
             try {
                 // Submit to PHP backend
                 const formData = new FormData(contactForm);
-                const response = await fetch('contact-form-phpmailer.php', {
+                const response = await fetch('contact-form.php', {
                     method: 'POST',
                     body: formData
                 });
