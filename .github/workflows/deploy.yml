@@ -3,7 +3,7 @@ name: Deploy to GoDaddy via FTP
 on:
   push:
     branches:
-      - main # Trigger deployment when pushing to the 'main' branch
+      - main # Trigger deployment on push to the 'main' branch
 
 jobs:
   deploy:
@@ -14,14 +14,13 @@ jobs:
         uses: actions/checkout@v2 # Step to checkout the code from GitHub
 
       - name: Install FTP client
-        run: sudo apt-get install lftp # Install the lftp client for  FTP deployment
+        run: sudo apt-get install lftp # Install the lftp client for FTP deployment
 
       - name: Upload files to GoDaddy via FTP
         run: |
           lftp -f "
-          set ftp:ssl-allow no
-          open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}
-
-          mirror -R ./ /public_html  # Upload files from your repo to the public_html directory
+          set ftp:ssl-allow no  # Disable SSL for FTP
+          open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp://${{ secrets.FTP_SERVER }}:21  # Specify custom port if needed
+          mirror -R ./ /public_html  # Ensure this path matches your GoDaddy FTP structure
           quit
           "
