@@ -207,12 +207,6 @@
             </div>
 
             <nav class="flex-1 py-6 space-y-2 px-3">
-                <a class="sidebar-link flex items-center px-4 py-3 text-slate-600 hover:bg-slate-100 hover:text-primary rounded-lg transition-colors group"
-                    href="<?php echo admin_e(dashboard_query()) ?>">
-                    <span
-                        class="sidebar-icon material-icons text-slate-400 group-hover:text-primary mr-3">dashboard</span>
-                    <span class="sidebar-text font-medium">Dashboard</span>
-                </a>
                 <a class="sidebar-link flex items-center px-4 py-3 <?php echo $view === 'index' ? 'bg-white text-primary shadow-sm ring-1 ring-primary/20' : 'text-slate-600 hover:bg-slate-100 hover:text-primary' ?> rounded-lg transition-colors"
                     href="<?php echo admin_e(dashboard_query(['view' => 'index'])) ?>">
                     <span
@@ -246,10 +240,41 @@
         <div class="flex-1 flex flex-col overflow-y-auto bg-background-light">
             <header
                 class="md:hidden flex items-center justify-between p-4 bg-white text-secondary border-b border-slate-200">
+                <button id="mobileMenuBtn" class="text-secondary focus:outline-none" type="button"
+                    aria-label="Open menu">
+                    <span class="material-icons">menu</span>
+                </button>
                 <span class="font-bold text-lg">JSK Buildwell</span>
-                <a class="text-secondary focus:outline-none" href="logout.php"><span
-                        class="material-icons">logout</span></a>
+                <a class="text-secondary focus:outline-none" href="<?php echo admin_e(dashboard_query(['view' => $view])) ?>"
+                    aria-label="Refresh">
+                    <span class="material-icons">refresh</span>
+                </a>
             </header>
+
+            <div id="mobileMenuOverlay"
+                class="md:hidden fixed inset-0 bg-black/40 z-40 opacity-0 pointer-events-none transition-opacity"></div>
+            <aside id="mobileMenu"
+                class="md:hidden fixed top-0 left-0 h-full w-72 max-w-[85vw] bg-white z-50 shadow-xl -translate-x-full transition-transform duration-300">
+                <div class="p-4 border-b border-slate-200 flex items-center justify-between">
+                    <h3 class="font-semibold text-secondary">Admin Menu</h3>
+                    <button id="mobileMenuClose" class="text-slate-500" type="button" aria-label="Close menu">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+                <nav class="p-3 space-y-2">
+                    <a class="flex items-center px-4 py-3 <?php echo $view === 'index' ? 'bg-amber-50 text-primary ring-1 ring-primary/20' : 'text-slate-700 hover:bg-slate-50' ?> rounded-lg"
+                        href="<?php echo admin_e(dashboard_query(['view' => 'index'])) ?>">
+                        <span class="material-icons text-sm mr-2">table_chart</span>Index Forms
+                    </a>
+                    <a class="flex items-center px-4 py-3 <?php echo $view === 'contact' ? 'bg-amber-50 text-primary ring-1 ring-primary/20' : 'text-slate-700 hover:bg-slate-50' ?> rounded-lg"
+                        href="<?php echo admin_e(dashboard_query(['view' => 'contact'])) ?>">
+                        <span class="material-icons text-sm mr-2">contact_mail</span>Contact Forms
+                    </a>
+                    <a class="flex items-center px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg" href="logout.php">
+                        <span class="material-icons text-sm mr-2">logout</span>Logout
+                    </a>
+                </nav>
+            </aside>
 
             <header
                 class="hidden md:flex justify-between items-center py-5 px-8 bg-surface-light border-b border-slate-200/60 shadow-sm">
@@ -277,23 +302,23 @@
                 <div class="bg-surface-light rounded-xl border border-slate-100 overflow-hidden">
                     <div
                         class="px-6 py-4 border-b border-slate-100 bg-slate-50/30 flex flex-wrap justify-between items-end gap-3">
-                        <form class="flex flex-wrap items-end gap-3" method="get">
+                        <form class="flex flex-wrap items-end gap-3 w-full lg:w-auto" method="get">
                             <input type="hidden" name="view" value="<?php echo admin_e($view) ?>">
-                            <div class="relative">
+                            <div class="relative w-full sm:w-auto">
                                 <span class="material-icons absolute left-3 top-2.5 text-primary text-sm">search</span>
                                 <input
                                     class="pl-9 pr-4 py-2 text-sm border-slate-200 rounded-lg bg-white focus:ring-primary focus:border-primary w-72 shadow-sm"
                                     name="q" placeholder="Search entries..." type="text"
                                     value="<?php echo admin_e($search) ?>" />
                             </div>
-                            <div>
+                            <div class="w-full sm:w-auto">
                                 <label class="block text-xs text-slate-500 mb-1">From</label>
                                 <input
                                     class="js-date-input py-2 px-3 text-sm border-slate-200 rounded-lg bg-white focus:ring-primary focus:border-primary shadow-sm"
                                     name="date_from" type="text" placeholder="YYYY-MM-DD"
                                     value="<?php echo admin_e($dateFrom) ?>">
                             </div>
-                            <div>
+                            <div class="w-full sm:w-auto">
                                 <label class="block text-xs text-slate-500 mb-1">To</label>
                                 <input
                                     class="js-date-input py-2 px-3 text-sm border-slate-200 rounded-lg bg-white focus:ring-primary focus:border-primary shadow-sm"
@@ -472,6 +497,34 @@
         toggleBtn.addEventListener('click', function() {
             const collapsed = sidebar.classList.contains('w-24');
             setCollapsed(!collapsed);
+        });
+    })();
+
+    (function() {
+        const menu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('mobileMenuOverlay');
+        const openBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('mobileMenuClose');
+
+        if (!menu || !overlay || !openBtn || !closeBtn) {
+            return;
+        }
+
+        function setOpen(isOpen) {
+            menu.classList.toggle('-translate-x-full', !isOpen);
+            overlay.classList.toggle('opacity-0', !isOpen);
+            overlay.classList.toggle('pointer-events-none', !isOpen);
+            document.body.classList.toggle('overflow-hidden', isOpen);
+        }
+
+        openBtn.addEventListener('click', function() {
+            setOpen(true);
+        });
+        closeBtn.addEventListener('click', function() {
+            setOpen(false);
+        });
+        overlay.addEventListener('click', function() {
+            setOpen(false);
         });
     })();
     </script>
