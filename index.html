@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,15 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <title>JSK Buildwell - Redefining Luxury Living</title>
+    <meta name="description"
+        content="JSK Buildwell redefines luxury living with premium residences, elegant design, and trusted craftsmanship across Mumbai and Thane.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="JSK Buildwell">
+    <meta name="theme-color" content="#F0EFE9">
+    <link rel="canonical" href="/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="JSK Buildwell">
+    <meta property="og:title" content="JSK Buildwell - Redefining Luxury Living">
+    <meta property="og:description"
+        content="JSK Buildwell redefines luxury living with premium residences, elegant design, and trusted craftsmanship across Mumbai and Thane.">
+    <meta property="og:url" content="/">
+    <meta property="og:image" content="/assets/images/logo.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JSK Buildwell - Redefining Luxury Living">
+    <meta name="twitter:description"
+        content="JSK Buildwell redefines luxury living with premium residences, elegant design, and trusted craftsmanship across Mumbai and Thane.">
+    <meta name="twitter:image" content="/assets/images/logo.png">
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preload" as="image" href="./assets/images/banners/banner-1.jpg" fetchpriority="high">
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 
     <!-- Lenis smooth scroll (loaded before navigation module) -->
-    <script src="https://unpkg.com/@studio-freight/lenis@latest/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@latest/dist/lenis.min.js" defer></script>
 
     <!-- Navigation Module -->
-    <script src="./assets/js/navigation.js"></script>
+    <script src="./assets/js/navigation.js" defer></script>
     <link rel="stylesheet" href="./assets/styles/pages.css">
 
     <!-- Google Fonts -->
@@ -521,7 +544,7 @@
         /* --- Main Layout --- */
         .hero-section {
             display: flex;
-            min-height: 100vh;
+            min-height: calc(100vh - (var(--header-height) + 50px));
             /* padding-top: var(--header-height); */
         }
 
@@ -1976,7 +1999,7 @@
         <a href="index.html" class="logo-link">
             <!-- style="font-size: 1.5rem; font-weight: 500; position: absolute; left: 50%; transform: translateX(-50%);"> -->
             <!-- JSK Buildwell -->
-            <img src="./assets/images/logo.png" alt="" srcset="">
+            <img src="./assets/images/logo.png" alt="" width="220" height="80" decoding="async" fetchpriority="high">
         </a>
         <!-- <div class="header-actions">
                 <i data-lucide="user" class="user-icon" width="20" height="20" style="cursor: pointer;"></i>
@@ -2069,7 +2092,8 @@
             <!-- Right Panel -->
             <div class="right-panel">
                 <div id="main-image-wrapper" class="main-image-wrapper">
-                    <img id="main-image" src="./assets/images/banners/banner-1.jpg" alt="Modern Living Room">
+                    <img id="main-image" src="./assets/images/banners/banner-1.jpg" alt="Modern Living Room"
+                        width="1280" height="720" decoding="async" fetchpriority="high">
                     <div class="gradient-overlay"></div>
                 </div>
                 <div class="thumbnails-strip">
@@ -2106,7 +2130,8 @@
 
                     <div class="values__card">
                         <div class="values__image">
-                            <img src="./assets/images/innovation-img.jpg" alt="Innovation in design">
+                            <img src="./assets/images/innovation-img.jpg" alt="Innovation in design" loading="lazy"
+                                decoding="async">
                         </div>
 
                         <h3 class="values__title">Innovation</h3>
@@ -2120,7 +2145,8 @@
 
                     <div class="values__card">
                         <div class="values__image">
-                            <img src="./assets/images/commitment-to-excellance.jpg" alt="Commitment to excellence">
+                            <img src="./assets/images/commitment-to-excellance.jpg" alt="Commitment to excellence"
+                                loading="lazy" decoding="async">
                         </div>
 
                         <h3 class="values__title">Commitment to Excellence</h3>
@@ -2232,7 +2258,8 @@
             </h3>
             <div class="bento-grid">
                 <div class="bento-item bento-large-left reveal-up delay-100">
-                    <img src="./assets/images/Bespoke-Excellence.jpg" class="bento-img-full" alt="Team Chat">
+                    <img src="./assets/images/Bespoke-Excellence.jpg" class="bento-img-full" alt="Team Chat"
+                        loading="lazy" decoding="async">
                     <div class="bento-overlay-text">
                         <h4 class="bento-title">Bespoke Excellence</h4>
                         <p class="bento-text">Quality materials and flawless finishes in every project.</p>
@@ -2248,7 +2275,8 @@
                     <p class="bento-text">20 years of crafting trust and opulence in Thane.</p>
                 </div>
                 <div class="bento-item bento-large-right reveal-up delay-400">
-                    <img src="./assets/images/abstract-con.jpg" class="bento-img-full" alt="Progress">
+                    <img src="./assets/images/abstract-con.jpg" class="bento-img-full" alt="Progress" loading="lazy"
+                        decoding="async">
                     <div class="bento-overlay-text">
                         <h4 class="bento-title">Timeless Design</h4>
                         <p class="bento-text">Redefining the landscape of with iconic projects.</p>
@@ -2272,7 +2300,8 @@
                 <div class="accordion-container">
                     <div class="accordion-image-wrapper reveal-up delay-100">
                         <div class="accordion-main-image">
-                            <img id="accordion-img" src="./assets/images/accordionImages/Our-Legacy.jpg" alt="Detail">
+                            <img id="accordion-img" src="./assets/images/accordionImages/Our-Legacy.jpg" alt="Detail"
+                                loading="lazy" decoding="async">
                         </div>
                     </div>
                     <div class="accordion-content-wrapper reveal-up delay-200">
@@ -2368,7 +2397,7 @@
 
             <div class="final-bg">
                 <!-- <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6" -->
-                <img src="./assets/images/footer-p.png" alt="Modern Pool Villa">
+                <img src="./assets/images/footer-p.png" alt="Modern Pool Villa" loading="lazy" decoding="async">
             </div>
             <div class="final-overlay"></div>
 
@@ -2486,13 +2515,22 @@
         const accordionImg = document.getElementById('accordion-img');
 
         // --- INIT ---
-        lucide.createIcons();
-        window.addEventListener('load', () => {
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) window.lucide.createIcons();
             body.classList.add('loaded');
             renderThumbnails();
             initCarousel();
-            setupScrollReveal();
-            startHeroAutoPlay(); // Start the Hero Slideshow
+
+            const initNonCritical = () => {
+                setupScrollReveal();
+                startHeroAutoPlay();
+            };
+
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(initNonCritical, { timeout: 1200 });
+            } else {
+                setTimeout(initNonCritical, 0);
+            }
         });
         window.addEventListener('resize', () => initCarousel(true));
 
@@ -2515,7 +2553,7 @@
                     changeImage(idx);
                     startHeroAutoPlay(); // Reset timer on manual interaction
                 };
-                btn.innerHTML = `<img src="${thumb}" alt="View ${idx + 1}">`;
+                btn.innerHTML = `<img src="${thumb}" alt="View ${idx + 1}" loading="lazy" decoding="async">`;
                 thumbnailsContainer.appendChild(btn);
             });
         }
@@ -2567,7 +2605,7 @@
                     card.classList.add('text-card');
                     card.innerHTML = `<h4>${item.title}</h4><p>${item.text}</p>`;
                 } else {
-                    card.innerHTML = `<img src="${item.src}" alt="Carousel Item">`;
+                    card.innerHTML = `<img src="${item.src}" alt="Carousel Item" loading="lazy" decoding="async">`;
                 }
 
                 // Click Handler to Center Card
