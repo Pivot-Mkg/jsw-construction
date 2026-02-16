@@ -4,11 +4,12 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-function respond($success, $message, $status = 200) {
+function respond($success, $message, $status = 200)
+{
     http_response_code($status);
     echo json_encode([
         'success' => $success,
-        'message' => $message
+        'message' => $message,
     ]);
     exit;
 }
@@ -17,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     respond(false, 'Method not allowed', 405);
 }
 
-$name = trim($_POST['name'] ?? '');
+$name  = trim($_POST['name'] ?? '');
 $email = trim($_POST['email'] ?? '');
 $phone = trim($_POST['phone'] ?? '');
 
@@ -25,19 +26,19 @@ if ($name === '' || $email === '' || $phone === '') {
     respond(false, 'Name, email and phone are required', 400);
 }
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(false, 'Invalid email address', 400);
 }
 
 try {
     require_once __DIR__ . '/admin/includes/db.php';
     admin_insert_submission([
-        'form_type' => 'index',
-        'name' => $name,
-        'email' => $email,
-        'phone' => $phone,
-        'city' => null,
-        'message' => null,
+        'form_type'  => 'index',
+        'name'       => $name,
+        'email'      => $email,
+        'phone'      => $phone,
+        'city'       => null,
+        'message'    => null,
         'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
         'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
     ]);
@@ -46,12 +47,12 @@ try {
     respond(false, 'Failed to save submission', 500);
 }
 
-$to = 'aakash@pivotmkg.com';
+$to      = 'aakash@pivotmkg.com,rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
 $subject = 'New Private Tour Request - JSK Buildwell';
 
-$safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-$safeEmail = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
-$safePhone = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
+$safeName    = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+$safeEmail   = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+$safePhone   = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
 $submittedAt = date('Y-m-d H:i:s');
 
 $messageBody = "
@@ -83,7 +84,7 @@ $messageBody = "
 </body>
 </html>";
 
-$headers = "MIME-Version: 1.0\r\n";
+$headers  = "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 $headers .= "From: JSK Buildwell <noreply@jskbuildwell.com>\r\n";
 $headers .= "Reply-To: " . $email . "\r\n";
