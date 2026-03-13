@@ -73,25 +73,25 @@ function email_shell(string $eyebrow, string $title, string $intro, string $cont
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 </head>
-<body style='margin:0;padding:24px;background:#f4efe7;font-family:Arial,sans-serif;color:#1f2937;'>
+<body bgcolor='#f4efe7' style='margin:0;padding:24px;background-color:#f4efe7;font-family:Arial,sans-serif;color:#1f2937;'>
   <table role='presentation' cellpadding='0' cellspacing='0' width='100%' style='max-width:680px;margin:0 auto;border-collapse:collapse;'>
     <tr>
       <td style='padding-bottom:18px;text-align:center;'>
-        <div style='display:inline-block;padding:7px 14px;border-radius:999px;background:#efe2ca;color:#9a7231;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;'>$eyebrow</div>
+        <div style='display:inline-block;padding:7px 14px;border-radius:999px;background-color:#efe2ca;color:#9a7231;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;'>$eyebrow</div>
       </td>
     </tr>
     <tr>
-      <td style='background:#ffffff;border:1px solid #eadfcf;border-radius:20px;overflow:hidden;box-shadow:0 12px 40px rgba(31,41,55,0.08);'>
+      <td bgcolor='#ffffff' style='background-color:#ffffff;border:1px solid #eadfcf;border-radius:20px;overflow:hidden;'>
         <table role='presentation' cellpadding='0' cellspacing='0' width='100%' style='border-collapse:collapse;'>
           <tr>
-            <td style='padding:34px 32px 18px;background:linear-gradient(135deg,#1f2533 0%,#3e2f20 100%);color:#ffffff;'>
+            <td bgcolor='#1f2533' style='padding:34px 32px 22px;background-color:#1f2533;background-image:linear-gradient(135deg,#1f2533 0%,#3e2f20 100%);color:#ffffff;'>
               <div style='font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#e8d6b1;font-weight:700;'>JSK Buildwell</div>
-              <h1 style='margin:14px 0 10px;font-size:30px;line-height:1.1;font-family:Georgia,serif;font-weight:700;color:#ffffff;'>$title</h1>
-              <p style='margin:0;font-size:15px;line-height:1.7;color:#f3eee4;'>$intro</p>
+              <div style='margin:14px 0 10px;font-size:30px;line-height:1.15;font-family:Georgia,serif;font-weight:700;color:#ffffff;'>$title</div>
+              <div style='margin:0;font-size:15px;line-height:1.7;color:#f3eee4;'>$intro</div>
             </td>
           </tr>
           <tr>
-            <td style='padding:28px 32px 32px;background:#ffffff;'>
+            <td bgcolor='#ffffff' style='padding:28px 32px 32px;background-color:#ffffff;'>
               $content
               $footerBlock
             </td>
@@ -149,7 +149,7 @@ $submittedAt = date('Y-m-d H:i:s');
 $ipAddress = htmlspecialchars((string) ($_SERVER['REMOTE_ADDR'] ?? ''), ENT_QUOTES, 'UTF-8');
 
 $adminContent = "
-<div style='margin-bottom:20px;padding:18px 20px;border-radius:16px;background:#fbf8f2;border:1px solid #efe2ca;'>
+<div style='margin-bottom:20px;padding:18px 20px;border-radius:16px;background-color:#fbf8f2;border:1px solid #efe2ca;'>
   <p style='margin:0;color:#5f584d;font-size:14px;line-height:1.7;'>A new popup lead has been submitted from the Casa Benau project page. The enquiry details are below for immediate follow-up.</p>
 </div>
 <table role='presentation' cellpadding='0' cellspacing='0' width='100%' style='border-collapse:collapse;'>
@@ -173,7 +173,7 @@ $adminMessageBody = email_shell(
 $userContent = "
 <p style='margin:0 0 16px;color:#4f4a40;font-size:15px;line-height:1.8;'>Dear $safeName,</p>
 <p style='margin:0 0 18px;color:#4f4a40;font-size:15px;line-height:1.8;'>Thank you for your interest in <strong>$safeProject</strong>. We have received your enquiry and our team will get in touch shortly with the project brochure, pricing details, and next steps for a site visit.</p>
-<div style='margin:0 0 22px;padding:18px 20px;border-radius:16px;background:#fbf8f2;border:1px solid #efe2ca;'>
+<div style='margin:0 0 22px;padding:18px 20px;border-radius:16px;background-color:#fbf8f2;border:1px solid #efe2ca;'>
   <div style='font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#9a7231;font-weight:700;margin-bottom:10px;'>Your enquiry details</div>
   <table role='presentation' cellpadding='0' cellspacing='0' width='100%' style='border-collapse:collapse;'>
     " . detail_row('Name', $safeName) . "
@@ -192,14 +192,14 @@ $userContent = "
 </div>
 <table role='presentation' cellpadding='0' cellspacing='0' width='100%' style='border-collapse:separate;border-spacing:0 12px;'>
   <tr>
-    <td style='padding:16px 18px;border-radius:16px;background:#1f2533;color:#ffffff;'>
+    <td bgcolor='#1f2533' style='padding:16px 18px;border-radius:16px;background-color:#1f2533;color:#ffffff;'>
       <div style='font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#e8d6b1;font-weight:700;margin-bottom:8px;'>Contact JSK Buildwell</div>
       <div style='font-size:15px;line-height:1.8;'>Email: <a href='mailto:$safeSalesEmail' style='color:#ffffff;text-decoration:none;'>$safeSalesEmail</a><br>Phone: <a href='tel:$safeSalesPhone' style='color:#ffffff;text-decoration:none;'>$safeSalesPhone</a></div>
     </td>
   </tr>
 </table>
 <div style='margin-top:10px;'>
-  <a href='$safeProjectUrl' style='display:inline-block;padding:13px 22px;border-radius:999px;background:#c19d60;color:#ffffff;text-decoration:none;font-weight:700;'>View Casa Benau</a>
+  <a href='$safeProjectUrl' style='display:inline-block;padding:13px 22px;border-radius:999px;background-color:#c19d60;color:#ffffff;text-decoration:none;font-weight:700;'>View Casa Benau</a>
 </div>";
 
 $userMessageBody = email_shell(
