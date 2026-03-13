@@ -42,23 +42,25 @@
     <!-- AOS Animate On Scroll -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1655971818619256');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1655971818619256');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 
 <style>
@@ -251,9 +253,181 @@ src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
             grid-template-columns: 1fr;
         }
     }
+
+    .casa-lead-popup[hidden] {
+        display: none;
+    }
+
+    .casa-lead-popup {
+        position: fixed;
+        inset: 0;
+        z-index: 1200;
+        display: grid;
+        place-items: center;
+        padding: 1.25rem;
+        background: rgba(12, 19, 35, 0.58);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.28s ease;
+    }
+
+    .casa-lead-popup.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .casa-lead-dialog {
+        position: relative;
+        width: min(100%, 440px);
+        background: linear-gradient(180deg, #fffdf9 0%, #f6efe4 100%);
+        border: 1px solid rgba(193, 157, 96, 0.24);
+        border-radius: 24px;
+        padding: 1.6rem;
+        box-shadow: 0 24px 60px rgba(12, 19, 35, 0.22);
+        transform: translateY(22px) scale(0.98);
+        transition: transform 0.28s ease;
+    }
+
+    .casa-lead-popup.is-visible .casa-lead-dialog {
+        transform: translateY(0) scale(1);
+    }
+
+    .casa-lead-close {
+        position: absolute;
+        top: 0.85rem;
+        right: 0.85rem;
+        width: 40px;
+        height: 40px;
+        border: 0;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.78);
+        color: #1b2230;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .casa-lead-close:hover {
+        background: #ffffff;
+        transform: rotate(90deg);
+    }
+
+    .casa-lead-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.45rem 0.8rem;
+        border-radius: 999px;
+        background: rgba(193, 157, 96, 0.12);
+        color: var(--accent-gold, #c19d60);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .casa-lead-title {
+        margin: 1rem 0 0.7rem;
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(1.4rem, 2vw, 2rem);
+        line-height: 0.98;
+        color: #1e1b16;
+    }
+
+    .casa-lead-copy {
+        margin: 0 0 1.2rem;
+        color: #5d564c;
+        line-height: 1.65;
+    }
+
+    .casa-lead-form {
+        display: grid;
+        gap: 0.9rem;
+    }
+
+    .casa-lead-field {
+        display: grid;
+        gap: 0.35rem;
+    }
+
+    .casa-lead-field input {
+        width: 100%;
+        border: 1px solid rgba(27, 34, 48, 0.12);
+        border-radius: 14px;
+        padding: 0.95rem 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        color: #1e1b16;
+        font: inherit;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .casa-lead-field input:focus {
+        outline: none;
+        border-color: rgba(193, 157, 96, 0.85);
+        box-shadow: 0 0 0 4px rgba(193, 157, 96, 0.14);
+    }
+
+    .casa-lead-submit {
+        width: 100%;
+        border: 0;
+        border-radius: 999px;
+        padding: 0.95rem 1.2rem;
+        background: var(--accent-gold);
+        color: #ffffff;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+    }
+
+    .casa-lead-submit:hover:not(:disabled) {
+        background: #a3824a;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(193, 157, 96, 0.3);
+    }
+
+    .casa-lead-submit:disabled {
+        opacity: 0.7;
+        cursor: wait;
+    }
+
+    .casa-lead-form-status {
+        min-height: 1.2rem;
+        margin: 0;
+        font-size: 0.88rem;
+        color: #5d564c;
+    }
+
+    .casa-lead-form-status.is-error {
+        color: #b42318;
+    }
+
+    .casa-lead-note {
+        margin: 0;
+        font-size: 0.82rem;
+        color: #7d766b;
+        line-height: 1.5;
+    }
+
+    body.casa-lead-popup-open {
+        overflow: hidden;
+    }
+
+    @media (max-width: 640px) {
+        .casa-lead-dialog {
+            padding: 1.35rem 1.1rem;
+            border-radius: 20px;
+        }
+
+        .casa-lead-title {
+            font-size: 1.9rem;
+        }
+    }
 </style>
 
-<body>    <!-- NAVBAR -->
+<body> <!-- NAVBAR -->
     <header class="main-header">
         <button id="menu-btn" class="mobile-toggle">
             <i data-lucide="menu" width="24" height="24"></i>
@@ -724,6 +898,44 @@ quarters, and elevator access. Price guidance is ₹4.5–5.0 crore per villa, s
         </div>
     </footer>
 
+    <div class="casa-lead-popup" id="casaLeadPopup" hidden aria-hidden="true">
+        <div class="casa-lead-dialog" role="dialog" aria-modal="true" aria-labelledby="casaLeadTitle">
+            <button type="button" class="casa-lead-close" data-lead-close aria-label="Close lead form">
+                <i data-lucide="x" width="18" height="18"></i>
+            </button>
+            <div class="casa-lead-badge">Private Enquiry</div>
+            <h2 class="casa-lead-title" id="casaLeadTitle">Request details for Casa Benau.</h2>
+            <p class="casa-lead-copy">
+                Share your details and our team will connect with pricing, brochure, and visit options.
+            </p>
+
+            <form class="casa-lead-form" id="casaLeadForm" action="../casa-benau-lead.php" method="post" novalidate>
+                <input type="hidden" name="project" value="Casa Benau 94 &amp; 95">
+                <input type="hidden" name="source_page" value="/projects/Casa-Benau.html">
+
+                <div class="casa-lead-field">
+                    <input type="text" id="casaLeadName" name="name" placeholder="Full name" autocomplete="name"
+                        aria-label="Full name" required>
+                </div>
+
+                <div class="casa-lead-field">
+                    <input type="tel" id="casaLeadPhone" name="phone" placeholder="Phone number" autocomplete="tel"
+                        aria-label="Phone number" required>
+                </div>
+
+                <div class="casa-lead-field">
+                    <input type="email" id="casaLeadEmail" name="email" placeholder="Email" autocomplete="email"
+                        aria-label="Email" required>
+                </div>
+
+                <p class="casa-lead-form-status" id="casaLeadStatus" aria-live="polite"></p>
+
+                <button type="submit" class="casa-lead-submit" id="casaLeadSubmit">Get project details</button>
+                <!-- <p class="casa-lead-note">After submission you will be redirected to the thank-you page.</p> -->
+            </form>
+        </div>
+    </div>
+
     <!-- JS (Copied exactly from your contact page) -->
     <script>
         lucide.createIcons();
@@ -833,6 +1045,115 @@ quarters, and elevator access. Price guidance is ₹4.5–5.0 crore per villa, s
                 console.warn('Lenis init failed:', e);
             }
         }
+    </script>
+
+    <script>
+        (function () {
+            const popup = document.getElementById('casaLeadPopup');
+            const form = document.getElementById('casaLeadForm');
+            const submitBtn = document.getElementById('casaLeadSubmit');
+            const status = document.getElementById('casaLeadStatus');
+
+            if (!popup || !form || !submitBtn || !status) {
+                return;
+            }
+
+            let hideTimer = null;
+
+            function setStatus(message, type) {
+                status.textContent = message || '';
+                status.classList.remove('is-error');
+                if (type === 'error') {
+                    status.classList.add('is-error');
+                }
+            }
+
+            function showPopup() {
+                popup.hidden = false;
+                popup.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('casa-lead-popup-open');
+
+                window.requestAnimationFrame(() => {
+                    popup.classList.add('is-visible');
+                });
+            }
+
+            function closePopup() {
+                popup.classList.remove('is-visible');
+                popup.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('casa-lead-popup-open');
+
+                window.clearTimeout(hideTimer);
+                hideTimer = window.setTimeout(() => {
+                    popup.hidden = true;
+                }, 280);
+            }
+
+            popup.querySelectorAll('[data-lead-close]').forEach((button) => {
+                button.addEventListener('click', () => closePopup());
+            });
+
+            popup.addEventListener('click', (event) => {
+                if (event.target === popup) {
+                    closePopup();
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && !popup.hidden) {
+                    closePopup();
+                }
+            });
+
+            window.setTimeout(showPopup, 3000);
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                setStatus('', '');
+
+                if (!form.reportValidity()) {
+                    return;
+                }
+
+                const phone = form.elements.phone.value.trim();
+                if (!/^[0-9+\-\s()]{7,}$/.test(phone)) {
+                    setStatus('Please enter a valid phone number.', 'error');
+                    form.elements.phone.focus();
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.dataset.originalText = submitBtn.dataset.originalText || submitBtn.textContent;
+                submitBtn.textContent = 'Submitting...';
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: new FormData(form)
+                    });
+
+                    const result = await response.json().catch(() => ({
+                        success: false,
+                        message: 'Mail service is not responding. Please try again later.'
+                    }));
+
+                    if (!response.ok || !result.success) {
+                        throw new Error(result.message || 'Failed to send your enquiry.');
+                    }
+
+                    window.location.href = '../thank-you.html';
+                } catch (error) {
+                    setStatus(error.message || 'Unable to submit the form right now.', 'error');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = submitBtn.dataset.originalText || 'Get project details';
+                }
+            });
+        })();
     </script>
 </body>
 
