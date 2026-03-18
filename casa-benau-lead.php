@@ -5,56 +5,56 @@ header('Access-Control-Allow-Headers: Content-Type, X-Requested-With');
 
 function wants_json_response(): bool
 {
-    $requestedWith = strtolower((string) ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? ''));
-    $accept = strtolower((string) ($_SERVER['HTTP_ACCEPT'] ?? ''));
+  $requestedWith = strtolower((string) ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? ''));
+  $accept = strtolower((string) ($_SERVER['HTTP_ACCEPT'] ?? ''));
 
-    return $requestedWith === 'xmlhttprequest' || strpos($accept, 'application/json') !== false;
+  return $requestedWith === 'xmlhttprequest' || strpos($accept, 'application/json') !== false;
 }
 
 function respond(bool $success, string $message, int $status = 200): void
 {
-    if (wants_json_response()) {
-        http_response_code($status);
-        header('Content-Type: application/json');
-        echo json_encode([
-            'success' => $success,
-            'message' => $message,
-        ]);
-        exit;
-    }
-
-    if ($success) {
-        header('Location: /thank-you.html');
-        exit;
-    }
-
+  if (wants_json_response()) {
     http_response_code($status);
-    header('Content-Type: text/plain; charset=UTF-8');
-    echo $message;
+    header('Content-Type: application/json');
+    echo json_encode([
+      'success' => $success,
+      'message' => $message,
+    ]);
     exit;
+  }
+
+  if ($success) {
+    header('Location: /thank-you.html');
+    exit;
+  }
+
+  http_response_code($status);
+  header('Content-Type: text/plain; charset=UTF-8');
+  echo $message;
+  exit;
 }
 
 function mail_headers(?string $replyTo = null, array $ccRecipients = []): string
 {
-    $headers = "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $headers .= "From: JSK Buildwell <noreply@jskbuildwell.com>\r\n";
+  $headers = "MIME-Version: 1.0\r\n";
+  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+  $headers .= "From: JSK Buildwell <noreply@jskbuildwell.com>\r\n";
 
-    if ($replyTo !== null && $replyTo !== '') {
-        $headers .= "Reply-To: $replyTo\r\n";
-    }
+  if ($replyTo !== null && $replyTo !== '') {
+    $headers .= "Reply-To: $replyTo\r\n";
+  }
 
-    $ccRecipients = array_values(array_unique(array_filter(array_map('trim', $ccRecipients))));
-    if ($ccRecipients !== []) {
-        $headers .= 'Cc: ' . implode(',', $ccRecipients) . "\r\n";
-    }
+  $ccRecipients = array_values(array_unique(array_filter(array_map('trim', $ccRecipients))));
+  if ($ccRecipients !== []) {
+    $headers .= 'Cc: ' . implode(',', $ccRecipients) . "\r\n";
+  }
 
-    return $headers;
+  return $headers;
 }
 
 function detail_row(string $label, string $value): string
 {
-    return "<tr>
+  return "<tr>
         <td style='padding:12px 0;border-top:1px solid #ece7de;width:140px;color:#7a7468;font-size:13px;vertical-align:top;'>$label</td>
         <td style='padding:12px 0;border-top:1px solid #ece7de;color:#1f2937;font-size:14px;font-weight:600;line-height:1.6;'>$value</td>
     </tr>";
@@ -62,11 +62,11 @@ function detail_row(string $label, string $value): string
 
 function email_shell(string $eyebrow, string $title, string $intro, string $content, string $footer = ''): string
 {
-    $footerBlock = $footer !== ''
-        ? "<p style='margin:20px 0 0;color:#7a7468;font-size:12px;line-height:1.6;'>$footer</p>"
-        : '';
+  $footerBlock = $footer !== ''
+    ? "<p style='margin:20px 0 0;color:#7a7468;font-size:12px;line-height:1.6;'>$footer</p>"
+    : '';
 
-    return "
+  return "
 <!doctype html>
 <html>
 <head>
@@ -105,7 +105,7 @@ function email_shell(string $eyebrow, string $title, string $intro, string $cont
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    respond(false, 'Method not allowed', 405);
+  respond(false, 'Method not allowed', 405);
 }
 
 $name = trim((string) ($_POST['name'] ?? ''));
@@ -115,22 +115,23 @@ $project = trim((string) ($_POST['project'] ?? 'Casa Benau 94 & 95'));
 $sourcePage = trim((string) ($_POST['source_page'] ?? '/projects/Casa-Benau.html'));
 
 if ($name === '' || $email === '' || $phone === '') {
-    respond(false, 'Name, email and phone are required.', 400);
+  respond(false, 'Name, email and phone are required.', 400);
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    respond(false, 'Invalid email address.', 400);
+  respond(false, 'Invalid email address.', 400);
 }
 
 if (!preg_match('/^[0-9+\-\s()]{7,}$/', $phone)) {
-    respond(false, 'Invalid phone number.', 400);
+  respond(false, 'Invalid phone number.', 400);
 }
 
 $to = 'sales@jskbuildwell.com';
 $ccRecipients = [
-    'aakash@pivotmkg.com',
-    'rthomas@pivotmkg.com',
-    'jskbuildwell@gmail.com',
+  'aakash@pivotmkg.com',
+  'rthomas@pivotmkg.com',
+  'jskbuildwell@gmail.com',
+  'dhruv@pivotmkg.com',
 ];
 $salesEmail = 'sales@jskbuildwell.com';
 $salesPhone = '+91 22 6236 5020';
@@ -163,11 +164,11 @@ $adminContent = "
 </table>";
 
 $adminMessageBody = email_shell(
-    'New Lead',
-    'Casa Benau popup enquiry received',
-    'A prospective buyer has submitted their details and is expecting a follow-up from the Goa villa team.',
-    $adminContent,
-    'This notification was generated automatically from the JSK Buildwell website.'
+  'New Lead',
+  'Casa Benau popup enquiry received',
+  'A prospective buyer has submitted their details and is expecting a follow-up from the Goa villa team.',
+  $adminContent,
+  'This notification was generated automatically from the JSK Buildwell website.'
 );
 
 $userContent = "
@@ -203,19 +204,19 @@ $userContent = "
 </div>";
 
 $userMessageBody = email_shell(
-    'Thank You',
-    'Your Casa Benau enquiry is with us',
-    'We appreciate your interest in JSK Buildwell. This is a confirmation that your enquiry has been received successfully.',
-    $userContent,
-    'If you did not submit this enquiry, you can ignore this email.'
+  'Thank You',
+  'Your Casa Benau enquiry is with us',
+  'We appreciate your interest in JSK Buildwell. This is a confirmation that your enquiry has been received successfully.',
+  $userContent,
+  'If you did not submit this enquiry, you can ignore this email.'
 );
 
 if (!mail($to, $subject, $adminMessageBody, mail_headers($email, $ccRecipients))) {
-    respond(false, 'Failed to send the enquiry email.', 500);
+  respond(false, 'Failed to send the enquiry email.', 500);
 }
 
 if (!mail($email, $userSubject, $userMessageBody, mail_headers($salesEmail))) {
-    error_log('Failed to send Casa Benau confirmation email to: ' . $email);
+  error_log('Failed to send Casa Benau confirmation email to: ' . $email);
 }
 
 respond(true, 'Lead submitted successfully.');
