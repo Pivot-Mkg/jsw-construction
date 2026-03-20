@@ -42,6 +42,7 @@
     <!-- AOS Animate On Scroll -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- Meta Pixel Code -->
     <script>
         !function (f, b, e, v, n, t, s) {
@@ -929,6 +930,10 @@ quarters, and elevator access. Price guidance is ₹4.5–5.0 crore per villa, s
                         aria-label="Email" required>
                 </div>
 
+                <div class="casa-lead-field">
+                    <div class="g-recaptcha" data-sitekey="6Lfy2JAsAAAAAFbFAiPuK8bmDN_93i5oLxgmDcgl"></div>
+                </div>
+
                 <p class="casa-lead-form-status" id="casaLeadStatus" aria-live="polite"></p>
 
                 <button type="submit" class="casa-lead-submit" id="casaLeadSubmit">Get project details</button>
@@ -1123,18 +1128,28 @@ quarters, and elevator access. Price guidance is ₹4.5–5.0 crore per villa, s
                     return;
                 }
 
+                // Check reCAPTCHA
+                const recaptchaResponse = grecaptcha.getResponse();
+                if (!recaptchaResponse) {
+                    setStatus('Please verify you are not a robot.', 'error');
+                    return;
+                }
+
                 submitBtn.disabled = true;
                 submitBtn.dataset.originalText = submitBtn.dataset.originalText || submitBtn.textContent;
                 submitBtn.textContent = 'Submitting...';
 
                 try {
+                    const formData = new FormData(form);
+                    formData.append('g-recaptcha-response', recaptchaResponse);
+
                     const response = await fetch(form.action, {
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
                             'X-Requested-With': 'XMLHttpRequest'
                         },
-                        body: new FormData(form)
+                        body: formData
                     });
 
                     const result = await response.json().catch(() => ({
@@ -1152,6 +1167,7 @@ quarters, and elevator access. Price guidance is ₹4.5–5.0 crore per villa, s
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.textContent = submitBtn.dataset.originalText || 'Get project details';
+                    grecaptcha.reset();
                 }
             });
         })();

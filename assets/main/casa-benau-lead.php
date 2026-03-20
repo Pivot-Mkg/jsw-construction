@@ -1,70 +1,49 @@
 <?php
+header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type, X-Requested-With');
+header('Access-Control-Allow-Headers: Content-Type');
 
-function wants_json_response(): bool
+function respond($success, $message, $status = 200)
 {
-  $requestedWith = strtolower((string) ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? ''));
-  $accept = strtolower((string) ($_SERVER['HTTP_ACCEPT'] ?? ''));
-
-  return $requestedWith === 'xmlhttprequest' || strpos($accept, 'application/json') !== false;
-}
-
-function respond(bool $success, string $message, int $status = 200): void
-{
-  if (wants_json_response()) {
-    http_response_code($status);
-    header('Content-Type: application/json');
-    echo json_encode([
-      'success' => $success,
-      'message' => $message,
-    ]);
-    exit;
-  }
-
-  if ($success) {
-    header('Location: /thank-you.html');
-    exit;
-  }
-
   http_response_code($status);
-  header('Content-Type: text/plain; charset=UTF-8');
-  echo $message;
+  echo json_encode([
+    'success' => $success,
+    'message' => $message
+  ]);
   exit;
 }
 
-function mail_headers(?string $replyTo = null, array $ccRecipients = []): string
+function detail_row($label, $value)
+{
+  $safeLabel = htmlspecialchars($label, ENT_QUOTES, 'UTF-8');
+  $safeValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+  return "<tr><td style='padding:10px 0;border-top:1px solid #f1f1f1;color:#6b7280;font-size:13px;'>$safeLabel</td><td style='padding:10px 0;border-top:1px solid #f1f1f1;font-size:14px;font-weight:600;'>$safeValue</td></tr>";
+}
+
+function mail_headers($replyTo = '', $cc = [])
 {
   $headers = "MIME-Version: 1.0\r\n";
   $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
   $headers .= "From: JSK Buildwell <noreply@jskbuildwell.com>\r\n";
 
-  if ($replyTo !== null && $replyTo !== '') {
-    $headers .= "Reply-To: $replyTo\r\n";
+  if ($replyTo) {
+    $headers .= "Reply-To: " . htmlspecialchars($replyTo, ENT_QUOTES, 'UTF-8') . "\r\n";
   }
 
-  $ccRecipients = array_values(array_unique(array_filter(array_map('trim', $ccRecipients))));
-  if ($ccRecipients !== []) {
-    $headers .= 'Cc: ' . implode(',', $ccRecipients) . "\r\n";
+  if (!empty($cc) && is_array($cc)) {
+    $headers .= "Cc: " . implode(', ', array_map('htmlspecialchars', $cc)) . "\r\n";
   }
 
   return $headers;
 }
 
-function detail_row(string $label, string $value): string
+function email_shell($title, $subtitle, $description, $content, $footer)
 {
-  return "<tr>
-        <td style='padding:12px 0;border-top:1px solid #ece7de;width:140px;color:#7a7468;font-size:13px;vertical-align:top;'>$label</td>
-        <td style='padding:12px 0;border-top:1px solid #ece7de;color:#1f2937;font-size:14px;font-weight:600;line-height:1.6;'>$value</td>
-    </tr>";
-}
-
-function email_shell(string $eyebrow, string $title, string $intro, string $content, string $footer = ''): string
-{
-  $footerBlock = $footer !== ''
-    ? "<p style='margin:20px 0 0;color:#7a7468;font-size:12px;line-height:1.6;'>$footer</p>"
-    : '';
+  $safeTitle = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+  $safeSubtitle = htmlspecialchars($subtitle, ENT_QUOTES, 'UTF-8');
+  $safeDescription = htmlspecialchars($description, ENT_QUOTES, 'UTF-8');
+  $safeFooter = htmlspecialchars($footer, ENT_QUOTES, 'UTF-8');
 
   return "
 <!doctype html>
@@ -73,30 +52,19 @@ function email_shell(string $eyebrow, string $title, string $intro, string $cont
   <meta charset='UTF-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 </head>
-<body bgcolor='#f4efe7' style='margin:0;padding:24px;background-color:#f4efe7;font-family:Arial,sans-serif;color:#1f2937;'>
-  <table role='presentation' cellpadding='0' cellspacing='0' width='100%' style='max-width:680px;margin:0 auto;border-collapse:collapse;'>
+<body style='margin:0;padding:24px;background:#f7f4ee;font-family:Arial,sans-serif;color:#1f2937;'>
+  <table role='presentation' cellpadding='0' cellspacing='0' width='100%' style='max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #eadfcf;border-radius:14px;overflow:hidden;'>
     <tr>
-      <td style='padding-bottom:18px;text-align:center;'>
-        <div style='display:inline-block;padding:7px 14px;border-radius:999px;background-color:#efe2ca;color:#9a7231;font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;'>$eyebrow</div>
+      <td style='background:#c19d60;color:#ffffff;padding:18px 22px;font-size:20px;font-weight:700;'>
+        $safeTitle
       </td>
     </tr>
     <tr>
-      <td bgcolor='#ffffff' style='background-color:#ffffff;border:1px solid #eadfcf;border-radius:20px;overflow:hidden;'>
-        <table role='presentation' cellpadding='0' cellspacing='0' width='100%' style='border-collapse:collapse;'>
-          <tr>
-            <td bgcolor='#1f2533' style='padding:34px 32px 22px;background-color:#1f2533;background-image:linear-gradient(135deg,#1f2533 0%,#3e2f20 100%);color:#ffffff;'>
-              <div style='font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#e8d6b1;font-weight:700;'>JSK Buildwell</div>
-              <div style='margin:14px 0 10px;font-size:30px;line-height:1.15;font-family:Georgia,serif;font-weight:700;color:#ffffff;'>$title</div>
-              <div style='margin:0;font-size:15px;line-height:1.7;color:#f3eee4;'>$intro</div>
-            </td>
-          </tr>
-          <tr>
-            <td bgcolor='#ffffff' style='padding:28px 32px 32px;background-color:#ffffff;'>
-              $content
-              $footerBlock
-            </td>
-          </tr>
-        </table>
+      <td style='padding:22px;'>
+        <h2 style='margin:0 0 8px;font-size:18px;color:#1f2937;'>$safeSubtitle</h2>
+        <p style='margin:0 0 16px;font-size:14px;color:#6b7280;'>$safeDescription</p>
+        $content
+        <p style='margin:24px 0 0;font-size:12px;color:#9ca3af;border-top:1px solid #f3f4f6;padding-top:16px;'>$safeFooter</p>
       </td>
     </tr>
   </table>
@@ -108,11 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   respond(false, 'Method not allowed', 405);
 }
 
-$name = trim((string) ($_POST['name'] ?? ''));
-$email = trim((string) ($_POST['email'] ?? ''));
-$phone = trim((string) ($_POST['phone'] ?? ''));
-$project = trim((string) ($_POST['project'] ?? 'Casa Benau 94 & 95'));
-$sourcePage = trim((string) ($_POST['source_page'] ?? '/projects/Casa-Benau.html'));
+$name = trim($_POST['name'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$phone = trim($_POST['phone'] ?? '');
+$project = trim($_POST['project'] ?? 'Casa Benau 94 & 95');
+$sourcePage = trim($_POST['source_page'] ?? '/projects/Casa-Benau.html');
+$recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
 
 if ($name === '' || $email === '' || $phone === '') {
   respond(false, 'Name, email and phone are required.', 400);
@@ -122,18 +91,42 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
   respond(false, 'Invalid email address.', 400);
 }
 
-if (!preg_match('/^[0-9+\-\s()]{7,}$/', $phone)) {
+if (!preg_match('/^[\d\s\-\+\(\)]{7,}$/', $phone)) {
   respond(false, 'Invalid phone number.', 400);
 }
 
-$to = 'aakash@pivotmkg.com';
-// $to = 'sales@jskbuildwell.com';
-// $ccRecipients = [
-//   'aakash@pivotmkg.com',
-//   'rthomas@pivotmkg.com',
-//   'jskbuildwell@gmail.com',
-//   'dhruv@pivotmkg.com',
-// ];
+// Verify reCAPTCHA
+if (empty($recaptchaResponse)) {
+  respond(false, 'Please complete the reCAPTCHA verification', 400);
+}
+
+$recaptchaSecret = '6Lfy2JAsAAAAAHIIie7FqCsHzlZzCsODs0FsGzSP';
+$recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
+$recaptchaData = [
+  'secret' => $recaptchaSecret,
+  'response' => $recaptchaResponse,
+  'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
+];
+
+$options = [
+  'http' => [
+    'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+    'method' => 'POST',
+    'content' => http_build_query($recaptchaData)
+  ]
+];
+
+$context = stream_context_create($options);
+$recaptchaResult = file_get_contents($recaptchaUrl, false, $context);
+$recaptchaJson = json_decode($recaptchaResult);
+
+if (!$recaptchaJson || !$recaptchaJson->success) {
+  respond(false, 'reCAPTCHA verification failed. Please try again.', 400);
+}
+
+$to = 'aakash@pivotmkg.com,rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
+// $to = 'aakash@pivotmkg.com';
+$ccRecipients = [];
 $salesEmail = 'sales@jskbuildwell.com';
 $salesPhone = '+91 22 6236 5020';
 $subject = 'New Casa Benau Lead - JSK Buildwell';
