@@ -63,7 +63,12 @@ if (!$recaptchaJson || !$recaptchaJson->success) {
 }
 
 try {
-    require_once __DIR__ . '../admin/includes/db.php';
+    $adminDbPath = dirname(__DIR__, 2) . '/admin/includes/db.php';
+    if (!file_exists($adminDbPath)) {
+        throw new RuntimeException('Admin DB include missing');
+    }
+    require_once $adminDbPath;
+
     admin_insert_submission([
         'form_type' => 'contact',
         'name' => $name,
@@ -74,9 +79,10 @@ try {
         'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
         'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
     ]);
+    $dbStored = true;
 } catch (Throwable $e) {
+    $dbStored = false;
     error_log('Failed to store contact submission: ' . $e->getMessage());
-    respond(false, 'Failed to save submission', 500);
 }
 
 // $to = 'aakash@pivotmkg.com,rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
@@ -132,8 +138,16 @@ $headers .= "From: JSK Buildwell <noreply@jskbuildwell.com>\r\n";
 $headers .= "Reply-To: " . $email . "\r\n";
 
 if (mail($to, $subject, $messageBody, $headers)) {
-    respond(true, 'Message sent successfully');
+    $successMessage = 'Message sent successfully';
+    if (!($dbStored ?? false)) {
+        $successMessage .= ' (database logging failed, but the email was delivered).';
+    }
+    respond(true, $successMessage);
 }
 
-respond(false, 'Failed to send message', 500);
+$failureMessage = 'Failed to send message';
+if (!($dbStored ?? false)) {
+    $failureMessage .= ' and submission could not be stored.';
+}
+respond(false, $failureMessage, 500);
 
