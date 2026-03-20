@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="assets/styles/pages.css">
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         /* 50/50 on desktop, stacked on mobile */
         .enquiry-split {
@@ -84,8 +85,8 @@
         }
 
         .label {
-            /* font-weight: 600; */
-            /* color: #1d1d1f; */
+            font-weight: 600;
+            color: #1d1d1f;
         }
 
         .enquiry-meta a {
@@ -105,26 +106,29 @@
             }
         }
     </style>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1655971818619256');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1655971818619256');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
 </head>
 
-<body>    <header class="main-header">
+<body>
+    <header class="main-header">
         <button id="menu-btn" class="mobile-toggle">
             <i data-lucide="menu" width="24" height="24"></i>
         </button>
@@ -143,7 +147,7 @@ src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
                     </div>
                     <!-- <div class="category">
                         <a href="./projects/Siddeshwar-Gardens-Row-Houses.html" class="category-title">Siddeshwar
-                            Gardens – Row
+                            Gardens â€“ Row
                             Houses</a>
                     </div> -->
                     <div class="category">
@@ -283,6 +287,12 @@ src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
                                 <span class="error-message"></span>
                             </div>
                         </div>
+                        <div class="form-grid full">
+                            <div class="form-field">
+                                <div class="g-recaptcha" data-sitekey="6Lfy2JAsAAAAAFbFAiPuK8bmDN_93i5oLxgmDcgl"></div>
+                                <span class="error-message" id="recaptcha-error"></span>
+                            </div>
+                        </div>
                         <button type="submit" class="btn-pill" id="submitBtn">
                             <span class="btn-text">Send Message</span>
                             <span class="btn-loader">
@@ -309,7 +319,7 @@ src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
                     <p class="enquiry-text">
                         If your housing society is considering redevelopment, we offer a free, no-obligation
                         consultation to
-                        explain the process, assess feasibility, and answer your committee’s questions.
+                        explain the process, assess feasibility, and answer your committeeâ€™s questions.
                     </p>
 
                     <div class="enquiry-meta">
@@ -397,7 +407,6 @@ src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
                         from or related to the business activities, operations, or affairs of any group company. Any
                         such claims, losses, or damages shall be pursued against the specific group company responsible
                         for such activities, operations, or affairs. Pictures shown are for representational purposes
-                        only
                     </p>
                 </div>
             </div>
@@ -652,7 +661,7 @@ src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
                 notification.classList.remove('show');
                 setTimeout(() => notification.remove(), 300);
             }, 5000);
-        }
+        };
 
         // Real-time validation
         const formFields = contactForm.querySelectorAll('.form-input');
@@ -676,6 +685,18 @@ src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
                 }
             });
 
+            // Check reCAPTCHA
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                const recaptchaError = document.getElementById('recaptcha-error');
+                recaptchaError.textContent = 'Please verify you are not a robot';
+                recaptchaError.classList.add('show');
+                isValid = false;
+            } else {
+                const recaptchaError = document.getElementById('recaptcha-error');
+                recaptchaError.classList.remove('show');
+            }
+
             if (!isValid) {
                 showNotification('Please fix the errors above', 'error');
                 return;
@@ -688,7 +709,8 @@ src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
             try {
                 // Submit to PHP backend
                 const formData = new FormData(contactForm);
-                const response = await fetch('contact-form.php', {
+                formData.append('g-recaptcha-response', recaptchaResponse);
+                const response = await fetch('assets/main/contact-form.php', {
                     method: 'POST',
                     body: formData
                 });
@@ -718,6 +740,7 @@ src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
             } finally {
                 submitBtn.classList.remove('loading');
                 submitBtn.disabled = false;
+                grecaptcha.reset();
             }
         });
 
@@ -726,8 +749,6 @@ src="https://www.facebook.com/tr?id=1655971818619256&ev=PageView&noscript=1"
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
                 isMenuOpen = false;
-                menuBtn.innerHTML = '<i data-lucide="menu" width="24" height="24"></i>';
-                lucide.createIcons();
             });
         });
 

@@ -4,7 +4,8 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-function respond($success, $message, $status = 200) {
+function respond($success, $message, $status = 200)
+{
     http_response_code($status);
     echo json_encode([
         'success' => $success,
@@ -22,6 +23,7 @@ $email = trim($_POST['email'] ?? '');
 $phone = trim($_POST['phone'] ?? '');
 $city = trim($_POST['city'] ?? '');
 $message = trim($_POST['message'] ?? '');
+$recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
 
 if ($name === '' || $email === '' || $phone === '' || $city === '') {
     respond(false, 'Name, email, phone and city are required', 400);
@@ -29,6 +31,35 @@ if ($name === '' || $email === '' || $phone === '' || $city === '') {
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(false, 'Invalid email address', 400);
+}
+
+// Verify reCAPTCHA
+if (empty($recaptchaResponse)) {
+    respond(false, 'Please complete the reCAPTCHA verification', 400);
+}
+
+$recaptchaSecret = '6Lfy2JAsAAAAAHIIie7FqCsHzlZzCsODs0FsGzSP';
+$recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
+$recaptchaData = [
+    'secret' => $recaptchaSecret,
+    'response' => $recaptchaResponse,
+    'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
+];
+
+$options = [
+    'http' => [
+        'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+        'method' => 'POST',
+        'content' => http_build_query($recaptchaData)
+    ]
+];
+
+$context = stream_context_create($options);
+$recaptchaResult = file_get_contents($recaptchaUrl, false, $context);
+$recaptchaJson = json_decode($recaptchaResult);
+
+if (!$recaptchaJson || !$recaptchaJson->success) {
+    respond(false, 'reCAPTCHA verification failed. Please try again.', 400);
 }
 
 try {
@@ -48,7 +79,8 @@ try {
     respond(false, 'Failed to save submission', 500);
 }
 
-$to = 'aakash@pivotmkg.com,rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
+// $to = 'aakash@pivotmkg.com,rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
+$to = 'aakash@pivotmkg.com';
 $subject = 'New Contact Form Submission - JSK Buildwell';
 
 $safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
