@@ -85,8 +85,8 @@ try {
     error_log('Failed to store contact submission: ' . $e->getMessage());
 }
 
-// $to = 'aakash@pivotmkg.com,rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
-$to = 'aakash@pivotmkg.com';
+$to = 'aakash@pivotmkg.com,rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
+// $to = 'aakash@pivotmkg.com';
 $subject = 'New Contact Form Submission - JSK Buildwell';
 
 $safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
@@ -150,4 +150,3 @@ if (!($dbStored ?? false)) {
     $failureMessage .= ' and submission could not be stored.';
 }
 respond(false, $failureMessage, 500);
-
