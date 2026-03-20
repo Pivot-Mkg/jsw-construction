@@ -126,13 +126,14 @@ if (!preg_match('/^[0-9+\-\s()]{7,}$/', $phone)) {
   respond(false, 'Invalid phone number.', 400);
 }
 
-$to = 'sales@jskbuildwell.com';
-$ccRecipients = [
-  'aakash@pivotmkg.com',
-  'rthomas@pivotmkg.com',
-  'jskbuildwell@gmail.com',
-  'dhruv@pivotmkg.com',
-];
+$to = 'aakash@pivotmkg.com';
+// $to = 'sales@jskbuildwell.com';
+// $ccRecipients = [
+//   'aakash@pivotmkg.com',
+//   'rthomas@pivotmkg.com',
+//   'jskbuildwell@gmail.com',
+//   'dhruv@pivotmkg.com',
+// ];
 $salesEmail = 'sales@jskbuildwell.com';
 $salesPhone = '+91 22 6236 5020';
 $subject = 'New Casa Benau Lead - JSK Buildwell';
