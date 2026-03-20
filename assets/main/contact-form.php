@@ -63,7 +63,7 @@ if (!$recaptchaJson || !$recaptchaJson->success) {
 }
 
 try {
-    require_once __DIR__ . '/admin/includes/db.php';
+    require_once __DIR__ . '../admin/includes/db.php';
     admin_insert_submission([
         'form_type' => 'contact',
         'name' => $name,
@@ -136,3 +136,4 @@ if (mail($to, $subject, $messageBody, $headers)) {
 }
 
 respond(false, 'Failed to send message', 500);
+
