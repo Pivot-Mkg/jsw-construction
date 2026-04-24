@@ -85,7 +85,7 @@ try {
     error_log('Failed to store contact submission: ' . $e->getMessage());
 }
 
-$to = 'aakash@pivotmkg.com,rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
+$to = 'rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
 // $to = 'aakash@pivotmkg.com';
 $subject = 'New Contact Form Submission - JSK Buildwell';
 

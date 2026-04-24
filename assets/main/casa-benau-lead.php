@@ -124,7 +124,7 @@ if (!$recaptchaJson || !$recaptchaJson->success) {
   respond(false, 'reCAPTCHA verification failed. Please try again.', 400);
 }
 
-$to = 'aakash@pivotmkg.com,rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
+$to = 'rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
 // $to = 'aakash@pivotmkg.com';
 $ccRecipients = [];
 $salesEmail = 'sales@jskbuildwell.com';

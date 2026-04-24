@@ -6,16 +6,16 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 function respond($success, $message, $status = 200)
 {
-    http_response_code($status);
-    echo json_encode([
-        'success' => $success,
-        'message' => $message,
-    ]);
-    exit;
+  http_response_code($status);
+  echo json_encode([
+    'success' => $success,
+    'message' => $message,
+  ]);
+  exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    respond(false, 'Method not allowed', 405);
+  respond(false, 'Method not allowed', 405);
 }
 
 $name  = trim($_POST['name'] ?? '');
@@ -23,31 +23,31 @@ $email = trim($_POST['email'] ?? '');
 $phone = trim($_POST['phone'] ?? '');
 
 if ($name === '' || $email === '' || $phone === '') {
-    respond(false, 'Name, email and phone are required', 400);
+  respond(false, 'Name, email and phone are required', 400);
 }
 
 if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    respond(false, 'Invalid email address', 400);
+  respond(false, 'Invalid email address', 400);
 }
 
 try {
-    require_once __DIR__ . '/admin/includes/db.php';
-    admin_insert_submission([
-        'form_type'  => 'index',
-        'name'       => $name,
-        'email'      => $email,
-        'phone'      => $phone,
-        'city'       => null,
-        'message'    => null,
-        'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
-        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
-    ]);
+  require_once __DIR__ . '/admin/includes/db.php';
+  admin_insert_submission([
+    'form_type'  => 'index',
+    'name'       => $name,
+    'email'      => $email,
+    'phone'      => $phone,
+    'city'       => null,
+    'message'    => null,
+    'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
+    'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
+  ]);
 } catch (Throwable $e) {
-    error_log('Failed to store index submission: ' . $e->getMessage());
-    respond(false, 'Failed to save submission', 500);
+  error_log('Failed to store index submission: ' . $e->getMessage());
+  respond(false, 'Failed to save submission', 500);
 }
 
-$to      = 'aakash@pivotmkg.com,rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
+$to      = 'rthomas@pivotmkg.com,sales@jskbuildwell.com,jskbuildwell@gmail.com';
 $subject = 'New Private Tour Request - JSK Buildwell';
 
 $safeName    = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
@@ -90,7 +90,7 @@ $headers .= "From: JSK Buildwell <noreply@jskbuildwell.com>\r\n";
 $headers .= "Reply-To: " . $email . "\r\n";
 
 if (mail($to, $subject, $messageBody, $headers)) {
-    respond(true, 'Request sent successfully');
+  respond(true, 'Request sent successfully');
 }
 
 respond(false, 'Failed to send request', 500);
